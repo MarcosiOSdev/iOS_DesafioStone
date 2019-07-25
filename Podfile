@@ -12,8 +12,8 @@ target 'DesafioStone' do
 
     
     # Realm database
-    pod 'RealmSwift'
-    pod 'RxRealm'
+    pod 'RealmSwift', '~> 3.0'
+    pod 'RxRealm', '0.7.6'
 
   target 'DesafioStoneTests' do
     inherit! :search_paths

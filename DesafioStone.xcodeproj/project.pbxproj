@@ -81,6 +81,7 @@
 		2899C51A22E94D4B00D6191B /* FactsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FactsViewController.xib; sourceTree = "<group>"; };
 		2899C51D22E9514400D6191B /* BindableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindableType.swift; sourceTree = "<group>"; };
 		2899C51F22E9536200D6191B /* UINavigationController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Rx.swift"; sourceTree = "<group>"; };
+		2899C52122E9556D00D6191B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2ABD987133942BF2F46EB16A /* Pods-DesafioStoneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioStoneTests.release.xcconfig"; path = "Target Support Files/Pods-DesafioStoneTests/Pods-DesafioStoneTests.release.xcconfig"; sourceTree = "<group>"; };
 		4C2157A60038E01ED127F2B3 /* Pods_DesafioStone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesafioStone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79CC21A1D9FE0613E4C984A7 /* Pods_DesafioStoneUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesafioStoneUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +126,7 @@
 		2899C49522E928D100D6191B = {
 			isa = PBXGroup;
 			children = (
+				2899C52122E9556D00D6191B /* README.md */,
 				2899C4A022E928D100D6191B /* DesafioStone */,
 				2899C4B522E928D600D6191B /* DesafioStoneTests */,
 				2899C4C022E928D700D6191B /* DesafioStoneUITests */,
@@ -187,6 +189,9 @@
 		2899C4D022E92AF600D6191B /* App */ = {
 			isa = PBXGroup;
 			children = (
+				2899C52422E956E000D6191B /* API */,
+				2899C52322E956D800D6191B /* Service */,
+				2899C52222E956D100D6191B /* Realm */,
 				2899C50122E93F1500D6191B /* Helpers */,
 				2899C4D922E92C5D00D6191B /* Model */,
 				2899C4D822E92C5300D6191B /* ViewModel */,
@@ -267,6 +272,27 @@
 				2899C51F22E9536200D6191B /* UINavigationController+Rx.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		2899C52222E956D100D6191B /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		2899C52322E956D800D6191B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		2899C52422E956E000D6191B /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		9A1536972E006B85432FB449 /* Frameworks */ = {
