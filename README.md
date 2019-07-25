@@ -36,6 +36,11 @@ Na  parte de #organização , abortará mais detalhes cada um deles.
 ### Helpers
 Contém alguns artefatos de ajudas como extensions , utils e outros.
 
+### SupportingFiles
+Contém toda parte de Internacionalization (i18n), serve tambem para unificar as variaveis, constants e texto de facil acesso.
+Contém a configuração de ambiente (Staging, Debug, Release).
+Contém a Info.plist e sua i18n também, apenas para mudar o nome do App de ( Desafio Stone, quando pt-BR ou Stone Challenge, quando en-US)
+
 ### View
 Contém Xibs, Controllers e UIViews. 
 Usado apenas para criar e executar certas funções de UI para o usúario.

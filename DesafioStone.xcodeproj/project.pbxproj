@@ -27,6 +27,8 @@
 		2899C51C22E94D4B00D6191B /* FactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899C51A22E94D4B00D6191B /* FactsViewController.xib */; };
 		2899C51E22E9514400D6191B /* BindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2899C51D22E9514400D6191B /* BindableType.swift */; };
 		2899C52022E9536200D6191B /* UINavigationController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2899C51F22E9536200D6191B /* UINavigationController+Rx.swift */; };
+		2899C52622E95CE400D6191B /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2899C52522E95CE400D6191B /* AppConfiguration.swift */; };
+		2899C52822E95DA000D6191B /* ChuckNorrisAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2899C52722E95DA000D6191B /* ChuckNorrisAPI.swift */; };
 		2CA5F4CE6D5A0CFD76E424E4 /* Pods_DesafioStone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C2157A60038E01ED127F2B3 /* Pods_DesafioStone.framework */; };
 		68AAA0508483B85151454553 /* Pods_DesafioStoneUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79CC21A1D9FE0613E4C984A7 /* Pods_DesafioStoneUITests.framework */; };
 		BA756740246C629722172C87 /* Pods_DesafioStoneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0548C102B9250839FE7DE9B5 /* Pods_DesafioStoneTests.framework */; };
@@ -82,6 +84,8 @@
 		2899C51D22E9514400D6191B /* BindableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindableType.swift; sourceTree = "<group>"; };
 		2899C51F22E9536200D6191B /* UINavigationController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Rx.swift"; sourceTree = "<group>"; };
 		2899C52122E9556D00D6191B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2899C52522E95CE400D6191B /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		2899C52722E95DA000D6191B /* ChuckNorrisAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisAPI.swift; sourceTree = "<group>"; };
 		2ABD987133942BF2F46EB16A /* Pods-DesafioStoneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioStoneTests.release.xcconfig"; path = "Target Support Files/Pods-DesafioStoneTests/Pods-DesafioStoneTests.release.xcconfig"; sourceTree = "<group>"; };
 		4C2157A60038E01ED127F2B3 /* Pods_DesafioStone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesafioStone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79CC21A1D9FE0613E4C984A7 /* Pods_DesafioStoneUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesafioStoneUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -270,6 +274,7 @@
 			children = (
 				2899C50222E93F2700D6191B /* UIViewController+Custom.swift */,
 				2899C51F22E9536200D6191B /* UINavigationController+Rx.swift */,
+				2899C52522E95CE400D6191B /* AppConfiguration.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 		2899C52422E956E000D6191B /* API */ = {
 			isa = PBXGroup;
 			children = (
+				2899C52722E95DA000D6191B /* ChuckNorrisAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -572,6 +578,8 @@
 				2899C51E22E9514400D6191B /* BindableType.swift in Sources */,
 				2899C4FE22E938B700D6191B /* CoordinatorType.swift in Sources */,
 				2899C50322E93F2700D6191B /* UIViewController+Custom.swift in Sources */,
+				2899C52822E95DA000D6191B /* ChuckNorrisAPI.swift in Sources */,
+				2899C52622E95CE400D6191B /* AppConfiguration.swift in Sources */,
 				2899C4FC22E9386D00D6191B /* AppCoordinator.swift in Sources */,
 				2899C4D522E92B5D00D6191B /* Scene.swift in Sources */,
 				2899C50022E93B9900D6191B /* FactsViewModel.swift in Sources */,
