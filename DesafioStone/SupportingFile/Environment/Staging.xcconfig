@@ -1,0 +1,18 @@
+//
+//  Staging.xcconfig
+//  DesafioStone
+//
+//  Created by Marcos Felipe Souza on 24/07/19.
+//  Copyright © 2019 Marcos Felipe Souza. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+//  App Information
+IS_APP_VERSION = 1.0
+IS_APP_ICON = AppIcon
+
+//Backend information
+IS_API_DOMAIN = api.chucknorris.io
+IS_BACKEND_URL = https:\/\/api.chucknorris.io/
