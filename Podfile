@@ -10,6 +10,9 @@ target 'DesafioStone' do
     pod 'RxCocoa', '~> 4.0'
     pod 'RxDataSources', '~> 3.0'
 
+    #Request HTTP
+    pod 'RxAlamofire', '4.5.0'
+
     
     # Realm database
     pod 'RealmSwift', '~> 3.0'

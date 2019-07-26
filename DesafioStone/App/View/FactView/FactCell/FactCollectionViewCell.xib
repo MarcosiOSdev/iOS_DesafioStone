@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="FactCollectionViewCell" customModule="DesafioStone" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="304" height="221"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="304" height="221"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TECNOLOGY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HWL-gh-BaV">
+                        <rect key="frame" x="8" y="192" width="104" height="21"/>
+                        <color key="backgroundColor" red="0.13385775690000001" green="0.63429743049999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmH-sc-Qds">
+                        <rect key="frame" x="20" y="20" width="264" height="140"/>
+                        <string key="text">Label favorecimento nos se vermos por aqui necessidade da verdade realidade da vida de um lore isumuns, mas nada na verdade veio da dura realidade de uma grande novidade.</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kCj-xf-Te6">
+                        <rect key="frame" x="255" y="178" width="41" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="41" id="0lz-a6-zUZ"/>
+                            <constraint firstAttribute="height" constant="35" id="dyC-fl-5cY"/>
+                        </constraints>
+                        <state key="normal" image="icon-shared"/>
+                    </button>
+                </subviews>
+            </view>
+            <color key="backgroundColor" red="0.98030656576156616" green="0.98044699430465698" blue="0.98027580976486206" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="HWL-gh-BaV" secondAttribute="bottom" constant="8" id="7AJ-Nl-vdM"/>
+                <constraint firstAttribute="bottom" secondItem="kCj-xf-Te6" secondAttribute="bottom" constant="8" id="OiL-yK-yYc"/>
+                <constraint firstItem="dmH-sc-Qds" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="RM0-iI-LIQ"/>
+                <constraint firstItem="dmH-sc-Qds" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="XQF-O2-976"/>
+                <constraint firstItem="kCj-xf-Te6" firstAttribute="top" secondItem="dmH-sc-Qds" secondAttribute="bottom" constant="18" id="Ytn-nI-Rpf"/>
+                <constraint firstAttribute="trailing" secondItem="kCj-xf-Te6" secondAttribute="trailing" constant="8" id="fWv-zK-oOf"/>
+                <constraint firstItem="HWL-gh-BaV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="pPH-MO-dSz"/>
+                <constraint firstAttribute="trailing" secondItem="dmH-sc-Qds" secondAttribute="trailing" constant="20" id="zSM-pi-ZNp"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="304" height="221"/>
+            <point key="canvasLocation" x="255.07246376811597" y="109.48660714285714"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="icon-shared" width="41" height="35"/>
+    </resources>
+</document>

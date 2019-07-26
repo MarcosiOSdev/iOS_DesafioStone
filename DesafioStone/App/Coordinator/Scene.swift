@@ -14,14 +14,12 @@ enum Scene {
 }
 
 extension Scene {
-    
     func dependencyInjection() -> UIViewController {
         switch self {
         case .facts:
-            
             let viewModel = FactsViewModel()
-            let viewController = FactsViewController.loadFromNib()
-            viewController.viewModel = viewModel
+            var viewController = FactsViewController.loadFromNib()
+            viewController.bindViewModel(to: viewModel)
             return viewController
         }
     }

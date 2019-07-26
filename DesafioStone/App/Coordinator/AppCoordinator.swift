@@ -88,11 +88,13 @@ class AppCoordinator: CoordinatorType {
                 .bind(to: subject)
             
             guard navigationController.popViewController(animated: animated) != nil else {
-                fatalError("can't navigate back from \(currentViewController)")
+                let vcString = String(describing: currentViewController)
+                fatalError("can't navigate back from \(vcString)")
             }
             currentViewController = AppCoordinator.actualViewController(for: navigationController.viewControllers.last!)
         } else {
-            fatalError("Not a modal, no navigation controller: can't navigate back from \(currentViewController)")
+            let vcString = String(describing: currentViewController)
+            fatalError("Not a modal, no navigation controller: can't navigate back from \(vcString)")
         }
         return subject.asObservable()
             .take(1)
