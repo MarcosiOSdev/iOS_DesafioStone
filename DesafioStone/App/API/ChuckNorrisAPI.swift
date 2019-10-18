@@ -9,32 +9,45 @@
 import Foundation
 import RxSwift
 
-class ChuckNorrisAPI {
-    
-    static let urlSession = URLSession.shared
-    
-    static fileprivate let categoriesEndpoint = "jokes/categories"
 
+class ChuckNorrisAPI: ChuckNorrisAPIType {
     
+    var urlSession = URLSession.shared
     
-    static var categories: Observable<[String]> = {
+    fileprivate let categoriesEndpoint = "jokes/categories"
+    fileprivate let factEndpoint = "jokes/search"
+    
+    func categories() -> Observable<CategoryResponse> {
         
         guard let urlRequest = request(endpoint: categoriesEndpoint) else { return Observable.empty() }
         
         return urlSession.rx
             .data(request: urlRequest)
-            .map { data -> [String] in
-                
-                if let strings = try? JSONDecoder().decode([String].self, from: data) {
-                    return strings
-                }
-                return ["Iaaaa... "]
-            }
-            .catchErrorJustReturn([])
-            .share(replay: 1, scope: .forever)
-    }()
+            .map(CategoryResponse.init)
+    }
     
-    static func request(endpoint: String,
+    func facts(category: CategoryModel?) -> Observable<FactResponse> {
+        
+        var query: [String: Any]? = nil
+        if let category = category {
+            query = ["query": category.value]
+        } else {
+            query = ["query": "animal"]
+        }
+        guard
+            let urlRequest = self.request(endpoint: self.factEndpoint, query: query ?? [:]) else {
+                return .empty()
+        }
+        return self.urlSession.rx
+            .data(request: urlRequest)
+            .map { data in
+                let factResponse = FactResponse(data: data)
+                return factResponse
+        }
+    }
+    
+    
+    private func request(endpoint: String,
                         query: [String: Any] = [:]) -> URLRequest? {
         do {
             let urlBase = ChuckNorrisAPI.Info.baseURL.replacingOccurrences(of: "\\", with: "")
@@ -43,7 +56,7 @@ class ChuckNorrisAPI {
                     throw EOError.invalidURL(endpoint)
             }
             if query.count > 0 {
-                components.queryItems = try query.flatMap { (key, value) in
+                components.queryItems = try query.compactMap { (key, value) in
                     guard let v = value as? CustomStringConvertible else {
                         throw EOError.invalidParameter(key, value)
                     }

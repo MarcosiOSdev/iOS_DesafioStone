@@ -20,8 +20,11 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TECNOLOGY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HWL-gh-BaV">
-                        <rect key="frame" x="8" y="192" width="104" height="21"/>
+                        <rect key="frame" x="8" y="185" width="104" height="21"/>
                         <color key="backgroundColor" red="0.13385775690000001" green="0.63429743049999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Yy8-Lx-Vt5"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -45,7 +48,7 @@
             </view>
             <color key="backgroundColor" red="0.98030656576156616" green="0.98044699430465698" blue="0.98027580976486206" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="HWL-gh-BaV" secondAttribute="bottom" constant="8" id="7AJ-Nl-vdM"/>
+                <constraint firstItem="HWL-gh-BaV" firstAttribute="centerY" secondItem="kCj-xf-Te6" secondAttribute="centerY" id="BBu-jS-Te7"/>
                 <constraint firstAttribute="bottom" secondItem="kCj-xf-Te6" secondAttribute="bottom" constant="8" id="OiL-yK-yYc"/>
                 <constraint firstItem="dmH-sc-Qds" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="RM0-iI-LIQ"/>
                 <constraint firstItem="dmH-sc-Qds" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="XQF-O2-976"/>
@@ -56,6 +59,11 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="304" height="221"/>
+            <connections>
+                <outlet property="shareButton" destination="kCj-xf-Te6" id="BGp-gM-xH4"/>
+                <outlet property="tagLabel" destination="HWL-gh-BaV" id="Iie-sE-TQz"/>
+                <outlet property="valueLabel" destination="dmH-sc-Qds" id="nfP-WT-YA5"/>
+            </connections>
             <point key="canvasLocation" x="255.07246376811597" y="109.48660714285714"/>
         </collectionViewCell>
     </objects>

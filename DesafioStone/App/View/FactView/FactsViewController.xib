@@ -21,10 +21,10 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="e0c-Ms-RcB">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="e0c-Ms-RcB">
+                    <rect key="frame" x="0.0" y="60" width="414" height="802"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="swb-XL-LMS">
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="swb-XL-LMS">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -34,7 +34,7 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="e0c-Ms-RcB" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="0xD-Uj-e7w"/>
+                <constraint firstItem="e0c-Ms-RcB" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="0xD-Uj-e7w"/>
                 <constraint firstItem="e0c-Ms-RcB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="1yD-iR-4AS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="e0c-Ms-RcB" secondAttribute="bottom" id="W6D-gw-KNs"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="e0c-Ms-RcB" secondAttribute="trailing" id="f4w-bi-BSt"/>

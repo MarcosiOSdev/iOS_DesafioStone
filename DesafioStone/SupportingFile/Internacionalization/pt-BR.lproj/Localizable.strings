@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  DesafioStone
+
+  Created by Marcos Felipe Souza on 28/07/19.
+  Copyright © 2019 Marcos Felipe Souza. All rights reserved.
+*/
+"TITLE_FACT_SCENE" = "Fatos do Chuck Norris";
+"UNCATEGORIZED_FACT_TAG" = "Descategorizado";

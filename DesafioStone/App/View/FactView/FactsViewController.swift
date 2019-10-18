@@ -10,51 +10,51 @@ import UIKit
 import RxSwift
 import RxDataSources
 
-typealias FactSection = AnimatableSectionModel<String, String>
 
 class FactsViewController: UIViewController, BindableType {
     
     @IBOutlet weak var factsCollectionView: UICollectionView! {
         didSet {
-            self.factsCollectionView.register(FactCollectionViewCell.nib, forCellWithReuseIdentifier: FactCollectionViewCell.reuseCell)
+            self.factsCollectionView.register(FactCollectionViewCell.nib,
+                                              forCellWithReuseIdentifier: FactCollectionViewCell.reuseCell)
+            if let layout = self.factsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+                layout.estimatedItemSize = CGSize(width: factsCollectionView.bounds.width - 16, height: CGFloat(10))
+            }
         }
     }
     
-    lazy var dataSource: RxCollectionViewSectionedAnimatedDataSource =
-        self.configCollectionView()
-    
     var viewModel: FactsViewModel!
-    
     var bag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        ChuckNorrisAPI.categories.subscribe(onNext: { valor in
-            print(valor)
-        }).disposed(by: bag)
+        configureNavigationBar()
     }
     
-    func configCollectionView() -> RxCollectionViewSectionedAnimatedDataSource<FactSection> {
-        
-        return RxCollectionViewSectionedAnimatedDataSource<FactSection>(
-            configureCell: { (dataSource, collectionView, indexPath, model) in
-            
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FactCollectionViewCell.reuseCell, for: indexPath) as! FactCollectionViewCell
-                
-                return cell
-        })
-        
-//        factsCollectionView.rowHeight = UITableViewAutomaticDimension
-//        factsCollectionView.estimatedRowHeight = 60
+    func configureNavigationBar() {        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
     }
+    
     
     func bindViewModel() {
-        let observable: Observable<[FactSection]> = Observable.from(optional: [FactSection(model: "", items: ["Feijao", "Arroz"])])
-        
-        observable
-            .bind(to: self.factsCollectionView.rx.items(dataSource: dataSource))
+
+        viewModel.facts
+            .asObservable()
+            .skip(1)
+            .filter { $0.count > 0}
+            .bind(to: self.factsCollectionView.rx.items(cellIdentifier: FactCollectionViewCell.reuseCell, cellType: FactCollectionViewCell.self)){
+                [weak self] row, model, cell in
+                guard let strongSelf = self  else { return }
+                cell.configure(with: model, action: strongSelf.viewModel.sharedButton(fact: model))
+            }
             .disposed(by: bag)
+        
+        
+        viewModel.title
+            .bind(to: self.rx.title)
+            .disposed(by: bag)
+        
+        navigationItem.rightBarButtonItem?.rx.action = viewModel.searchViewButtonTapped
     }
 
 }

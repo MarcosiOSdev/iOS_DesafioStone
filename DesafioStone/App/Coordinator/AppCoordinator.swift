@@ -14,7 +14,7 @@ class AppCoordinator: CoordinatorType {
     
     fileprivate var window: UIWindow?
     fileprivate var currentViewController: UIViewController!
-    fileprivate var navigation: UINavigationController!
+    fileprivate var currentNavigation: UINavigationController!
     
     init(window: UIWindow) {
         self.window = window
@@ -39,16 +39,15 @@ class AppCoordinator: CoordinatorType {
     @discardableResult
     func transition(to scene: Scene, type: SceneTransitionType) -> Completable {
         let subject = PublishSubject<Void>()
-        let viewController = scene.dependencyInjection()
-        
+        let viewController = scene.dependencyInjection(coordinator: self)
         switch type {
         case .root:
-            self.navigation = startRoot(viewController: viewController) as? UINavigationController
-            currentViewController = AppCoordinator.actualViewController(for: viewController)
+            self.currentNavigation = startRoot(viewController: viewController) as? UINavigationController
+            currentViewController = AppCoordinator.actualViewController(for: currentNavigation)
             subject.onCompleted()
             
         case .push:
-            guard let navigationController = currentViewController.navigationController else {
+            guard let navigationController = currentNavigation else {
                 fatalError("Can't push a view controller without a current navigation controller")
             }
             // one-off subscription to be notified when push complete
@@ -65,6 +64,11 @@ class AppCoordinator: CoordinatorType {
                     subject.onCompleted()
                 }
                 currentViewController = AppCoordinator.actualViewController(for: nav)
+            } else {
+                viewController.modalPresentationStyle = .overCurrentContext
+                self.currentViewController.present(viewController, animated: true) {
+                    subject.onCompleted()
+                }
             }
         }
         
@@ -99,5 +103,13 @@ class AppCoordinator: CoordinatorType {
         return subject.asObservable()
             .take(1)
             .ignoreElements()
+    }
+    
+    func currentNavigationController() -> UINavigationController {
+        return self.currentNavigation
+    }
+    
+    func currentView() -> UIViewController {
+        return self.currentViewController
     }
 }

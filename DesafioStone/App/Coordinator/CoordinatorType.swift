@@ -11,7 +11,7 @@ import RxSwift
 
 
 /// Protocolo que tem assinaturas de todo os coordinators
-protocol CoordinatorType {
+protocol CoordinatorType: AnyObject {
     
     /// Adicionar uma scene para uma outra
     @discardableResult
@@ -20,6 +20,12 @@ protocol CoordinatorType {
     /// Pop para tirar a tela do stack da navigationController ou dismiss uma modal.
     @discardableResult
     func pop(animated: Bool) -> Completable
+    
+    ///Pegar a atual navigationController
+    func currentNavigationController() -> UINavigationController
+    
+    ///Pegar a atual viewController
+    func currentView() -> UIViewController
 }
 
 extension CoordinatorType {
