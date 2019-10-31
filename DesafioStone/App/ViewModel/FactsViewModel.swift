@@ -93,14 +93,6 @@ extension FactsViewModel {
                 }
             }).disposed(by: bag)
         
-        
-        
-//        factsByFecth
-//            .subscribe(onNext: { [weak self] elements in
-//            self?.cacheFactsRealm.resetCache()
-//            self?.cacheFactsRealm.saveCaches(elements)
-//        }).disposed(by: bag)
-        
         let combined =
             Observable
                 .combineLatest(factsByFecth.startWith([FactModel.empty]), cacheFacts)
@@ -125,29 +117,6 @@ extension FactsViewModel {
             .subscribe({ [weak self] fetch in
                 self?.facts.onNext(fetch.element ?? [])
         }).disposed(by: bag)
-        
-        
-//            var factModel = factModels
-//            factModel.forEach { fact in
-//                if fact.title.count > 80 {
-//                    fact.font = UIFont.systemFont(ofSize: 16)
-//                } else {
-//                    fact.font = UIFont.boldSystemFont(ofSize: 24)
-//                }
-//
-//                if fact.tag.isEmpty {
-//                    fact.tag = StringText.sharing.text(by: .tagUncategorized)
-//                }
-//                fact.tag = fact.tag.uppercased()
-//            }
-//            return factModel
-//            }
-        
-        
-//        facts.subscribe({ [weak self] in
-//                self?.facts.onNext($0.element ?? [])
-//        }).disposed(by: bag)
-        
     }
 }
 

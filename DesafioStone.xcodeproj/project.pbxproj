@@ -67,7 +67,6 @@
 		2810ED2A2308F8FA00614FE7 /* CacheFactsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFactsModel.swift; sourceTree = "<group>"; };
 		2810ED2C2308FA5700614FE7 /* CacheFactsRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFactsRealm.swift; sourceTree = "<group>"; };
 		2810ED2E230AE7C800614FE7 /* CacheFactsRealmType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFactsRealmType.swift; sourceTree = "<group>"; };
-		287124B222EE85E700125BBD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		287124B422EE85E900125BBD /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2899C49E22E928D100D6191B /* DesafioStone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesafioStone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2899C4A122E928D100D6191B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +117,7 @@
 		C047DBC55960BFFAE3EB807F /* Pods-DesafioStoneTests.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioStoneTests.staging.xcconfig"; path = "Target Support Files/Pods-DesafioStoneTests/Pods-DesafioStoneTests.staging.xcconfig"; sourceTree = "<group>"; };
 		C62339D2E2741A2F42DD315E /* Pods-DesafioStoneUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioStoneUITests.release.xcconfig"; path = "Target Support Files/Pods-DesafioStoneUITests/Pods-DesafioStoneUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D7E3DA6132BE9EE1F934D475 /* Pods-DesafioStoneUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioStoneUITests.debug.xcconfig"; path = "Target Support Files/Pods-DesafioStoneUITests/Pods-DesafioStoneUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		D8DA49F8236B633F0061650C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FD8C7AFABD5A144FD5A5EFF2 /* Pods-DesafioStoneUITests.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioStoneUITests.staging.xcconfig"; path = "Target Support Files/Pods-DesafioStoneUITests/Pods-DesafioStoneUITests.staging.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -675,8 +675,8 @@
 		287124B322EE85E700125BBD /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				287124B222EE85E700125BBD /* en */,
 				287124B422EE85E900125BBD /* pt-BR */,
+				D8DA49F8236B633F0061650C /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
