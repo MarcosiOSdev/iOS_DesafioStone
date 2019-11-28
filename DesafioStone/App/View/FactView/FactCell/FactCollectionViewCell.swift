@@ -23,13 +23,14 @@ class FactCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var loading: UIActivityIndicatorView!
     
     var bag = DisposeBag()
     
     override func prepareForReuse() {
         shareButton.rx.action = nil
         bag = DisposeBag()
-        setupCell()
+        self.loading.isHidden = true
         super.prepareForReuse()
     }
     override func awakeFromNib() {
@@ -52,31 +53,31 @@ class FactCollectionViewCell: UICollectionViewCell {
     
     func setupCell() {
         //rounded the cell
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = self.frame.height / 12
-        
-        //Border for Shadow
-        self.layer.borderWidth = 0.3
-        self.layer.borderColor = UIColor.gray.cgColor
-        
-        
-        //Drawing Shadow
-        self.layer.shadowColor = UIColor.gray.cgColor
-                
-        self.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        self.layer.shadowRadius = 2.0
-        self.layer.shadowOpacity = 1.0
-        self.layer.shadowPath =
-            UIBezierPath(roundedRect: self.bounds,
-                         cornerRadius:self.contentView.layer.cornerRadius).cgPath
+        self.contentView.layer.cornerRadius = self.frame.height / 12
+        self.contentView.layer.borderWidth = 0.3
+        self.contentView.layer.borderColor = UIColor.gray.cgColor
+        self.contentView.layer.masksToBounds = true
     }
     
-    func configure(with factModel: FactModel, action: CocoaAction) {
+    func configure(with factModel: FactModel, action: CocoaAction, loadingAction: BehaviorRelay<Bool>) {
         self.valueLabel.text = factModel.title
         self.tagLabel.text = factModel.tag
-        shareButton.rx.action = action
+        self.shareButton.rx.action = action
+        self.tagLabel.text = factModel.tag
+        _ = loadingAction.asDriver(onErrorJustReturn: true)
+            .map {
+                self.loading.isHidden = $0
+        }
         
-        self.valueLabel.text = factModel.title
-        self.tagLabel.text = factModel.tag
+        //Regras das fonts
+        if factModel.title.count < 80 {
+            self.valueLabel.adjustsFontForContentSizeCategory = true
+            let customFont = UIFont.boldSystemFont(ofSize: 24)
+            if #available(iOS 11.0, *) {
+                self.valueLabel.font = UIFontMetrics(forTextStyle: .largeTitle).scaledFont(for: customFont)
+            } else {
+                self.valueLabel.font = customFont
+            }
+        }
     }
 }

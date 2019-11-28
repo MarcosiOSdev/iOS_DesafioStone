@@ -20,7 +20,7 @@ class FactModel {
         self.title = fact.value
         
         if fact.categories.count > 0 {
-            self.tag = fact.categories.joined(separator: ",")
+            self.tag = fact.categories.map{ $0.uppercased() }.joined(separator: ",")
         }
     }
     

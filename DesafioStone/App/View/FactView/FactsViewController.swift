@@ -45,7 +45,9 @@ class FactsViewController: UIViewController, BindableType {
             .bind(to: self.factsCollectionView.rx.items(cellIdentifier: FactCollectionViewCell.reuseCell, cellType: FactCollectionViewCell.self)){
                 [weak self] row, model, cell in
                 guard let strongSelf = self  else { return }
-                cell.configure(with: model, action: strongSelf.viewModel.sharedButton(fact: model))
+                cell.configure(with: model,
+                               action: strongSelf.viewModel.sharedButton(fact: model),
+                               loadingAction: strongSelf.viewModel.showLoading)                
             }
             .disposed(by: bag)
         

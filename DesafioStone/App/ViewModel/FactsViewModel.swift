@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 import RxDataSources
 import Action
 
@@ -26,6 +27,8 @@ class FactsViewModel {
     var title: Observable<String> {
         return Observable<String>.of(StringText.sharing.text(by: .titleFactScene))
     }
+    let showLoading = BehaviorRelay<Bool>(value: false)
+
     
     //MARK: Input
     lazy var searchViewButtonTapped: Action<Void, Void> = { this in
@@ -54,6 +57,7 @@ extension FactsViewModel {
     
     // Inputs
     func sharedButton(fact: FactModel) -> CocoaAction {
+        self.showLoading.accept(true)
         return CocoaAction { [weak self] in
             if let url = URL(string: fact.url) {
                 self?.coordinator
@@ -79,7 +83,7 @@ extension FactsViewModel {
                 let factModels:[FactModel] = factResponse.result.map { [weak self] response in
                     let factModel = FactModel()
                     factModel.setModel(by: response)
-                    self?.setUncategorized(in: factModel)
+                    self?.tagUncategorized(in: factModel)
                     return factModel
                 }
                 return factModels
@@ -90,7 +94,7 @@ extension FactsViewModel {
             .disposed(by: bag)
     }
     
-    func setUncategorized(in factModel: FactModel) {
+    func tagUncategorized(in factModel: FactModel) {
         if factModel.tag.isEmpty {
             factModel.tag = "UNCATEGORIZED"
         }
