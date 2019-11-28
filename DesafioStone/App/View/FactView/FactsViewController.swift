@@ -17,6 +17,13 @@ class FactsViewController: UIViewController, BindableType {
         didSet {
             self.factsCollectionView.register(FactCollectionViewCell.nib,
                                               forCellWithReuseIdentifier: FactCollectionViewCell.reuseCell)
+            
+            self.factsCollectionView.register(ErrorFactCollectionViewCell.nib,
+                                              forCellWithReuseIdentifier: ErrorFactCollectionViewCell.reuseCell)
+            
+            self.factsCollectionView.register(EmptyFactCollectionViewCell.nib,
+                                              forCellWithReuseIdentifier: EmptyFactCollectionViewCell.reuseCell)
+            
             if let layout = self.factsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 layout.estimatedItemSize = CGSize(width: factsCollectionView.bounds.width - 16, height: CGFloat(10))
             }
@@ -38,16 +45,35 @@ class FactsViewController: UIViewController, BindableType {
     
     func bindViewModel() {
 
-        viewModel.facts
+        viewModel.factsCell
             .asObservable()
             .skip(1)
             .filter { $0.count > 0}
-            .bind(to: self.factsCollectionView.rx.items(cellIdentifier: FactCollectionViewCell.reuseCell, cellType: FactCollectionViewCell.self)){
-                [weak self] row, model, cell in
-                guard let strongSelf = self  else { return }
-                cell.configure(with: model,
-                               action: strongSelf.viewModel.sharedButton(fact: model),
-                               loadingAction: strongSelf.viewModel.showLoading)                
+            .bind(to: self.factsCollectionView.rx.items) { tableView, index, element in
+                
+                let indexPath = IndexPath(item: index, section: 0)
+                switch element {
+                case .normal(let cellViewModel):
+                    guard let cell = tableView.dequeueReusableCell(withReuseIdentifier: FactCollectionViewCell.reuseCell, for: indexPath) as? FactCollectionViewCell else {
+                        return UICollectionViewCell()
+                    }
+                    cell.configure(with: cellViewModel)
+                    return cell
+                
+                case .error(let message):
+                    guard let cell = tableView.dequeueReusableCell(withReuseIdentifier: ErrorFactCollectionViewCell.reuseCell, for: indexPath) as? ErrorFactCollectionViewCell else {
+                        return UICollectionViewCell()
+                    }
+                    cell.isUserInteractionEnabled = false
+                    return cell
+                
+                case .empty:
+                    guard let cell = tableView.dequeueReusableCell(withReuseIdentifier: ErrorFactCollectionViewCell.reuseCell, for: indexPath) as? ErrorFactCollectionViewCell else {
+                        return UICollectionViewCell()
+                    }
+                    cell.isUserInteractionEnabled = false
+                    return cell
+                }
             }
             .disposed(by: bag)
         
