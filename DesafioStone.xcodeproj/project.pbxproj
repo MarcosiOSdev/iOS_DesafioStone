@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2810ED2B2308F8FA00614FE7 /* CacheFactsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2810ED2A2308F8FA00614FE7 /* CacheFactsModel.swift */; };
-		2810ED2D2308FA5700614FE7 /* CacheFactsRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2810ED2C2308FA5700614FE7 /* CacheFactsRealm.swift */; };
-		2810ED2F230AE7C800614FE7 /* CacheFactsRealmType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2810ED2E230AE7C800614FE7 /* CacheFactsRealmType.swift */; };
 		287124B122EE85E700125BBD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 287124B322EE85E700125BBD /* Localizable.strings */; };
 		2899C4A222E928D100D6191B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2899C4A122E928D100D6191B /* AppDelegate.swift */; };
 		2899C4A922E928D600D6191B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2899C4A822E928D600D6191B /* Assets.xcassets */; };
@@ -64,9 +61,6 @@
 
 /* Begin PBXFileReference section */
 		0548C102B9250839FE7DE9B5 /* Pods_DesafioStoneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesafioStoneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2810ED2A2308F8FA00614FE7 /* CacheFactsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFactsModel.swift; sourceTree = "<group>"; };
-		2810ED2C2308FA5700614FE7 /* CacheFactsRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFactsRealm.swift; sourceTree = "<group>"; };
-		2810ED2E230AE7C800614FE7 /* CacheFactsRealmType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFactsRealmType.swift; sourceTree = "<group>"; };
 		287124B422EE85E900125BBD /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2899C49E22E928D100D6191B /* DesafioStone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesafioStone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2899C4A122E928D100D6191B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -217,7 +211,6 @@
 			children = (
 				2899C52422E956E000D6191B /* API */,
 				2899C52322E956D800D6191B /* Service */,
-				2899C52222E956D100D6191B /* Realm */,
 				2899C50122E93F1500D6191B /* Helpers */,
 				2899C4D922E92C5D00D6191B /* Model */,
 				2899C4D322E92B3E00D6191B /* Coordinator */,
@@ -272,7 +265,6 @@
 			children = (
 				28A63D4322EB0AD1002A9186 /* CategoryModel.swift */,
 				28A63D4522EB9E88002A9186 /* FactModel.swift */,
-				2810ED2A2308F8FA00614FE7 /* CacheFactsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -305,15 +297,6 @@
 				289A8B5B22EE7DB3008C847C /* StringText.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		2899C52222E956D100D6191B /* Realm */ = {
-			isa = PBXGroup;
-			children = (
-				2810ED2C2308FA5700614FE7 /* CacheFactsRealm.swift */,
-				2810ED2E230AE7C800614FE7 /* CacheFactsRealmType.swift */,
-			);
-			path = Realm;
 			sourceTree = "<group>";
 		};
 		2899C52322E956D800D6191B /* Service */ = {
@@ -616,7 +599,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2899C4A222E928D100D6191B /* AppDelegate.swift in Sources */,
-				2810ED2D2308FA5700614FE7 /* CacheFactsRealm.swift in Sources */,
 				28A63D4622EB9E88002A9186 /* FactModel.swift in Sources */,
 				289A8B5C22EE7DB3008C847C /* StringText.swift in Sources */,
 				28A63D4222EB0A0E002A9186 /* FactService.swift in Sources */,
@@ -627,13 +609,11 @@
 				2899C4FE22E938B700D6191B /* CoordinatorType.swift in Sources */,
 				2899C50322E93F2700D6191B /* UIViewController+Custom.swift in Sources */,
 				28A63D4422EB0AD1002A9186 /* CategoryModel.swift in Sources */,
-				2810ED2F230AE7C800614FE7 /* CacheFactsRealmType.swift in Sources */,
 				2899C52822E95DA000D6191B /* ChuckNorrisAPI.swift in Sources */,
 				2899C52622E95CE400D6191B /* AppConfiguration.swift in Sources */,
 				2899C4FC22E9386D00D6191B /* AppCoordinator.swift in Sources */,
 				2899C4D522E92B5D00D6191B /* Scene.swift in Sources */,
 				289CEB6722EAAC6300112AE0 /* URLSession+Rx.swift in Sources */,
-				2810ED2B2308F8FA00614FE7 /* CacheFactsModel.swift in Sources */,
 				2899C50022E93B9900D6191B /* FactsViewModel.swift in Sources */,
 				2899C4D722E92BEA00D6191B /* SceneTransitionType.swift in Sources */,
 				2899C51B22E94D4B00D6191B /* FactsViewController.swift in Sources */,

@@ -7,16 +7,12 @@
 //
 
 import Foundation
-import RealmSwift
 
-class FactModel: Object {
-    @objc dynamic var id: String = ""
-    @objc dynamic var title: String = ""
-    @objc dynamic var tag: String = ""
-    @objc dynamic var url: String = ""
-    @objc dynamic var font: UIFont?
-    
-    @objc dynamic var owned: CacheFactsModel?
+class FactModel {
+    var id: String = ""
+    var title: String = ""
+    var tag: String = ""
+    var url: String = ""
     
     func setModel(by fact: FactResponse.Fact) {
         self.id = fact.id
@@ -28,22 +24,12 @@ class FactModel: Object {
         }
     }
     
-    
-    override static func primaryKey() -> String? {
-        return "id"
-    }
-    
-    override static func ignoredProperties() -> [String] {
-        return ["font"]
-    }
-    
     static var empty: FactModel {
         let factModel = FactModel()
         factModel.id = "0"
         factModel.title = "Empty"
         factModel.tag = "Doesnt have"
         factModel.url = "http..."
-        factModel.font = UIFont.systemFont(ofSize: 16)
         return factModel
     }
     

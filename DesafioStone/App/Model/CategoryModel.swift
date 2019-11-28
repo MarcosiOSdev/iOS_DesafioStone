@@ -7,16 +7,12 @@
 //
 
 import Foundation
-import RealmSwift
 import RxDataSources
 
-class CategoryModel: Object {    
-    @objc dynamic var uid: Int = 0
-    @objc dynamic var value: String = ""
+class CategoryModel {
+    var uid: Int = 0
+    var value: String = ""
     
-    override class func primaryKey() -> String? {
-        return "uid"
-    }
 }
 
 extension CategoryModel {

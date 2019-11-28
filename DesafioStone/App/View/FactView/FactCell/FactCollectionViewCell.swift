@@ -43,7 +43,9 @@ class FactCollectionViewCell: UICollectionViewCell {
         return width
     }()
     
-    override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+    override func systemLayoutSizeFitting(_ targetSize: CGSize,
+                                          withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority,
+                                          verticalFittingPriority: UILayoutPriority) -> CGSize {
         self.width.constant = bounds.size.width
         return contentView.systemLayoutSizeFitting(CGSize(width: targetSize.width, height: 1))
     }
@@ -54,14 +56,14 @@ class FactCollectionViewCell: UICollectionViewCell {
         self.layer.cornerRadius = self.frame.height / 12
         
         //Border for Shadow
-        self.contentView.layer.cornerRadius = 10
-        self.contentView.layer.borderWidth = 1.0
-        self.contentView.layer.borderColor = UIColor.clear.cgColor
-        self.contentView.layer.masksToBounds = true
+        self.layer.borderWidth = 0.3
+        self.layer.borderColor = UIColor.gray.cgColor
+        
         
         //Drawing Shadow
         self.layer.shadowColor = UIColor.gray.cgColor
-        self.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+                
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         self.layer.shadowRadius = 2.0
         self.layer.shadowOpacity = 1.0
         self.layer.shadowPath =
@@ -72,26 +74,9 @@ class FactCollectionViewCell: UICollectionViewCell {
     func configure(with factModel: FactModel, action: CocoaAction) {
         self.valueLabel.text = factModel.title
         self.tagLabel.text = factModel.tag
-        shareButton.rx.action = action       
+        shareButton.rx.action = action
         
-        factModel.rx
-            .observe(String.self, "title")
-            .subscribe(onNext: { [weak self] title in
-                self?.valueLabel.text = title
-            }).disposed(by: bag)
-        
-        factModel.rx
-            .observe(UIFont.self, "font")
-            .map{ $0 } //map para remover os nulls
-            .subscribe(onNext: { [weak self] font in
-                self?.valueLabel.font = font
-            }).disposed(by: bag)
-        
-        factModel.rx
-            .observe(String.self, "tag")
-            .subscribe(onNext:{ [weak self] tag in
-                self?.tagLabel.text = tag
-            }).disposed(by: bag)
-        
+        self.valueLabel.text = factModel.title
+        self.tagLabel.text = factModel.tag
     }
 }

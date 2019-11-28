@@ -17,13 +17,8 @@ import Action
 class FactsViewModel {
     private let chuckNorrisAPI: ChuckNorrisAPIType
     private let coordinator: CoordinatorType
-    private let cacheFactsRealm: CacheFactsRealmType
     
     var bag = DisposeBag()
-    
-    
-    
-    var factsByFecth = BehaviorSubject<[FactModel]>(value: [])
     
     //MARK: Outputs
     var facts = BehaviorSubject<[FactModel]> (value: [])
@@ -47,12 +42,9 @@ class FactsViewModel {
     
     
     init(chuckNorrisAPI: ChuckNorrisAPIType,
-         coordinator: CoordinatorType,
-         cacheFactsRealm: CacheFactsRealmType) {
+         coordinator: CoordinatorType) {
         self.chuckNorrisAPI = chuckNorrisAPI
         self.coordinator = coordinator
-        self.cacheFactsRealm = cacheFactsRealm
-        
         setupFactsBinding()
     }
 }
@@ -73,70 +65,34 @@ extension FactsViewModel {
     }
     
     func setupFactsBinding() {
-        
         self.featch(category: nil)
-        
-        let cacheFacts: Observable<CacheFactsModel> = self.cacheFactsRealm.fact(on: Date())
-        cacheFacts
-            .catchError({ error -> Observable<CacheFactsModel> in
-                if let cacheError = error as? CacheFactsRealmError, cacheError == .notFoundCache  {
-                    return .just(CacheFactsModel.empty)
-                }
-                return .just(CacheFactsModel.empty)
-            })
-            .map {
-                $0.items.count > 0
-            }
-            .subscribe(onNext: { [weak self] hasCache in
-                if !hasCache {
-                    self?.featch(category: nil)
-                }
-            }).disposed(by: bag)
-        
-        let combined =
-            Observable
-                .combineLatest(factsByFecth.startWith([FactModel.empty]), cacheFacts)
-                .map { [weak self] values -> [FactModel] in
-                    
-                    let fetches: [FactModel] = values.0
-                    let caches: CacheFactsModel = values.1
-                    
-                    if caches.items.count > 0  {
-                        return caches.items.toArray()
-                    }
-                    
-                    if fetches.count > 0 {
-                        return fetches
-                    }
-                    
-                    self?.featch(category: nil)
-                    return []
-        }
-        
-        combined
-            .subscribe({ [weak self] fetch in
-                self?.facts.onNext(fetch.element ?? [])
-        }).disposed(by: bag)
     }
 }
 
 //MARK: Functions for Service
 extension FactsViewModel {
-    func featch(category: CategoryModel?) {
+    private func featch(category: CategoryModel?) {
         let observable = chuckNorrisAPI.facts(category: category)
             .retry(3)
             .catchErrorJustReturn(FactResponse.empty)
             .map { factResponse -> [FactModel] in
-                let factModels:[FactModel] = factResponse.result.map { response in
+                let factModels:[FactModel] = factResponse.result.map { [weak self] response in
                     let factModel = FactModel()
                     factModel.setModel(by: response)
+                    self?.setUncategorized(in: factModel)
                     return factModel
                 }
                 return factModels
         }
         
         observable
-            .subscribe(onNext: { self.factsByFecth.onNext($0) })
+            .subscribe(onNext: { self.facts.onNext($0) })
             .disposed(by: bag)
+    }
+    
+    func setUncategorized(in factModel: FactModel) {
+        if factModel.tag.isEmpty {
+            factModel.tag = "UNCATEGORIZED"
+        }
     }
 }

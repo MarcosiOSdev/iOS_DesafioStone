@@ -20,16 +20,12 @@ extension Scene {
        return ChuckNorrisAPI()
     }
     
-    var cacheFactRealm: CacheFactsRealmType {
-        return CacheFactsRealm()
-    }
     
     func dependencyInjection(coordinator: CoordinatorType) -> UIViewController {
         switch self {
         case .facts:
             let viewModel = FactsViewModel(chuckNorrisAPI: self.chuckNorrisAPI,
-                                           coordinator: coordinator,
-                                           cacheFactsRealm: self.cacheFactRealm)
+                                           coordinator: coordinator)
             var viewController = FactsViewController.loadFromNib()
             viewController.bindViewModel(to: viewModel)
             return viewController
