@@ -32,7 +32,11 @@ extension Scene {
         
         case .sharedLink(let title, let link):
             let objectsToShare: [Any] = [link, title]
-            return UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            let viewController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            viewController.completionWithItemsHandler = { activityType, bollean, anyes, error in
+                
+            }
+            return viewController
         }
     }
 }

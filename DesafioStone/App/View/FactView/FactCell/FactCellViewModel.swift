@@ -22,39 +22,17 @@ struct FactCellViewModel {
     
     init(model: FactModel, sharedAction: CocoaAction) {
         self.factModel = model
-        self.sharedAction = sharedAction        
-    }
-    
-    
-    
-    //MARK: - OUTPUT
-    var title: Driver<String> {
-        return Observable<String>.of(self.factModel.title).asDriver(onErrorJustReturn: "")
-    }
-    var tag: Driver<String> {
-        return Observable<String>.of(self.factModel.tag).asDriver(onErrorJustReturn: "")
-    }
-    var font: Driver<FactCellFontType> {
-        let fontType: FactCellFontType = self.factModel.title.count > 80 ? .normal : .largeTitle
-        return BehaviorRelay<FactCellFontType>(value: fontType).asDriver(onErrorJustReturn: .normal)
-    }
-    var loadInProgress: Driver<Bool> { return _loadInProgress.asDriver(onErrorJustReturn: false) }
-    
- 
-    //MARK: INPUT
-    mutating func binding(onTappedButton: Observable<Void>) {
-        self._onTappedButton = onTappedButton
+        self.sharedAction = sharedAction
         self.initing()
     }
     
     
-    
-    
-    private var _onTappedButton: Observable<Void>?
+    //MARK: INPUT
+    var onTappedButton: PublishSubject<Void> = .init()
     private let _loadInProgress = BehaviorSubject<Bool>(value: true)
     
     func initing() {
-        _onTappedButton?.asObservable().subscribe { _ in
+        onTappedButton.asObservable().subscribe { _ in
             self._loadInProgress.onNext(false)
             self.sharedAction.execute().asObservable().subscribe({ event in
                 switch event {
@@ -66,3 +44,21 @@ struct FactCellViewModel {
         }.disposed(by: disposeBag)
     }
 }
+
+//MARK: - OUTPUT
+extension FactCellViewModel {
+    var title: Driver<String> {
+        return Observable<String>.of(self.factModel.title).asDriver(onErrorJustReturn: "")
+    }
+    var tag: Driver<String> {
+        return Observable<String>.of(self.factModel.tag).asDriver(onErrorJustReturn: "")
+    }
+    
+    var font: Driver<FactCellFontType> {
+        let fontType: FactCellFontType = self.factModel.title.count > 80 ? .normal : .largeTitle
+        return BehaviorRelay<FactCellFontType>(value: fontType).asDriver(onErrorJustReturn: .normal)
+    }
+    var loadInProgress: Driver<Bool> { return _loadInProgress.asDriver(onErrorJustReturn: false) }
+}
+
+

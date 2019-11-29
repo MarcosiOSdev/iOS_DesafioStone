@@ -46,6 +46,7 @@
 		D81EE68423904DA90000A214 /* ErrorFactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D81EE68223904DA90000A214 /* ErrorFactCollectionViewCell.xib */; };
 		D81EE68823904E0D0000A214 /* EmptyFactCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81EE68623904E0D0000A214 /* EmptyFactCollectionViewCell.swift */; };
 		D81EE68923904E0D0000A214 /* EmptyFactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D81EE68723904E0D0000A214 /* EmptyFactCollectionViewCell.xib */; };
+		D88DA5BF239171BA00458240 /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88DA5BE239171BA00458240 /* RxTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,7 @@
 		D81EE68223904DA90000A214 /* ErrorFactCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorFactCollectionViewCell.xib; sourceTree = "<group>"; };
 		D81EE68623904E0D0000A214 /* EmptyFactCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFactCollectionViewCell.swift; sourceTree = "<group>"; };
 		D81EE68723904E0D0000A214 /* EmptyFactCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyFactCollectionViewCell.xib; sourceTree = "<group>"; };
+		D88DA5BE239171BA00458240 /* RxTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8DA49F8236B633F0061650C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FD8C7AFABD5A144FD5A5EFF2 /* Pods-DesafioStoneUITests.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioStoneUITests.staging.xcconfig"; path = "Target Support Files/Pods-DesafioStoneUITests/Pods-DesafioStoneUITests.staging.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -140,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D88DA5BF239171BA00458240 /* RxTest.framework in Frameworks */,
 				BA756740246C629722172C87 /* Pods_DesafioStoneTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,6 +347,7 @@
 		9A1536972E006B85432FB449 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D88DA5BE239171BA00458240 /* RxTest.framework */,
 				4C2157A60038E01ED127F2B3 /* Pods_DesafioStone.framework */,
 				0548C102B9250839FE7DE9B5 /* Pods_DesafioStoneTests.framework */,
 				79CC21A1D9FE0613E4C984A7 /* Pods_DesafioStoneUITests.framework */,

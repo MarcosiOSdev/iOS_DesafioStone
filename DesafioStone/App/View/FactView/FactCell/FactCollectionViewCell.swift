@@ -64,7 +64,9 @@ class FactCollectionViewCell: UICollectionViewCell {
     func configure(with viewModel: FactCellViewModel) {
         self.viewModel = viewModel
         
-        self.viewModel.binding(onTappedButton: self.shareButton.rx.tap.asObservable())
+        self.shareButton.rx.tap
+        .bind(to: viewModel.onTappedButton)
+        .disposed(by: self.bag)
         
         self.viewModel.title
             .asObservable()
@@ -85,11 +87,6 @@ class FactCollectionViewCell: UICollectionViewCell {
             })
             .disposed(by: self.bag)
         
-        
-//        self.shareButton.rx.tap
-//            .asObservable()
-//            .bind(to: viewModel.onTappedButton)
-//            .disposed(by: self.bag)
         
         self.viewModel.font
             .asObservable()
