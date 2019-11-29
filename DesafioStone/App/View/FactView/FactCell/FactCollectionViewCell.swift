@@ -32,7 +32,6 @@ class FactCollectionViewCell: UICollectionViewCell {
         viewModel = nil
         shareButton.rx.action = nil
         bag = DisposeBag()
-        self.loading.isHidden = true
         super.prepareForReuse()
     }
     
@@ -65,6 +64,8 @@ class FactCollectionViewCell: UICollectionViewCell {
     func configure(with viewModel: FactCellViewModel) {
         self.viewModel = viewModel
         
+        self.viewModel.binding(onTappedButton: self.shareButton.rx.tap.asObservable())
+        
         self.viewModel.title
             .asObservable()
             .map { $0 }
@@ -76,34 +77,19 @@ class FactCollectionViewCell: UICollectionViewCell {
             .map { $0 }
             .bind(to: self.tagLabel.rx.text)
             .disposed(by: self.bag)
-        
-        
+                
         self.viewModel.loadInProgress
             .asDriver(onErrorJustReturn: true)
-            .map {
-                $0 ? self.loading.startAnimating() : self.loading.stopAnimating()                
-            }
-            .drive()
+            .drive(onNext: { loading in
+                self.loading.isHidden = loading
+            })
             .disposed(by: self.bag)
         
         
-        
-        
-//        self.viewModel.onShowLoading
-//            .map {
-//                self.loading.isHidden = $0
-//
-//            }
-//            .subscribe()
+//        self.shareButton.rx.tap
+//            .asObservable()
+//            .bind(to: viewModel.onTappedButton)
 //            .disposed(by: self.bag)
-        
-        
-//        self.shareButton.rx.action = viewModel.sharedAction
-        
-        self.shareButton.rx.tap
-            .asObservable()
-            .bind(to: viewModel.onTappedButton)
-            .disposed(by: self.bag)
         
         self.viewModel.font
             .asObservable()

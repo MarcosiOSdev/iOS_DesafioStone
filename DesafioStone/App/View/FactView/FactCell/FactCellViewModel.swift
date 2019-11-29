@@ -14,41 +14,52 @@ enum FactCellFontType {
     case normal, largeTitle
 }
 
-class FactCellViewModel {
+struct FactCellViewModel {
+    
     private var factModel: FactModel
+    private var sharedAction: CocoaAction
     let disposeBag = DisposeBag()
+    
     init(model: FactModel, sharedAction: CocoaAction) {
         self.factModel = model
-        self.sharedAction = sharedAction
-        self.binding()
+        self.sharedAction = sharedAction        
     }
     
-    //MARK: output
-    var sharedAction: CocoaAction
+    
     
     //MARK: - OUTPUT
-    lazy var title = BehaviorRelay<String>(value: self.factModel.title)
-    lazy var tag = BehaviorRelay<String>(value: self.factModel.tag)
-    var font: BehaviorRelay<FactCellFontType> {
-        let fontType: FactCellFontType = self.factModel.title.count > 80 ? .normal : .largeTitle
-        return BehaviorRelay<FactCellFontType>(value: fontType)
+    var title: Driver<String> {
+        return Observable<String>.of(self.factModel.title).asDriver(onErrorJustReturn: "")
     }
-    var loadInProgress = BehaviorRelay(value: false)
+    var tag: Driver<String> {
+        return Observable<String>.of(self.factModel.tag).asDriver(onErrorJustReturn: "")
+    }
+    var font: Driver<FactCellFontType> {
+        let fontType: FactCellFontType = self.factModel.title.count > 80 ? .normal : .largeTitle
+        return BehaviorRelay<FactCellFontType>(value: fontType).asDriver(onErrorJustReturn: .normal)
+    }
+    var loadInProgress: Driver<Bool> { return _loadInProgress.asDriver(onErrorJustReturn: false) }
     
  
     //MARK: INPUT
-    var onTappedButton = PublishRelay<Void>()
+    mutating func binding(onTappedButton: Observable<Void>) {
+        self._onTappedButton = onTappedButton
+        self.initing()
+    }
     
-    func binding() {
-        
-        onTappedButton.asObservable().subscribe { _ in
-            self.loadInProgress.accept(true)
-            print("TAPPED")
+    
+    
+    
+    private var _onTappedButton: Observable<Void>?
+    private let _loadInProgress = BehaviorSubject<Bool>(value: true)
+    
+    func initing() {
+        _onTappedButton?.asObservable().subscribe { _ in
+            self._loadInProgress.onNext(false)
             self.sharedAction.execute().asObservable().subscribe({ event in
                 switch event {
                 case .completed:
-                    self.loadInProgress.accept(false)
-                    print("GOTTEM HERE")
+                    self._loadInProgress.onNext(true)
                 default: break
                 }
             }).disposed(by: self.disposeBag)

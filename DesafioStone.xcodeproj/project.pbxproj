@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		280615582390C18D00B013F6 /* FactModelMockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280615572390C18D00B013F6 /* FactModelMockable.swift */; };
 		287124B122EE85E700125BBD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 287124B322EE85E700125BBD /* Localizable.strings */; };
 		2899C4A222E928D100D6191B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2899C4A122E928D100D6191B /* AppDelegate.swift */; };
 		2899C4A922E928D600D6191B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2899C4A822E928D600D6191B /* Assets.xcassets */; };
 		2899C4AC22E928D600D6191B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2899C4AA22E928D600D6191B /* LaunchScreen.storyboard */; };
-		2899C4B722E928D600D6191B /* DesafioStoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2899C4B622E928D600D6191B /* DesafioStoneTests.swift */; };
+		2899C4B722E928D600D6191B /* FactCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2899C4B622E928D600D6191B /* FactCellViewModelTests.swift */; };
 		2899C4C222E928D700D6191B /* DesafioStoneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2899C4C122E928D700D6191B /* DesafioStoneUITests.swift */; };
 		2899C4D522E92B5D00D6191B /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2899C4D422E92B5D00D6191B /* Scene.swift */; };
 		2899C4D722E92BEA00D6191B /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2899C4D622E92BEA00D6191B /* SceneTransitionType.swift */; };
@@ -66,13 +67,14 @@
 
 /* Begin PBXFileReference section */
 		0548C102B9250839FE7DE9B5 /* Pods_DesafioStoneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesafioStoneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		280615572390C18D00B013F6 /* FactModelMockable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactModelMockable.swift; sourceTree = "<group>"; };
 		287124B422EE85E900125BBD /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2899C49E22E928D100D6191B /* DesafioStone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesafioStone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2899C4A122E928D100D6191B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2899C4A822E928D600D6191B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2899C4AB22E928D600D6191B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2899C4B222E928D600D6191B /* DesafioStoneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DesafioStoneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2899C4B622E928D600D6191B /* DesafioStoneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesafioStoneTests.swift; sourceTree = "<group>"; };
+		2899C4B622E928D600D6191B /* FactCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactCellViewModelTests.swift; sourceTree = "<group>"; };
 		2899C4B822E928D600D6191B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2899C4BD22E928D700D6191B /* DesafioStoneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DesafioStoneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2899C4C122E928D700D6191B /* DesafioStoneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesafioStoneUITests.swift; sourceTree = "<group>"; };
@@ -153,6 +155,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		280615562390C10200B013F6 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				280615572390C18D00B013F6 /* FactModelMockable.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		2899C49522E928D100D6191B = {
 			isa = PBXGroup;
 			children = (
@@ -188,7 +198,8 @@
 		2899C4B522E928D600D6191B /* DesafioStoneTests */ = {
 			isa = PBXGroup;
 			children = (
-				2899C4B622E928D600D6191B /* DesafioStoneTests.swift */,
+				280615562390C10200B013F6 /* Mocks */,
+				2899C4B622E928D600D6191B /* FactCellViewModelTests.swift */,
 				2899C4B822E928D600D6191B /* Info.plist */,
 			);
 			path = DesafioStoneTests;
@@ -652,7 +663,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2899C4B722E928D600D6191B /* DesafioStoneTests.swift in Sources */,
+				2899C4B722E928D600D6191B /* FactCellViewModelTests.swift in Sources */,
+				280615582390C18D00B013F6 /* FactModelMockable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

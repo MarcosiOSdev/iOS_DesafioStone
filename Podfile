@@ -14,11 +14,7 @@ target 'DesafioStone' do
 
     # Community projects
     pod 'Action', '~> 3.4'
-    pod 'NSObject+Rx', '~> 4.1'
-    
-    # Realm database
-    #pod 'RealmSwift', '~> 3.0'
-    #pod 'RxRealm', '0.7.6'
+    pod 'NSObject+Rx', '~> 4.1'    
 
   target 'DesafioStoneTests' do
     inherit! :search_paths

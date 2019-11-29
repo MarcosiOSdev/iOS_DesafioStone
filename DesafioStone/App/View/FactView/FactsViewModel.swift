@@ -20,13 +20,13 @@ enum FactsTableViewCellType {
 }
 
 //MARK: List of Variables
-class FactsViewModel {
+struct FactsViewModel {
     private let chuckNorrisAPI: ChuckNorrisAPIType
     private let coordinator: CoordinatorType
     
     var bag = DisposeBag()
     
-    private var loadInProgress = BehaviorRelay(value: true)
+    private var loadInProgress = BehaviorSubject(value: true)
     private var facts = BehaviorRelay<[FactsTableViewCellType]> (value: [])
     
     init(chuckNorrisAPI: ChuckNorrisAPIType,
@@ -41,7 +41,7 @@ class FactsViewModel {
     }
     
     lazy var searchViewButtonTapped: Action<Void, Void> = { this in
-        return Action { [weak self] element in
+        return Action { element in
             print("Vai pesquisar ... tem que fazer")
             //            self?.coordinator.transition(to: .searchView, type: .push)
             
@@ -56,9 +56,9 @@ class FactsViewModel {
 //MARK: Inputs
 extension FactsViewModel {
     func sharedButton(fact: FactModel) -> CocoaAction {
-        return CocoaAction { [weak self] in
+        return CocoaAction {
             if let url = URL(string: fact.url) {
-                self?.coordinator
+                self.coordinator
                     .transition(to: .sharedLink(title: fact.title,
                                                 link: url), type: .modal)
             }
@@ -88,31 +88,29 @@ extension FactsViewModel {
 //MARK: Functions for Service
 extension FactsViewModel {
     private func featch(category: CategoryModel?) {
+        self.loadInProgress.onNext(false) 
         let observable = chuckNorrisAPI.facts(category: category)
             .retry(3)
         
-        observable.subscribe(onNext: { [weak self] factResponse in
-            self?.loadInProgress.accept(false)
-            
-            guard let strongSelf = self else { return }
+        observable.subscribe(onNext: { factResponse in
+            self.loadInProgress.onNext(true)
             
             guard factResponse.result.count > 0 else {
-                strongSelf.facts.accept([.empty])
+                self.facts.accept([.empty])
                 return
             }
             
             let factsCell = factResponse.result.map { result -> FactsTableViewCellType in
                 let factModel = FactModel()
                 factModel.setModel(by: result)
-                strongSelf.tagUncategorized(in: factModel)
-                let cellViewModel = FactCellViewModel(model: factModel, sharedAction: strongSelf.sharedButton(fact: factModel))
+                self.tagUncategorized(in: factModel)
+                let cellViewModel = FactCellViewModel(model: factModel, sharedAction: self.sharedButton(fact: factModel))
                 return FactsTableViewCellType.normal(cellViewModel: cellViewModel)
             }
-            self?.facts.accept(factsCell)
-            
-        }, onError: { [weak self] error in
-            self?.loadInProgress.accept(false)
-            self?.facts.accept([.error(message: "Ocorreu um erro")])
+            self.facts.accept(factsCell)
+        }, onError: { error in
+            self.loadInProgress.onNext(true)
+            self.facts.accept([.error(message: "Ocorreu um erro")])
         })
         .disposed(by: bag)
     }
