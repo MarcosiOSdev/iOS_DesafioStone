@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxDataSources
+import Action
 
 
 class FactsViewController: UIViewController, BindableType {
@@ -31,7 +32,7 @@ class FactsViewController: UIViewController, BindableType {
     }
     
     var viewModel: FactsViewModel!
-    var bag = DisposeBag()
+    var disposedBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,22 +46,26 @@ class FactsViewController: UIViewController, BindableType {
     
     func bindViewModel() {
 
-        viewModel.factsCell
+        viewModel.output.facts
             .asObservable()
             .skip(1)
             .filter { $0.count > 0}
-            .bind(to: self.factsCollectionView.rx.items) { tableView, index, element in
+            .bind(to: self.factsCollectionView.rx.items) { [weak self] tableView, index, element in
+                
+                guard let strongSelf = self else { return UICollectionViewCell() }
                 
                 let indexPath = IndexPath(item: index, section: 0)
                 switch element {
-                case .normal(let cellViewModel):
+                case .normal(let factModel):
                     guard let cell = tableView.dequeueReusableCell(withReuseIdentifier: FactCollectionViewCell.reuseCell, for: indexPath) as? FactCollectionViewCell else {
                         return UICollectionViewCell()
                     }
-                    cell.configure(with: cellViewModel)
+                    cell.configure(with: factModel,
+                                   sharedAction: strongSelf.sharedButton(fact: factModel))
+                    
                     return cell
                 
-                case .error(let message):
+                case .error(_):
                     guard let cell = tableView.dequeueReusableCell(withReuseIdentifier: ErrorFactCollectionViewCell.reuseCell, for: indexPath) as? ErrorFactCollectionViewCell else {
                         return UICollectionViewCell()
                     }
@@ -75,14 +80,33 @@ class FactsViewController: UIViewController, BindableType {
                     return cell
                 }
             }
-            .disposed(by: bag)
+            .disposed(by: disposedBag)
+        
+        viewModel.output.title
+            .drive(self.rx.title)
+            .disposed(by: disposedBag)
         
         
-        viewModel.title
-            .bind(to: self.rx.title)
-            .disposed(by: bag)
-        
-        navigationItem.rightBarButtonItem?.rx.action = viewModel.searchViewButtonTapped
+        navigationItem.rightBarButtonItem?.rx
+            .tap
+            .bind(to: viewModel.input.searchViewButtonTapped)
+            .disposed(by: disposedBag)                
+    }
+    
+    func sharedButton(fact: FactModel) -> CocoaAction {
+        return CocoaAction {
+//            if let url = URL(string: fact.url) {
+//                self.coordinator
+//                    .transition(to: .sharedLink(title: fact.title,
+//                                            link: url,
+//                                            completion: CocoaAction {
+//                                                return Observable.empty()
+//                }), type: .modal)
+//            }
+            
+            
+            return Observable.empty()
+        }
     }
 
 }

@@ -76,7 +76,7 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="304" height="221"/>
             <connections>
-                <outlet property="loading" destination="qyo-X7-Ou0" id="EuF-8W-pnf"/>
+                <outlet property="loadingActivityIndicator" destination="qyo-X7-Ou0" id="P81-q2-RID"/>
                 <outlet property="shareButton" destination="kCj-xf-Te6" id="BGp-gM-xH4"/>
                 <outlet property="tagLabel" destination="HWL-gh-BaV" id="Iie-sE-TQz"/>
                 <outlet property="valueLabel" destination="dmH-sc-Qds" id="nfP-WT-YA5"/>

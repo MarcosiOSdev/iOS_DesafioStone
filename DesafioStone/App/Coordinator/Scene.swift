@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import RxSwift
+import Action
 
 /// Telas do app
 enum Scene {
     case facts
-    case sharedLink(title: String, link: URL)
+    case sharedLink(title: String, link: URL, completion: CocoaAction)
+    
+    /// JUST USING IN TEST
+    case none
 }
 
 extension Scene {
@@ -23,18 +28,18 @@ extension Scene {
     
     func dependencyInjection(coordinator: CoordinatorType) -> UIViewController {
         switch self {
-        case .facts:
+        case .facts, .none:
             let viewModel = FactsViewModel(chuckNorrisAPI: self.chuckNorrisAPI,
                                            coordinator: coordinator)
             var viewController = FactsViewController.loadFromNib()
             viewController.bindViewModel(to: viewModel)
             return viewController
         
-        case .sharedLink(let title, let link):
+        case .sharedLink(let title, let link, let completion):
             let objectsToShare: [Any] = [link, title]
             let viewController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             viewController.completionWithItemsHandler = { activityType, bollean, anyes, error in
-                
+                completion.execute()                
             }
             return viewController
         }

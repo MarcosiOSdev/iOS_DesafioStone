@@ -34,6 +34,14 @@ class FactModel {
     }
     
 }
+extension FactModel: Equatable {
+    static func == (lhs: FactModel, rhs: FactModel) -> Bool {
+        return lhs.id == rhs.id
+            && lhs.title == rhs.title
+            && lhs.tag == rhs.tag
+            && lhs.url == rhs.url
+    }
+}
 
 struct FactResponse: Codable {
     let total: Int

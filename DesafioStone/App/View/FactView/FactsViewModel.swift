@@ -14,86 +14,85 @@ import Action
 
 //typealias FactSection = AnimatableSectionModel<String, FactModel>
 enum FactsTableViewCellType {
-    case normal(cellViewModel: FactCellViewModel)
+    case normal(factModel: FactModel)
     case error(message: String)
     case empty
 }
 
 //MARK: List of Variables
-struct FactsViewModel {
+struct FactsViewModel: BindingViewModelType {
+    
+    let input: FactsViewModel.UIInput
+    let output: FactsViewModel.UIOutput
+    
+    struct UIInput {
+        var searchViewButtonTapped: AnyObserver<Void>
+        let sharedButton: BehaviorRelay<FactModel>
+    }
+
+    struct UIOutput {
+        var facts: Driver<[FactsTableViewCellType]>
+        var title: Driver<String>
+    }
+    
     private let chuckNorrisAPI: ChuckNorrisAPIType
     private let coordinator: CoordinatorType
+    var disposedBag = DisposeBag()
     
-    var bag = DisposeBag()
-    
-    private var loadInProgress = BehaviorSubject(value: true)
     private var facts = BehaviorRelay<[FactsTableViewCellType]> (value: [])
-    
+    private var searchViewButtonTapped: PublishSubject<Void> = .init()
+    private var sharedFact: BehaviorRelay<FactModel> = BehaviorRelay<FactModel>(value: FactModel.empty)
+
     init(chuckNorrisAPI: ChuckNorrisAPIType,
          coordinator: CoordinatorType) {
         self.chuckNorrisAPI = chuckNorrisAPI
         self.coordinator = coordinator
-        setupFactsBinding()
-    }
-    
-    func setupFactsBinding() {
+                        
+        sharedFact
+            .skip(1)
+            .filter { $0 != FactModel.empty }
+            .subscribe(onNext: { model in
+                FactsViewModel.openSharedActionSheet(model, coordiantor: coordinator)
+            })
+            .disposed(by: disposedBag)
+        
+        input = UIInput(searchViewButtonTapped: searchViewButtonTapped.asObserver(),
+                        sharedButton: sharedFact)
+        
+        let title = Observable<String>
+            .of(StringText.sharing.text(by: .titleFactScene))
+            .asDriver(onErrorJustReturn: "")
+        
+        output = UIOutput(facts: facts.asDriver(onErrorJustReturn: [.empty]), title: title)
+        
+        self.searchViewButtonTapped.subscribe(onNext: { _ in
+            print("Clicou")
+        }).disposed(by: disposedBag)
+        
         self.featch(category: nil)
     }
     
-    lazy var searchViewButtonTapped: Action<Void, Void> = { this in
-        return Action { element in
-            print("Vai pesquisar ... tem que fazer")
-            //            self?.coordinator.transition(to: .searchView, type: .push)
-            
-            this.facts.accept([])
-            
-            return Observable.empty()
+    static func openSharedActionSheet(_ fact: FactModel, coordiantor: CoordinatorType) {
+        if let url = URL(string: fact.url) {
+            coordiantor
+                .transition(to: .sharedLink(title: fact.title,
+                                        link: url,
+                                        completion: CocoaAction {
+                                            return Observable.empty()
+            }), type: .modal)
         }
-    }(self)
-    var categoryForSearch = BehaviorSubject<CategoryModel>(value: CategoryModel.isEmpty)
-}
-
-//MARK: Inputs
-extension FactsViewModel {
-    func sharedButton(fact: FactModel) -> CocoaAction {
-        return CocoaAction {
-            if let url = URL(string: fact.url) {
-                self.coordinator
-                    .transition(to: .sharedLink(title: fact.title,
-                                                link: url), type: .modal)
-            }
-            return Observable.empty()
-        }
-    }
-    
-    
-}
-
-//MARK: Output
-extension FactsViewModel {
-    var factsCell: Observable<[FactsTableViewCellType]> {
-        return facts.asObservable()
-    }
-    
-    var onShowLoading: Observable<Bool> {
-        return loadInProgress
-            .asObservable()
-            .distinctUntilChanged()
-    }
-    var title: Observable<String> {
-        return Observable<String>.of(StringText.sharing.text(by: .titleFactScene))
     }
 }
 
 //MARK: Functions for Service
 extension FactsViewModel {
     private func featch(category: CategoryModel?) {
-        self.loadInProgress.onNext(false) 
+        
         let observable = chuckNorrisAPI.facts(category: category)
             .retry(3)
         
         observable.subscribe(onNext: { factResponse in
-            self.loadInProgress.onNext(true)
+        
             
             guard factResponse.result.count > 0 else {
                 self.facts.accept([.empty])
@@ -104,15 +103,13 @@ extension FactsViewModel {
                 let factModel = FactModel()
                 factModel.setModel(by: result)
                 self.tagUncategorized(in: factModel)
-                let cellViewModel = FactCellViewModel(model: factModel, sharedAction: self.sharedButton(fact: factModel))
-                return FactsTableViewCellType.normal(cellViewModel: cellViewModel)
+                return FactsTableViewCellType.normal(factModel: factModel)
             }
             self.facts.accept(factsCell)
         }, onError: { error in
-            self.loadInProgress.onNext(true)
             self.facts.accept([.error(message: "Ocorreu um erro")])
         })
-        .disposed(by: bag)
+        .disposed(by: disposedBag)
     }
     
     func tagUncategorized(in factModel: FactModel) {

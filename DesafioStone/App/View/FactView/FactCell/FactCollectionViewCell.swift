@@ -19,19 +19,18 @@ class FactCollectionViewCell: UICollectionViewCell {
         return UINib(nibName: reuseCell, bundle: nil)
     }
     
-    
     @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var shareButton: UIButton!
-    @IBOutlet weak var loading: UIActivityIndicatorView!
+    @IBOutlet weak var loadingActivityIndicator: UIActivityIndicatorView!
     
-    var viewModel: FactCellViewModel!
+    var factModel: FactModel!
     var bag = DisposeBag()
-    
+    private var _loadInProgress = BehaviorSubject<Bool>(value: false)
+
     override func prepareForReuse() {
-        viewModel = nil
+        factModel = nil
         shareButton.rx.action = nil
-        bag = DisposeBag()
         super.prepareForReuse()
     }
     
@@ -53,75 +52,52 @@ class FactCollectionViewCell: UICollectionViewCell {
         return contentView.systemLayoutSizeFitting(CGSize(width: targetSize.width, height: 1))
     }
     
-    func setupCell() {
-        //rounded the cell
-        self.contentView.layer.cornerRadius = self.frame.height / 12
-        self.contentView.layer.borderWidth = 0.3
-        self.contentView.layer.borderColor = UIColor.gray.cgColor
-        self.contentView.layer.masksToBounds = true
-    }
     
-    func configure(with viewModel: FactCellViewModel) {
-        self.viewModel = viewModel
+    
+    func configure(with factModel: FactModel,
+                   sharedAction: CocoaAction) {
         
-        self.shareButton.rx.tap
-        .bind(to: viewModel.onTappedButton)
-        .disposed(by: self.bag)
-        
-        self.viewModel.title
-            .asObservable()
-            .map { $0 }
-            .bind(to: self.valueLabel.rx.text)
-            .disposed(by: self.bag)
-        
-        self.viewModel.tag
-            .asObservable()
-            .map { $0 }
-            .bind(to: self.tagLabel.rx.text)
-            .disposed(by: self.bag)
+        self.factModel = factModel
+        shareButton.rx.action = sharedAction
+//        shareButton.rx.tap
+//            .throttle(1.0, scheduler: MainScheduler.instance)
+//            .subscribe(onNext: { _ in sharedAction.accept(factModel) })
+//            .disposed(by: bag)
                 
-        self.viewModel.loadInProgress
-            .asDriver(onErrorJustReturn: true)
-            .drive(onNext: { loading in
-                self.loading.isHidden = loading
-            })
-            .disposed(by: self.bag)
-        
-        
-        self.viewModel.font
-            .asObservable()
-            .map {$0}
-            .subscribe { [weak self] event in
-                if let element = event.element {
-                    self?.valueLabel.adjustsFontForContentSizeCategory = true
-                    
-                    switch element {
-                    case .normal:
-                        self?.setupNormalTitle()
-                    case .largeTitle:
-                        self?.setupLargeTitle()
-                    }
-                }
-            }
-            .disposed(by: self.bag)
-        
+        self.valueLabel.text = factModel.title
+        self.tagLabel.text = factModel.tag
+                
+        self.valueLabel.adjustsFontForContentSizeCategory = true
+        factModel.title.count > 80 ? setupNormalTitle() : setupLargeTitle()
     }
-    
-    private func setupLargeTitle() {
-        let customFont = UIFont.boldSystemFont(ofSize: 24)
-        if #available(iOS 11.0, *) {
-            self.valueLabel.font = UIFontMetrics(forTextStyle: .largeTitle).scaledFont(for: customFont)
-        } else {
-            self.valueLabel.font = customFont
-        }
-    }
-    
-    private func setupNormalTitle() {
-        let customFont = UIFont.systemFont(ofSize: 17)
-        if #available(iOS 11.0, *) {
-            self.valueLabel.font = UIFontMetrics(forTextStyle: .title1).scaledFont(for: customFont)
-        } else {
-            self.valueLabel.font = customFont
-        }
-    }
+   
+}
+
+//MARK: - Setups
+extension FactCollectionViewCell {
+    private func setupCell() {
+           //rounded the cell
+           self.contentView.layer.cornerRadius = self.frame.height / 12
+           self.contentView.layer.borderWidth = 0.3
+           self.contentView.layer.borderColor = UIColor.gray.cgColor
+           self.contentView.layer.masksToBounds = true
+       }
+
+       private func setupLargeTitle() {
+           let customFont = UIFont.boldSystemFont(ofSize: 24)
+           if #available(iOS 11.0, *) {
+               self.valueLabel.font = UIFontMetrics(forTextStyle: .largeTitle).scaledFont(for: customFont)
+           } else {
+               self.valueLabel.font = customFont
+           }
+       }
+       
+       private func setupNormalTitle() {
+           let customFont = UIFont.systemFont(ofSize: 17)
+           if #available(iOS 11.0, *) {
+               self.valueLabel.font = UIFontMetrics(forTextStyle: .title1).scaledFont(for: customFont)
+           } else {
+               self.valueLabel.font = customFont
+           }
+       }
 }
