@@ -53,13 +53,32 @@ class FactCollectionViewCell: UICollectionViewCell {
     }
     
     func showLoading() {
-        self.shareButton.isHidden = true
-        self.loadingActivityIndicator.isHidden = false
+        
+        self.shareButton.alpha = 1
+        UIView.animate(withDuration: 0.5) {
+            self.shareButton.alpha = 0
+        }
+        UIView.animate(withDuration: 0.5, delay: 0.2, options: .curveEaseInOut, animations: {
+            self.loadingActivityIndicator.alpha = 1
+        }) { _ in
+            self.loadingActivityIndicator.startAnimating()
+            self.shareButton.isHidden = true
+            self.loadingActivityIndicator.isHidden = false
+        }
     }
     
     func hideLoading() {
-        self.shareButton.isHidden = false
-        self.loadingActivityIndicator.isHidden = true
+        
+        UIView.animate(withDuration: 0.5) {
+            self.loadingActivityIndicator.alpha = 0
+        }
+        
+        UIView.animate(withDuration: 0.5, delay: 0.15, options: .curveEaseInOut, animations: {
+            self.shareButton.alpha = 1
+        }, completion: {_ in
+            self.shareButton.isHidden = false
+            self.loadingActivityIndicator.isHidden = true
+        })
     }
     
     func configure(with factModel: FactModel,

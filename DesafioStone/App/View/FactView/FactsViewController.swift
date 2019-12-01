@@ -102,29 +102,18 @@ class FactsViewController: UIViewController, BindableType {
             .bind(to: viewModel.input.sharedFact)
             .disposed(by: disposedBag)
         
-        
+        self.viewModel.output.finishedShareFact
+            .asObservable()
+            .subscribe { event in
+                guard let isLoading = event.element, let cell = self.cellSelected else { return }
+                isLoading ? cell.showLoading() : cell.hideLoading()
+        }.disposed(by: self.disposedBag)
     }
     
     func sharedButton(fact: FactModel, cell: FactCollectionViewCell) -> CocoaAction {
         return CocoaAction {
-            
-            
             self.cellSelected = cell
             self._shareFact.accept(fact)
-//            self.viewModel.output.finishedShareFact
-//                .asObservable()
-//                .filter {_ in self.cellSelected != nil}
-//                .map{!$0}
-//                .bind(to: self.cellSelected!.loadingActivityIndicator.rx.isHidden)
-//                .disposed(by: self.disposedBag)
-            
-            self.viewModel.output.finishedShareFact
-                .asObservable()
-                .subscribe { event in
-                    guard let isLoading = event.element, let cell = self.cellSelected else { return }
-                    isLoading ? cell.showLoading() : cell.hideLoading()                    
-            }.disposed(by: self.disposedBag)
-            
             return Observable.empty()
         }
     }
