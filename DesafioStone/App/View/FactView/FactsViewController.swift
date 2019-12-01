@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 import RxDataSources
 import Action
 
@@ -34,10 +35,14 @@ class FactsViewController: UIViewController, BindableType {
     var viewModel: FactsViewModel!
     var disposedBag = DisposeBag()
     
+    private let _shareFact =  BehaviorRelay<FactModel>(value: FactModel.empty)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
     }
+    
+    private var cellSelected: FactCollectionViewCell?
     
     func configureNavigationBar() {        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
@@ -60,8 +65,9 @@ class FactsViewController: UIViewController, BindableType {
                     guard let cell = tableView.dequeueReusableCell(withReuseIdentifier: FactCollectionViewCell.reuseCell, for: indexPath) as? FactCollectionViewCell else {
                         return UICollectionViewCell()
                     }
+                    let sharedAction = strongSelf.sharedButton(fact: factModel, cell: cell)
                     cell.configure(with: factModel,
-                                   sharedAction: strongSelf.sharedButton(fact: factModel))
+                                   sharedAction: sharedAction)
                     
                     return cell
                 
@@ -90,20 +96,34 @@ class FactsViewController: UIViewController, BindableType {
         navigationItem.rightBarButtonItem?.rx
             .tap
             .bind(to: viewModel.input.searchViewButtonTapped)
-            .disposed(by: disposedBag)                
+            .disposed(by: disposedBag)
+        
+        _shareFact
+            .bind(to: viewModel.input.sharedFact)
+            .disposed(by: disposedBag)
+        
+        
     }
     
-    func sharedButton(fact: FactModel) -> CocoaAction {
+    func sharedButton(fact: FactModel, cell: FactCollectionViewCell) -> CocoaAction {
         return CocoaAction {
-//            if let url = URL(string: fact.url) {
-//                self.coordinator
-//                    .transition(to: .sharedLink(title: fact.title,
-//                                            link: url,
-//                                            completion: CocoaAction {
-//                                                return Observable.empty()
-//                }), type: .modal)
-//            }
             
+            
+            self.cellSelected = cell
+            self._shareFact.accept(fact)
+//            self.viewModel.output.finishedShareFact
+//                .asObservable()
+//                .filter {_ in self.cellSelected != nil}
+//                .map{!$0}
+//                .bind(to: self.cellSelected!.loadingActivityIndicator.rx.isHidden)
+//                .disposed(by: self.disposedBag)
+            
+            self.viewModel.output.finishedShareFact
+                .asObservable()
+                .subscribe { event in
+                    guard let isLoading = event.element, let cell = self.cellSelected else { return }
+                    isLoading ? cell.showLoading() : cell.hideLoading()                    
+            }.disposed(by: self.disposedBag)
             
             return Observable.empty()
         }

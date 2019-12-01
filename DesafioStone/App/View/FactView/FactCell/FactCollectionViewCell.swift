@@ -52,18 +52,21 @@ class FactCollectionViewCell: UICollectionViewCell {
         return contentView.systemLayoutSizeFitting(CGSize(width: targetSize.width, height: 1))
     }
     
+    func showLoading() {
+        self.shareButton.isHidden = true
+        self.loadingActivityIndicator.isHidden = false
+    }
     
+    func hideLoading() {
+        self.shareButton.isHidden = false
+        self.loadingActivityIndicator.isHidden = true
+    }
     
     func configure(with factModel: FactModel,
                    sharedAction: CocoaAction) {
         
         self.factModel = factModel
         shareButton.rx.action = sharedAction
-//        shareButton.rx.tap
-//            .throttle(1.0, scheduler: MainScheduler.instance)
-//            .subscribe(onNext: { _ in sharedAction.accept(factModel) })
-//            .disposed(by: bag)
-                
         self.valueLabel.text = factModel.title
         self.tagLabel.text = factModel.tag
                 

@@ -20,19 +20,20 @@ enum FactsTableViewCellType {
 }
 
 //MARK: List of Variables
-struct FactsViewModel: BindingViewModelType {
+class FactsViewModel: BindingViewModelType {
     
-    let input: FactsViewModel.UIInput
+    var input: FactsViewModel.UIInput
     let output: FactsViewModel.UIOutput
     
     struct UIInput {
         var searchViewButtonTapped: AnyObserver<Void>
-        let sharedButton: BehaviorRelay<FactModel>
+        var sharedFact: AnyObserver<FactModel>
     }
 
     struct UIOutput {
         var facts: Driver<[FactsTableViewCellType]>
         var title: Driver<String>
+        var finishedShareFact: Driver<Bool>
     }
     
     private let chuckNorrisAPI: ChuckNorrisAPIType
@@ -40,44 +41,55 @@ struct FactsViewModel: BindingViewModelType {
     var disposedBag = DisposeBag()
     
     private var facts = BehaviorRelay<[FactsTableViewCellType]> (value: [])
+    private var _isLoadingShare = BehaviorSubject<Bool>(value: false)
     private var searchViewButtonTapped: PublishSubject<Void> = .init()
-    private var sharedFact: BehaviorRelay<FactModel> = BehaviorRelay<FactModel>(value: FactModel.empty)
-
+    private var sharedFact: PublishSubject<FactModel> = PublishSubject<FactModel>()
+    
+    
     init(chuckNorrisAPI: ChuckNorrisAPIType,
          coordinator: CoordinatorType) {
         self.chuckNorrisAPI = chuckNorrisAPI
         self.coordinator = coordinator
                         
-        sharedFact
-            .skip(1)
-            .filter { $0 != FactModel.empty }
-            .subscribe(onNext: { model in
-                FactsViewModel.openSharedActionSheet(model, coordiantor: coordinator)
-            })
-            .disposed(by: disposedBag)
         
         input = UIInput(searchViewButtonTapped: searchViewButtonTapped.asObserver(),
-                        sharedButton: sharedFact)
+                        sharedFact: sharedFact.asObserver())
         
         let title = Observable<String>
             .of(StringText.sharing.text(by: .titleFactScene))
             .asDriver(onErrorJustReturn: "")
         
-        output = UIOutput(facts: facts.asDriver(onErrorJustReturn: [.empty]), title: title)
+        output = UIOutput(facts: facts.asDriver(onErrorJustReturn: [.empty]),
+                          title: title,
+                          finishedShareFact: self._isLoadingShare.asDriver(onErrorJustReturn: false))
         
         self.searchViewButtonTapped.subscribe(onNext: { _ in
             print("Clicou")
         }).disposed(by: disposedBag)
         
+        
+        sharedFact
+            .skip(1)
+            .map { $0 }
+            .subscribe({ event in
+                self._isLoadingShare.onNext(true)
+                if let model = event.element {
+                    self.openSharedActionSheet(model)
+                }
+            })
+            .disposed(by: disposedBag)
+
+        
         self.featch(category: nil)
     }
     
-    static func openSharedActionSheet(_ fact: FactModel, coordiantor: CoordinatorType) {
+    private func openSharedActionSheet(_ fact: FactModel) {
         if let url = URL(string: fact.url) {
-            coordiantor
+            coordinator
                 .transition(to: .sharedLink(title: fact.title,
                                         link: url,
                                         completion: CocoaAction {
+                                            self._isLoadingShare.onNext(false)
                                             return Observable.empty()
             }), type: .modal)
         }
