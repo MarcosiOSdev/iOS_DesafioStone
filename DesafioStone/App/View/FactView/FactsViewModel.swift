@@ -28,6 +28,7 @@ class FactsViewModel: BindingViewModelType {
     struct UIInput {
         var searchViewButtonTapped: AnyObserver<Void>
         var sharedFact: AnyObserver<FactModel>
+        var reloadEvent: AnyObserver<Void>
     }
 
     struct UIOutput {
@@ -43,6 +44,7 @@ class FactsViewModel: BindingViewModelType {
     private var facts = BehaviorRelay<[FactsTableViewCellType]> (value: [])
     private var _isLoadingShare = BehaviorSubject<Bool>(value: false)
     private var searchViewButtonTapped: PublishSubject<Void> = .init()
+    private var reloadEvent: PublishSubject<Void> = .init()
     private var sharedFact: PublishSubject<FactModel> = PublishSubject<FactModel>()
     
     
@@ -53,7 +55,8 @@ class FactsViewModel: BindingViewModelType {
                         
         
         input = UIInput(searchViewButtonTapped: searchViewButtonTapped.asObserver(),
-                        sharedFact: sharedFact.asObserver())
+                        sharedFact: sharedFact.asObserver(),
+                        reloadEvent: reloadEvent.asObserver())
         
         let title = Observable<String>
             .of(StringText.sharing.text(by: .titleFactScene))
@@ -67,6 +70,11 @@ class FactsViewModel: BindingViewModelType {
             print("Clicou")
         }).disposed(by: disposedBag)
         
+        reloadEvent.skip(1)
+            .asObservable()
+            .subscribe(onNext: { _ in
+                self.featch(category: nil)
+            }).disposed(by: disposedBag)
         
         sharedFact
             .skip(1)
@@ -104,8 +112,6 @@ extension FactsViewModel {
             .retry(3)
         
         observable.subscribe(onNext: { factResponse in
-        
-            
             guard factResponse.result.count > 0 else {
                 self.facts.accept([.empty])
                 return

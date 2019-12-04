@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 
-class FactCollectionViewCell: UICollectionViewCell {
+class FactCollectionViewCell: BaseFactCell {
 
     static let reuseCell = "FactCollectionViewCell"
     static var nib: UINib {
@@ -39,26 +39,15 @@ class FactCollectionViewCell: UICollectionViewCell {
         setupCell()
     }
     
-    lazy var width: NSLayoutConstraint = {
-        let width = contentView.widthAnchor.constraint(equalToConstant: bounds.size.width)
-        width.isActive = true
-        return width
-    }()
     
-    override func systemLayoutSizeFitting(_ targetSize: CGSize,
-                                          withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority,
-                                          verticalFittingPriority: UILayoutPriority) -> CGSize {
-        self.width.constant = bounds.size.width
-        return contentView.systemLayoutSizeFitting(CGSize(width: targetSize.width, height: 1))
-    }
     
     func showLoading() {
         
         self.shareButton.alpha = 1
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.3) {
             self.shareButton.alpha = 0
         }
-        UIView.animate(withDuration: 0.5, delay: 0.2, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.3, delay: 0.15, options: .curveEaseInOut, animations: {
             self.loadingActivityIndicator.alpha = 1
         }) { _ in
             self.loadingActivityIndicator.startAnimating()
@@ -67,13 +56,11 @@ class FactCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func hideLoading() {
-        
-        UIView.animate(withDuration: 0.5) {
+    func hideLoading() {        
+        UIView.animate(withDuration: 0.3) {
             self.loadingActivityIndicator.alpha = 0
         }
-        
-        UIView.animate(withDuration: 0.5, delay: 0.15, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.3, delay: 0.15, options: .curveEaseInOut, animations: {
             self.shareButton.alpha = 1
         }, completion: {_ in
             self.shareButton.isHidden = false
@@ -97,16 +84,9 @@ class FactCollectionViewCell: UICollectionViewCell {
 
 //MARK: - Setups
 extension FactCollectionViewCell {
-    private func setupCell() {
-           //rounded the cell
-           self.contentView.layer.cornerRadius = self.frame.height / 12
-           self.contentView.layer.borderWidth = 0.3
-           self.contentView.layer.borderColor = UIColor.gray.cgColor
-           self.contentView.layer.masksToBounds = true
-       }
 
        private func setupLargeTitle() {
-           let customFont = UIFont.boldSystemFont(ofSize: 24)
+           let customFont = UIFont.OpenSans(.extraBold, size: 22)
            if #available(iOS 11.0, *) {
                self.valueLabel.font = UIFontMetrics(forTextStyle: .largeTitle).scaledFont(for: customFont)
            } else {
@@ -115,7 +95,7 @@ extension FactCollectionViewCell {
        }
        
        private func setupNormalTitle() {
-           let customFont = UIFont.systemFont(ofSize: 17)
+           let customFont = UIFont.OpenSans(.regular, size: 16)
            if #available(iOS 11.0, *) {
                self.valueLabel.font = UIFontMetrics(forTextStyle: .title1).scaledFont(for: customFont)
            } else {

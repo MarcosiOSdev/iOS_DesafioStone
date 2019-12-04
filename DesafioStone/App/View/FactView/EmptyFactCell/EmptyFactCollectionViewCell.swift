@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EmptyFactCollectionViewCell: UICollectionViewCell {
+class EmptyFactCollectionViewCell: BaseFactCell {
     
     static let reuseCell = "EmptyFactCollectionViewCell"
     static var nib: UINib {
@@ -17,7 +17,7 @@ class EmptyFactCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        setupCell()
     }
 
 }

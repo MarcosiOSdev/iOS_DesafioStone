@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ErrorFactCollectionViewCell: UICollectionViewCell {
+class ErrorFactCollectionViewCell: BaseFactCell {
+    
+    @IBOutlet weak var errorMessageLabel: UILabel!
     
     static let reuseCell = "ErrorFactCollectionViewCell"
     static var nib: UINib {
@@ -17,7 +19,6 @@ class ErrorFactCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.setupCell()
     }
-
 }

@@ -71,21 +71,31 @@ class FactsViewController: UIViewController, BindableType {
                     
                     return cell
                 
-                case .error(_):
+                case .error(let message):
                     guard let cell = tableView.dequeueReusableCell(withReuseIdentifier: ErrorFactCollectionViewCell.reuseCell, for: indexPath) as? ErrorFactCollectionViewCell else {
                         return UICollectionViewCell()
                     }
-                    cell.isUserInteractionEnabled = false
+                    cell.errorMessageLabel.text = message
                     return cell
                 
                 case .empty:
                     guard let cell = tableView.dequeueReusableCell(withReuseIdentifier: ErrorFactCollectionViewCell.reuseCell, for: indexPath) as? ErrorFactCollectionViewCell else {
                         return UICollectionViewCell()
                     }
-                    cell.isUserInteractionEnabled = false
                     return cell
                 }
             }
+            .disposed(by: disposedBag)
+        
+        self.factsCollectionView.rx
+            .itemSelected
+            .map { self.factsCollectionView.cellForItem(at: $0) }
+            .filter { $0 is ErrorFactCollectionViewCell || $0 is EmptyFactCollectionViewCell }
+            .subscribe({ _ in
+                self.viewModel.input
+                    .reloadEvent
+                    .onNext(())
+            })
             .disposed(by: disposedBag)
         
         viewModel.output.title
