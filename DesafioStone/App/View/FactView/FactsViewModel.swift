@@ -132,7 +132,7 @@ extension FactsViewModel {
     
     func tagUncategorized(in factModel: FactModel) {
         if factModel.tag.isEmpty {
-            factModel.tag = "UNCATEGORIZED"
+            factModel.tag = StringText.sharing.text(by: .tagUncategorized)
         }
     }
 }

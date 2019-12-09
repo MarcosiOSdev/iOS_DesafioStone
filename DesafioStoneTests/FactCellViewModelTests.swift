@@ -39,47 +39,31 @@ class FactCellViewModelTests: XCTestCase {
         }
     }
     
-    func test_check_init_viewModel() {
+    func test_init_viewModel() {
         let factsCellObservable = viewModel.output.facts.asObservable().subscribeOn(self.scheduler)
         XCTAssertEqual(try factsCellObservable.toBlocking(timeout: 1.0).first()?.count, 3)
     }
     
-    func test_check_init_viewModel_normal() {
+    func test_init_viewModel_normal() {
         let factsCellObservable = viewModel.output.facts.asObservable().subscribeOn(self.scheduler)
         XCTAssertEqual(try factsCellObservable.toBlocking(timeout: 1.0).first()?.first!, .normal(factModel: FactModel()))
     }
     
-    
-//    func test_check_tag() {
-//        let tagObservable = self.viewModel.tag.asObservable().subscribeOn(self.scheduler)
-//        XCTAssertEqual(try tagObservable.toBlocking(timeout: 1.0).first(), FactModel.mockable.tag)
-//    }
-    
-//    func test_check_font_normal() {
-//        let modelMock = FactModel.mockable
-//        modelMock.title = "Teste para palavras com font normal devem ter acima de 80 caracteres. Devemos fazer o imblometion."
-//        self.viewModel = FactCellViewModel(model: modelMock, sharedAction: self.actionMock())
-//        let idObservable = self.viewModel.font.asObservable().subscribeOn(self.scheduler)
-//        XCTAssertEqual(try idObservable.toBlocking(timeout: 1.0).first(), .normal)
-//    }
-//
-//    func test_tap_shared() {
-//        let isLoading = testScheduler.createObserver(Bool.self)
-//        self.viewModel
-//            .loadInProgress
-//            .drive(isLoading)
-//            .disposed(by: self.bag)
-//
-//
-//        testScheduler.createColdObservable([.next(10, ())])
-//            .bind(to: self.viewModel.onTappedButton)
-//            .disposed(by: bag)
-//
-//        testScheduler.start()
-//
-//        XCTAssertEqual(isLoading.events, [
-//            .next(0, false),
-//            .next(10, true)
-//        ])
-//    }
+    func test_without_category_set_uncategorized(){
+        let factCellObservable = viewModel.output.facts.asObservable().subscribeOn(self.scheduler)
+        
+        do {
+            let result: FactsTableViewCellType = try (factCellObservable.toBlocking(timeout: 1.0).first()?.first!)!
+            
+            if case let FactsTableViewCellType.normal(factModel) = result {
+                let uncategorized = StringText.sharing.text(by: .tagUncategorized)
+                XCTAssertEqual(factModel.tag, "Uncategorized")
+                XCTAssertEqual(factModel.tag, uncategorized)
+            } else {
+                XCTFail("Sem model")
+            }
+        } catch {
+            XCTFail("Erro in test_without_category_set_uncategorized with: \(error.localizedDescription)")
+        }
+    }
 }
