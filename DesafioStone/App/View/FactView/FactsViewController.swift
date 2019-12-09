@@ -28,6 +28,7 @@ class FactsViewController: UIViewController, BindableType {
             
             if let layout = self.factsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 layout.estimatedItemSize = CGSize(width: factsCollectionView.bounds.width - 16, height: CGFloat(10))
+                layout.itemSize = UICollectionViewFlowLayoutAutomaticSize
             }
         }
     }

@@ -66,4 +66,18 @@ class FactCellViewModelTests: XCTestCase {
             XCTFail("Erro in test_without_category_set_uncategorized with: \(error.localizedDescription)")
         }
     }
+    
+    func test_with_empty_result() {
+        self.viewModel = FactsViewModel(chuckNorrisAPI: ChuckNorrisAPIEmptyStub(), coordinator: CoordinatorStub())
+        
+        let factCellObservable = viewModel.output.facts.asObservable().subscribeOn(self.scheduler)
+        do {
+            let result: FactsTableViewCellType = try factCellObservable.toBlocking(timeout: 1.0).first()!.first!
+            XCTAssertEqual(result, FactsTableViewCellType.empty)
+        } catch {
+            XCTFail("Erro in test_with_empty_result with: \(error.localizedDescription)")
+        }
+    }
+    
+    
 }

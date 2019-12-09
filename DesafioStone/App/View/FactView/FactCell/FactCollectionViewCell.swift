@@ -37,12 +37,10 @@ class FactCollectionViewCell: BaseFactCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupCell()
+        loadingActivityIndicator.isHidden = true
     }
     
-    
-    
     func showLoading() {
-        
         self.shareButton.alpha = 1
         UIView.animate(withDuration: 0.3) {
             self.shareButton.alpha = 0
