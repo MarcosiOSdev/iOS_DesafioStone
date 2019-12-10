@@ -27,7 +27,8 @@ class FactsViewController: UIViewController, BindableType {
                                               forCellWithReuseIdentifier: EmptyFactCollectionViewCell.reuseCell)
             
             if let layout = self.factsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-                layout.estimatedItemSize = CGSize(width: factsCollectionView.bounds.width - 16, height: CGFloat(10))
+                let width = UIScreen.main.bounds.width - 32
+                layout.estimatedItemSize = CGSize(width: width, height: CGFloat(10))
                 layout.itemSize = UICollectionViewFlowLayoutAutomaticSize
             }
         }
@@ -54,7 +55,6 @@ class FactsViewController: UIViewController, BindableType {
 
         viewModel.output.facts
             .asObservable()
-            .skip(1)
             .filter { $0.count > 0}
             .bind(to: self.factsCollectionView.rx.items) { [weak self] tableView, index, element in
                 
@@ -80,7 +80,7 @@ class FactsViewController: UIViewController, BindableType {
                     return cell
                 
                 case .empty:
-                    guard let cell = tableView.dequeueReusableCell(withReuseIdentifier: ErrorFactCollectionViewCell.reuseCell, for: indexPath) as? ErrorFactCollectionViewCell else {
+                    guard let cell = tableView.dequeueReusableCell(withReuseIdentifier: EmptyFactCollectionViewCell.reuseCell, for: indexPath) as? EmptyFactCollectionViewCell else {
                         return UICollectionViewCell()
                     }
                     return cell

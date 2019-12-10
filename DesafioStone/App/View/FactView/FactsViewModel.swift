@@ -32,7 +32,7 @@ class FactsViewModel: BindingViewModelType {
     }
 
     struct UIOutput {
-        var facts: Driver<[FactsTableViewCellType]>
+        var facts: Signal<[FactsTableViewCellType]>
         var title: Driver<String>
         var finishedShareFact: Driver<Bool>
     }
@@ -62,7 +62,7 @@ class FactsViewModel: BindingViewModelType {
             .of(StringText.sharing.text(by: .titleFactScene))
             .asDriver(onErrorJustReturn: "")
         
-        output = UIOutput(facts: facts.asDriver(onErrorJustReturn: [.empty]),
+        output = UIOutput(facts: facts.asSignal(onErrorJustReturn: [.empty]),
                           title: title,
                           finishedShareFact: self._isLoadingShare.asDriver(onErrorJustReturn: false))
         
@@ -123,9 +123,10 @@ extension FactsViewModel {
                 self.tagUncategorized(in: factModel)
                 return FactsTableViewCellType.normal(factModel: factModel)
             }
-            self.facts.accept(factsCell)
+            self.facts.accept(factsCell)            
         }, onError: { error in
-            self.facts.accept([.error(message: "Ocorreu um erro")])
+            let genericError = StringText.sharing.text(by: .defaultError)
+            self.facts.accept([.error(message: genericError)])
         })
         .disposed(by: disposedBag)
     }

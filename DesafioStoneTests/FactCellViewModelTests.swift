@@ -56,8 +56,7 @@ class FactCellViewModelTests: XCTestCase {
             let result: FactsTableViewCellType = try (factCellObservable.toBlocking(timeout: 1.0).first()?.first!)!
             
             if case let FactsTableViewCellType.normal(factModel) = result {
-                let uncategorized = StringText.sharing.text(by: .tagUncategorized)
-                XCTAssertEqual(factModel.tag, "Uncategorized")
+                let uncategorized = StringText.sharing.text(by: .tagUncategorized)                
                 XCTAssertEqual(factModel.tag, uncategorized)
             } else {
                 XCTFail("Sem model")
@@ -79,5 +78,15 @@ class FactCellViewModelTests: XCTestCase {
         }
     }
     
+    func test_with_error_network() {        
+        self.viewModel = FactsViewModel(chuckNorrisAPI: ChuckNorrisAPIErrorNetworkStub(), coordinator: CoordinatorStub())
+        
+        let factCellObservable = viewModel.output.facts.asObservable().subscribeOn(self.scheduler)
+        let result = try! factCellObservable.toBlocking(timeout: 1.0).first()!.first!
+        if case let FactsTableViewCellType.error(message) = result {
+            let genericError = StringText.sharing.text(by: .defaultError)
+            XCTAssertEqual(genericError, message)
+        }
+    }
     
 }

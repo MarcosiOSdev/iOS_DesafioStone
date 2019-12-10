@@ -16,6 +16,7 @@ class StringText {
     enum LocalizationString: String {
         case titleFactScene = "TITLE_FACT_SCENE"
         case tagUncategorized = "UNCATEGORIZED_FACT_TAG"
+        case defaultError = "ERROR_DEFAULT"
     }
     
     func text(by localizationString: LocalizationString ) -> String{

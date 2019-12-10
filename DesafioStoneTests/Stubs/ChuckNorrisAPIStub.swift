@@ -8,7 +8,7 @@
 
 import Foundation
 import RxSwift
-
+import RxCocoa
 @testable import DesafioStone
 
 class ChuckNorrisAPIStub: ChuckNorrisAPIType {
@@ -34,6 +34,17 @@ class ChuckNorrisAPIEmptyStub: ChuckNorrisAPIStub {
         return Observable<FactResponse>.of(response)
     }
 }
+
+class ChuckNorrisAPIErrorNetworkStub: ChuckNorrisAPIStub {
+    
+    override func facts(category: CategoryModel?) -> Observable<FactResponse> {        
+        return Observable.create { observer in
+            observer.on(.error(RxCocoaURLError.unknown))
+            return Disposables.create()
+        }
+    }
+}
+
 
 //class ChuckNorrisAPIErrorStub: ChuckNorrisAPIStub {
 //    override func facts(category: CategoryModel?) -> Observable<FactResponse> {
