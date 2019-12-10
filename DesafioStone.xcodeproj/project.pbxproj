@@ -335,25 +335,25 @@
 		2899C4D122E92B1700D6191B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2899C4D222E92B2D00D6191B /* FactView */,
-				2899C4AA22E928D600D6191B /* LaunchScreen.storyboard */,
+				D81BBA0823A01BD1001D45A6 /* Launch */,
+				D81BBA0523A01B60001D45A6 /* SearchScene */,
+				2899C4D222E92B2D00D6191B /* FactScene */,
 				287F370123922E9E00D8FC20 /* BindingViewModelType.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		2899C4D222E92B2D00D6191B /* FactView */ = {
+		2899C4D222E92B2D00D6191B /* FactScene */ = {
 			isa = PBXGroup;
 			children = (
+				D81BBA0723A01BA5001D45A6 /* FactsViewController */,
 				28913C8F23974B0E005473F2 /* Cell */,
 				D81EE68523904DF90000A214 /* EmptyFactCell */,
 				D81EE68023904D510000A214 /* ErrorFactCell */,
 				289CEB6122EA795000112AE0 /* FactCell */,
 				2899C4FF22E93B9900D6191B /* FactsViewModel.swift */,
-				2899C51922E94D4B00D6191B /* FactsViewController.swift */,
-				2899C51A22E94D4B00D6191B /* FactsViewController.xib */,
 			);
-			path = FactView;
+			path = FactScene;
 			sourceTree = "<group>";
 		};
 		2899C4D322E92B3E00D6191B /* Coordinator */ = {
@@ -459,6 +459,30 @@
 				FD8C7AFABD5A144FD5A5EFF2 /* Pods-DesafioStoneUITests.staging.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		D81BBA0523A01B60001D45A6 /* SearchScene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SearchScene;
+			sourceTree = "<group>";
+		};
+		D81BBA0723A01BA5001D45A6 /* FactsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2899C51922E94D4B00D6191B /* FactsViewController.swift */,
+				2899C51A22E94D4B00D6191B /* FactsViewController.xib */,
+			);
+			path = FactsViewController;
+			sourceTree = "<group>";
+		};
+		D81BBA0823A01BD1001D45A6 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				2899C4AA22E928D600D6191B /* LaunchScreen.storyboard */,
+			);
+			path = Launch;
 			sourceTree = "<group>";
 		};
 		D81EE68023904D510000A214 /* ErrorFactCell */ = {
