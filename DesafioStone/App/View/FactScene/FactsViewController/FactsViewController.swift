@@ -36,55 +36,64 @@ class FactsViewController: UIViewController, BindableType {
     
     var viewModel: FactsViewModel!
     var disposedBag = DisposeBag()
-    
     private let _shareFact =  BehaviorRelay<FactModel>(value: FactModel.empty)
+    private var cellSelected: FactCollectionViewCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationBar()
+        self.configureNavigationBar()
     }
     
-    private var cellSelected: FactCollectionViewCell?
-    
-    func configureNavigationBar() {        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
+    func sharedButton(fact: FactModel, cell: FactCollectionViewCell) -> CocoaAction {
+        return CocoaAction {
+            self.cellSelected = cell
+            self._shareFact.accept(fact)
+            return Observable.empty()
+        }
     }
-    
-    
-    func bindViewModel() {
+}
 
-        viewModel.output.facts
+//MARK: - Binding UI - ViewModel
+extension FactsViewController {
+    func bindViewModel() {
+        self.bindToCollection()
+        self.bindNavigation()
+        self.bindSharing()
+    }
+    
+    private func bindNavigation() {
+        self.viewModel.output.title
+            .drive(self.rx.title)
+            .disposed(by: disposedBag)
+        
+        self.navigationItem.rightBarButtonItem?.rx
+            .tap
+            .bind(to: viewModel.input.searchViewButtonTapped)
+            .disposed(by: disposedBag)
+        
+    }
+    
+    private func bindSharing() {
+        self._shareFact
+            .bind(to: viewModel.input.sharedFact)
+            .disposed(by: disposedBag)
+        
+        self.viewModel.output.finishedShareFact
+            .asObservable()
+            .subscribe { event in
+                guard let isLoading = event.element, let cell = self.cellSelected else { return }
+                isLoading ? cell.showLoading() : cell.hideLoading()
+            }.disposed(by: self.disposedBag)
+    }
+    
+    private func bindToCollection() {
+        self.viewModel.output.facts
             .asObservable()
             .filter { $0.count > 0}
-            .bind(to: self.factsCollectionView.rx.items) { [weak self] tableView, index, element in
-                
-                guard let strongSelf = self else { return UICollectionViewCell() }
-                
-                let indexPath = IndexPath(item: index, section: 0)
-                switch element {
-                case .normal(let factModel):
-                    guard let cell = tableView.dequeueReusableCell(withReuseIdentifier: FactCollectionViewCell.reuseCell, for: indexPath) as? FactCollectionViewCell else {
-                        return UICollectionViewCell()
-                    }
-                    let sharedAction = strongSelf.sharedButton(fact: factModel, cell: cell)
-                    cell.configure(with: factModel,
-                                   sharedAction: sharedAction)
-                    
-                    return cell
-                
-                case .error(let message):
-                    guard let cell = tableView.dequeueReusableCell(withReuseIdentifier: ErrorFactCollectionViewCell.reuseCell, for: indexPath) as? ErrorFactCollectionViewCell else {
-                        return UICollectionViewCell()
-                    }
-                    cell.errorMessageLabel.text = message
-                    return cell
-                
-                case .empty:
-                    guard let cell = tableView.dequeueReusableCell(withReuseIdentifier: EmptyFactCollectionViewCell.reuseCell, for: indexPath) as? EmptyFactCollectionViewCell else {
-                        return UICollectionViewCell()
-                    }
-                    return cell
-                }
+            .bind(to: self.factsCollectionView.rx.items) { [weak self] collectionView, index, element in
+                guard let self = self else { return UICollectionViewCell() }
+                let cell = self.setupCell(in: collectionView, index: index, cellType: element)
+                return cell
             }
             .disposed(by: disposedBag)
         
@@ -98,35 +107,41 @@ class FactsViewController: UIViewController, BindableType {
                     .onNext(())
             })
             .disposed(by: disposedBag)
-        
-        viewModel.output.title
-            .drive(self.rx.title)
-            .disposed(by: disposedBag)
-        
-        
-        navigationItem.rightBarButtonItem?.rx
-            .tap
-            .bind(to: viewModel.input.searchViewButtonTapped)
-            .disposed(by: disposedBag)
-        
-        _shareFact
-            .bind(to: viewModel.input.sharedFact)
-            .disposed(by: disposedBag)
-        
-        self.viewModel.output.finishedShareFact
-            .asObservable()
-            .subscribe { event in
-                guard let isLoading = event.element, let cell = self.cellSelected else { return }
-                isLoading ? cell.showLoading() : cell.hideLoading()
-        }.disposed(by: self.disposedBag)
+    }
+}
+
+//MARK: - Setups View
+extension FactsViewController {
+    
+    private func configureNavigationBar() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
     }
     
-    func sharedButton(fact: FactModel, cell: FactCollectionViewCell) -> CocoaAction {
-        return CocoaAction {
-            self.cellSelected = cell
-            self._shareFact.accept(fact)
-            return Observable.empty()
+    private func setupCell(in collectionView: UICollectionView, index: Int, cellType: FactsTableViewCellType) -> UICollectionViewCell {
+        let indexPath = IndexPath(item: index, section: 0)
+        switch cellType {
+        case .normal(let factModel):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FactCollectionViewCell.reuseCell, for: indexPath) as? FactCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            let sharedAction = self.sharedButton(fact: factModel, cell: cell)
+            cell.configure(with: factModel,
+                           sharedAction: sharedAction)
+            
+            return cell
+            
+        case .error(let message):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ErrorFactCollectionViewCell.reuseCell, for: indexPath) as? ErrorFactCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            cell.errorMessageLabel.text = message
+            return cell
+            
+        case .empty:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyFactCollectionViewCell.reuseCell, for: indexPath) as? EmptyFactCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            return cell
         }
     }
-
 }

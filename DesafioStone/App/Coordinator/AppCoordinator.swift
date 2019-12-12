@@ -12,7 +12,7 @@ import RxCocoa
 
 class AppCoordinator: CoordinatorType {
     
-    fileprivate var window: UIWindow?
+    fileprivate weak var window: UIWindow?
     fileprivate var currentViewController: UIViewController!
     fileprivate var currentNavigation: UINavigationController!
     
@@ -51,7 +51,7 @@ class AppCoordinator: CoordinatorType {
                 fatalError("Can't push a view controller without a current navigation controller")
             }
             // one-off subscription to be notified when push complete
-            _ = navigationController.rx.delegate          .sentMessage(#selector(UINavigationControllerDelegate.navigationController(_:didShow:animated:)))
+            _ = navigationController.rx.delegate.sentMessage(#selector(UINavigationControllerDelegate.navigationController(_:didShow:animated:)))
                 .map { _ in }
                 .bind(to: subject)
             navigationController.pushViewController(viewController, animated: true)
@@ -87,7 +87,7 @@ class AppCoordinator: CoordinatorType {
             }
         
         } else if let navigationController = currentViewController.navigationController {
-            _ = navigationController.rx.delegate                .sentMessage(#selector(UINavigationControllerDelegate.navigationController(_:didShow:animated:)))
+            _ = navigationController.rx.delegate.sentMessage(#selector(UINavigationControllerDelegate.navigationController(_:didShow:animated:)))
                 .map { _ in }
                 .bind(to: subject)
             
