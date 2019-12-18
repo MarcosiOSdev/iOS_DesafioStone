@@ -34,10 +34,21 @@ class ChuckNorrisAPI: ChuckNorrisAPIType {
         } else {
             query = ["query": "animal"]
         }
-        guard
-            let urlRequest = self.request(endpoint: self.factEndpoint, query: query ?? [:]) else {
-                return .empty()
+        guard let urlRequest = self.request(endpoint: self.factEndpoint, query: query ?? [:]) else {
+            return .empty()
         }
+        
+//        return self.urlSession.rx.response(request: urlRequest)
+//            .map { response, data in
+//            if 200 ..< 300 ~= response.statusCode {
+//                return FactResponse(data: data)
+//            } else if 400 ..< 500 ~= response.statusCode {
+//                throw ChuckNorrisAPIError.notFound
+//            } else {
+//                throw ChuckNorrisAPIError.serverFailure
+//            }
+//        }
+        
         return self.urlSession.rx
             .data(request: urlRequest)
             .map { data in
@@ -46,26 +57,25 @@ class ChuckNorrisAPI: ChuckNorrisAPIType {
         }
     }
     
-    
     private func request(endpoint: String,
                         query: [String: Any] = [:]) -> URLRequest? {
         do {
             let urlBase = ChuckNorrisAPI.Info.baseURL.replacingOccurrences(of: "\\", with: "")
             guard let url = URL(string: urlBase)?.appendingPathComponent(endpoint),
                 var components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
-                    throw EOError.invalidURL(endpoint)
+                    throw ChuckNorrisAPIError.invalidURL(endpoint)
             }
             if query.count > 0 {
                 components.queryItems = try query.compactMap { (key, value) in
                     guard let v = value as? CustomStringConvertible else {
-                        throw EOError.invalidParameter(key, value)
+                        throw ChuckNorrisAPIError.invalidParameter(key, value)
                     }
                     return URLQueryItem(name: key, value: v.description)
                 }
             }
             
             guard let finalURL = components.url else {
-                throw EOError.invalidURL(endpoint)
+                throw ChuckNorrisAPIError.invalidURL(endpoint)
             }
             let request = URLRequest(url: finalURL)
             return request
@@ -88,8 +98,10 @@ extension ChuckNorrisAPI {
     }
 }
 
-enum EOError: Error {
+enum ChuckNorrisAPIError: Error {
     case invalidURL(String)
     case invalidParameter(String, Any)
     case invalidJSON(String)
+    case notFound
+    case serverFailure
 }

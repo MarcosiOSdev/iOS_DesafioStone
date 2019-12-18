@@ -16,13 +16,13 @@ class ChuckNorrisAPIStub: ChuckNorrisAPIType {
         return Observable<CategoryResponse>.of(CategoryResponse(["TESTE", "MOCK"]))
     }
     
-    func facts(category: CategoryModel?) -> Observable<FactResponse> {
-        
-        let facts = [FactResponse.Fact(id: "1", url: "www.1", value: "Ola teste 1", categories: [""]),
-                     FactResponse.Fact(id: "2", url: "www.2", value: "Ola teste 2", categories: [""]),
-                     FactResponse.Fact(id: "3", url: "www.3", value: "Ola teste 3", categories: ["Sweet"])
-                    ]
-        let response = FactResponse(total: 3, result: facts)
+    var fakeFacts = [FactResponse.Fact(id: "1", url: "www.1", value: "Ola teste 1", categories: [""]),
+     FactResponse.Fact(id: "2", url: "www.2", value: "Ola teste 2", categories: [""]),
+     FactResponse.Fact(id: "3", url: "www.3", value: "Ola teste 3", categories: ["Sweet"])
+    ]
+    
+    func facts(category: CategoryModel?) -> Observable<FactResponse> {        
+        let response = FactResponse(total: 3, result: fakeFacts)
         
         return Observable<FactResponse>.of(response)
     }

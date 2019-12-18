@@ -23,3 +23,16 @@ extension FactsTableViewCellType: Equatable {
         }
     }
 }
+
+extension Scene: Equatable {
+    public static func == (lhs: Scene, rhs: Scene) -> Bool {        
+        switch (lhs, rhs) {
+        case (.facts, .facts): return true
+        case (.searchCategory, .searchCategory): return true
+        case (.none, .none): return true
+        case (.sharedLink(title: _, link: _, completion: _),
+              .sharedLink(title: _, link: _, completion: _)): return true
+        default: return false
+        }
+    }
+}

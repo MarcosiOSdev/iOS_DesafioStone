@@ -36,7 +36,7 @@ class FactsViewController: UIViewController, BindableType {
     
     var viewModel: FactsViewModel!
     var disposedBag = DisposeBag()
-    private let _shareFact =  BehaviorRelay<FactModel>(value: FactModel.empty)
+    private let _shareFact = PublishRelay<FactModel>()
     private var cellSelected: FactCollectionViewCell?
     
     override func viewDidLoad() {

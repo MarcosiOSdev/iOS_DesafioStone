@@ -67,17 +67,16 @@ class FactsViewModel: BindingViewModelType {
                           finishedShareFact: self._isLoadingShare.asDriver(onErrorJustReturn: false))
         
         self.searchViewButtonTapped.subscribe(onNext: { _ in
-            print("Clicou")
+            coordinator.transition(to: .searchCategory, type: .push)
         }).disposed(by: disposedBag)
         
-        reloadEvent.skip(1)
+        reloadEvent
             .asObservable()
             .subscribe(onNext: { _ in
                 self.featch(category: nil)
             }).disposed(by: disposedBag)
         
-        sharedFact
-            .skip(1)
+        sharedFact           
             .map { $0 }
             .subscribe({ event in
                 self._isLoadingShare.onNext(true)

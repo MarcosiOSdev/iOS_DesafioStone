@@ -15,7 +15,7 @@ class AppCoordinator: CoordinatorType {
     fileprivate weak var window: UIWindow?
     fileprivate var currentViewController: UIViewController!
     fileprivate var currentNavigation: UINavigationController!
-    
+    fileprivate var scene: Scene!
     init(window: UIWindow) {
         self.window = window
     }
@@ -38,6 +38,7 @@ class AppCoordinator: CoordinatorType {
     
     @discardableResult
     func transition(to scene: Scene, type: SceneTransitionType) -> Completable {
+        self.scene = scene
         let subject = PublishSubject<Void>()
         let viewController = scene.dependencyInjection(coordinator: self)
         switch type {
@@ -111,5 +112,9 @@ class AppCoordinator: CoordinatorType {
     
     func currentView() -> UIViewController {
         return self.currentViewController
+    }
+    
+    func currentScene() -> Scene {
+        return self.scene
     }
 }

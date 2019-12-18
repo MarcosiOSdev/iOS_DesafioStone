@@ -12,22 +12,51 @@ import RxCocoa
 
 @testable import DesafioStone
 
-class CoordinatorStub: AppCoordinator {
+class CoordinatorStub: CoordinatorType {
     
-    var completionOk =  BehaviorRelay<Scene>(value: .none)
-    
-    init() {
-        super.init(window: UIApplication.shared.windows.first!)
-    }
+    var completionOk = PublishRelay<Void>()
+    var currentSceneObservable = PublishSubject<Int>()
+    let disposedBag = DisposeBag()
         
-    override func transition(to scene: Scene, type: SceneTransitionType) -> Completable {
-        completionOk.accept(scene)
+    func transition(to scene: Scene, type: SceneTransitionType) -> Completable {
+        currentSceneObservable.onNext(scene.rawValue)
+        switch scene {
+        case .sharedLink(_, _, let completion):
+            completionOk.asObservable().subscribe(onNext: { _ in
+                completion?.execute()
+            }).disposed(by: disposedBag)
+        default:
+            break;
+        }
+        
+        
+        
         let finish = PublishSubject<Void>()
         finish.onCompleted()
         return finish.asObservable()
         .take(1)
         .ignoreElements()
     }
+}
+
+extension CoordinatorStub {
+    func currentScene() -> Scene {
+        return .none
+    }
     
+    func pop(animated: Bool) -> Completable {
+        let finish = PublishSubject<Void>()
+        finish.onCompleted()
+        return finish.asObservable()
+            .take(1)
+            .ignoreElements()
+    }
     
+    func currentNavigationController() -> UINavigationController {
+        return UINavigationController()
+    }
+    
+    func currentView() -> UIViewController {
+        return UIViewController()
+    }
 }

@@ -13,7 +13,8 @@ import Action
 /// Telas do app
 enum Scene {
     case facts
-    case sharedLink(title: String, link: URL, completion: CocoaAction)
+    case sharedLink(title: String, link: URL, completion: CocoaAction?)
+    case searchCategory
     
     /// JUST USING IN TEST
     case none
@@ -39,9 +40,11 @@ extension Scene {
             let objectsToShare: [Any] = [link, title]
             let viewController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             viewController.completionWithItemsHandler = { activityType, bollean, anyes, error in
-                completion.execute()                
+                completion?.execute()                
             }
             return viewController
+        case .searchCategory:
+            return UIViewController()
         }
     }
 }

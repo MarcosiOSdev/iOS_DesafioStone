@@ -26,6 +26,9 @@ protocol CoordinatorType: AnyObject {
     
     ///Pegar a atual viewController
     func currentView() -> UIViewController
+    
+    ///Pegar a atual Scene
+    func currentScene() -> Scene
 }
 
 extension CoordinatorType {

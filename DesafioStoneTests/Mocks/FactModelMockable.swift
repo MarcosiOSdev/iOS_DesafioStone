@@ -19,3 +19,11 @@ extension FactModel {
         return model
     }
 }
+
+extension FactsTableViewCellType {
+    static var mockFactsResult: [FactsTableViewCellType] {
+        return [FactsTableViewCellType.normal(factModel: FactModel.mockable),
+                FactsTableViewCellType.normal(factModel: FactModel.mockable),
+                FactsTableViewCellType.normal(factModel: FactModel.mockable)]
+    }
+}
