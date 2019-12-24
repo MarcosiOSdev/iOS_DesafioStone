@@ -15,6 +15,7 @@ class StringText {
     
     enum LocalizationString: String {
         case titleFactScene = "TITLE_FACT_SCENE"
+        case titleSearchFacts = "TITLE_SEARCH_FACTS"
         case tagUncategorized = "UNCATEGORIZED_FACT_TAG"
         case defaultError = "ERROR_DEFAULT"
     }

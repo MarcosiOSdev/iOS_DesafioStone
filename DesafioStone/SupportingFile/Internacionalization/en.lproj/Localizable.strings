@@ -6,5 +6,6 @@
   Copyright © 2019 Marcos Felipe Souza. All rights reserved.
 */
 "TITLE_FACT_SCENE" = "Chuck Norris Facts";
+"TITLE_SEARCH_FACTS" = "Search Facts";
 "UNCATEGORIZED_FACT_TAG" = "Uncategorized";
 "ERROR_DEFAULT" = "An error has occurred :/";

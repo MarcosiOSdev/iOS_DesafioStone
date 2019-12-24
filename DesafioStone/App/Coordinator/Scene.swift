@@ -44,7 +44,10 @@ extension Scene {
             }
             return viewController
         case .searchCategory:
-            return UIViewController()
+            let viewModel = SearchFactsViewModel()
+            var viewController = SearchFactsViewController()
+            viewController.bindViewModel(to: viewModel)
+            return viewController
         }
     }
 }

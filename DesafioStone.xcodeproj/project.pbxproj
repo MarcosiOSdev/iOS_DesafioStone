@@ -62,6 +62,12 @@
 		D81EE68323904DA90000A214 /* ErrorFactCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81EE68123904DA90000A214 /* ErrorFactCollectionViewCell.swift */; };
 		D81EE68823904E0D0000A214 /* EmptyFactCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81EE68623904E0D0000A214 /* EmptyFactCollectionViewCell.swift */; };
 		D81EE68923904E0D0000A214 /* EmptyFactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D81EE68723904E0D0000A214 /* EmptyFactCollectionViewCell.xib */; };
+		D823676123B0EB7400A31F5C /* SearchFactsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D823676023B0EB7400A31F5C /* SearchFactsViewModel.swift */; };
+		D823676423B0F17C00A31F5C /* SearchFactsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D823676323B0F17C00A31F5C /* SearchFactsViewModelTests.swift */; };
+		D8372A8C23B0F84400D1275A /* SearchFactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8372A8B23B0F84400D1275A /* SearchFactsViewController.swift */; };
+		D87B2D2E23B1517600685E81 /* SuggestionFactsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87B2D2D23B1517600685E81 /* SuggestionFactsCollectionViewCell.swift */; };
+		D87B2D3023B15AFB00685E81 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87B2D2F23B15AFB00685E81 /* UIColor+Hex.swift */; };
+		D87B2D3323B15DF200685E81 /* SuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87B2D3223B15DF200685E81 /* SuggestionView.swift */; };
 		D884C25323A40B6000CEE022 /* Scene+CustomTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D884C25223A40B6000CEE022 /* Scene+CustomTest.swift */; };
 		D88DA5BF239171BA00458240 /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88DA5BE239171BA00458240 /* RxTest.framework */; };
 /* End PBXBuildFile section */
@@ -159,6 +165,12 @@
 		D81EE68123904DA90000A214 /* ErrorFactCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorFactCollectionViewCell.swift; sourceTree = "<group>"; };
 		D81EE68623904E0D0000A214 /* EmptyFactCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFactCollectionViewCell.swift; sourceTree = "<group>"; };
 		D81EE68723904E0D0000A214 /* EmptyFactCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyFactCollectionViewCell.xib; sourceTree = "<group>"; };
+		D823676023B0EB7400A31F5C /* SearchFactsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFactsViewModel.swift; sourceTree = "<group>"; };
+		D823676323B0F17C00A31F5C /* SearchFactsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFactsViewModelTests.swift; sourceTree = "<group>"; };
+		D8372A8B23B0F84400D1275A /* SearchFactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFactsViewController.swift; sourceTree = "<group>"; };
+		D87B2D2D23B1517600685E81 /* SuggestionFactsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionFactsCollectionViewCell.swift; sourceTree = "<group>"; };
+		D87B2D2F23B15AFB00685E81 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		D87B2D3223B15DF200685E81 /* SuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionView.swift; sourceTree = "<group>"; };
 		D884C25223A40B6000CEE022 /* Scene+CustomTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Scene+CustomTest.swift"; sourceTree = "<group>"; };
 		D88DA5BE239171BA00458240 /* RxTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8DA49F8236B633F0061650C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -288,11 +300,11 @@
 		2899C4B522E928D600D6191B /* DesafioStoneTests */ = {
 			isa = PBXGroup;
 			children = (
+				D823676223B0F15D00A31F5C /* Tests */,
 				D884C25123A40B5000CEE022 /* Helper */,
 				287F36FE239217A700D8FC20 /* Equatable */,
 				287F36F92392114400D8FC20 /* Stubs */,
 				280615562390C10200B013F6 /* Mocks */,
-				2899C4B622E928D600D6191B /* FactCellViewModelTests.swift */,
 				2899C4B822E928D600D6191B /* Info.plist */,
 			);
 			path = DesafioStoneTests;
@@ -407,6 +419,7 @@
 				2899C52522E95CE400D6191B /* AppConfiguration.swift */,
 				289A8B5B22EE7DB3008C847C /* StringText.swift */,
 				28913C8423973DB5005473F2 /* OpenSansFont.swift */,
+				D87B2D2F23B15AFB00685E81 /* UIColor+Hex.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -467,6 +480,9 @@
 		D81BBA0523A01B60001D45A6 /* SearchScene */ = {
 			isa = PBXGroup;
 			children = (
+				D87B2D3123B15DD900685E81 /* SuggestionView */,
+				D823676023B0EB7400A31F5C /* SearchFactsViewModel.swift */,
+				D8372A8B23B0F84400D1275A /* SearchFactsViewController.swift */,
 			);
 			path = SearchScene;
 			sourceTree = "<group>";
@@ -504,6 +520,32 @@
 				D81EE68723904E0D0000A214 /* EmptyFactCollectionViewCell.xib */,
 			);
 			path = EmptyFactCell;
+			sourceTree = "<group>";
+		};
+		D823676223B0F15D00A31F5C /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				2899C4B622E928D600D6191B /* FactCellViewModelTests.swift */,
+				D823676323B0F17C00A31F5C /* SearchFactsViewModelTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		D87B2D2C23B1512D00685E81 /* SuggestionFactsCell */ = {
+			isa = PBXGroup;
+			children = (
+				D87B2D2D23B1517600685E81 /* SuggestionFactsCollectionViewCell.swift */,
+			);
+			path = SuggestionFactsCell;
+			sourceTree = "<group>";
+		};
+		D87B2D3123B15DD900685E81 /* SuggestionView */ = {
+			isa = PBXGroup;
+			children = (
+				D87B2D2C23B1512D00685E81 /* SuggestionFactsCell */,
+				D87B2D3223B15DF200685E81 /* SuggestionView.swift */,
+			);
+			path = SuggestionView;
 			sourceTree = "<group>";
 		};
 		D884C25123A40B5000CEE022 /* Helper */ = {
@@ -782,16 +824,21 @@
 				D81EE68323904DA90000A214 /* ErrorFactCollectionViewCell.swift in Sources */,
 				2899C52022E9536200D6191B /* UINavigationController+Rx.swift in Sources */,
 				D81EE68823904E0D0000A214 /* EmptyFactCollectionViewCell.swift in Sources */,
+				D823676123B0EB7400A31F5C /* SearchFactsViewModel.swift in Sources */,
 				289CEB6422EA796C00112AE0 /* FactCollectionViewCell.swift in Sources */,
+				D87B2D2E23B1517600685E81 /* SuggestionFactsCollectionViewCell.swift in Sources */,
 				2899C51E22E9514400D6191B /* BindableType.swift in Sources */,
 				28A63D4822EBA1C0002A9186 /* ChuckNorrisAPIType.swift in Sources */,
+				D8372A8C23B0F84400D1275A /* SearchFactsViewController.swift in Sources */,
 				2899C4FE22E938B700D6191B /* CoordinatorType.swift in Sources */,
 				2899C50322E93F2700D6191B /* UIViewController+Custom.swift in Sources */,
 				28A63D4422EB0AD1002A9186 /* CategoryModel.swift in Sources */,
 				2899C52822E95DA000D6191B /* ChuckNorrisAPI.swift in Sources */,
+				D87B2D3323B15DF200685E81 /* SuggestionView.swift in Sources */,
 				2899C52622E95CE400D6191B /* AppConfiguration.swift in Sources */,
 				2899C4FC22E9386D00D6191B /* AppCoordinator.swift in Sources */,
 				2899C4D522E92B5D00D6191B /* Scene.swift in Sources */,
+				D87B2D3023B15AFB00685E81 /* UIColor+Hex.swift in Sources */,
 				289CEB6722EAAC6300112AE0 /* URLSession+Rx.swift in Sources */,
 				287F370223922E9E00D8FC20 /* BindingViewModelType.swift in Sources */,
 				2899C50022E93B9900D6191B /* FactsViewModel.swift in Sources */,
@@ -805,6 +852,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D823676423B0F17C00A31F5C /* SearchFactsViewModelTests.swift in Sources */,
 				287F3700239217B500D8FC20 /* Equatables.swift in Sources */,
 				2899C4B722E928D600D6191B /* FactCellViewModelTests.swift in Sources */,
 				280615582390C18D00B013F6 /* FactModelMockable.swift in Sources */,
