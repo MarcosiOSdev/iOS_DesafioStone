@@ -33,6 +33,8 @@ class SearchFactsViewController: UIViewController, BindableType {
         return sv
     }()
     
+    
+    
     var viewModel: SearchFactsViewModel!
     var disposeBag = DisposeBag()
     
@@ -48,8 +50,11 @@ class SearchFactsViewController: UIViewController, BindableType {
     
     func bindViewModel() {
         
-        searchTextField.rx.controlEvent(.editingDidEndOnExit).asObservable().subscribe(onNext: { _ in
-            print("Clicou aqui 3")
+        self.searchTextField.rx
+            .controlEvent(.editingDidEndOnExit)
+            .asObservable()
+            .subscribe(onNext: { _ in
+                print("Clicou aqui \(self.searchTextField.text)")
         }).disposed(by: disposeBag)
         
         self.viewModel.output
@@ -80,15 +85,14 @@ class SearchFactsViewController: UIViewController, BindableType {
             searchTextField.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 30).isActive = true
         }
         
-        NSLayoutConstraint.activate([
-            
+        NSLayoutConstraint.activate([            
             searchTextField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 32.0),
             searchTextField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -32.0),
             searchTextField.heightAnchor.constraint(equalToConstant: 50),
             
             lineView.trailingAnchor.constraint(equalTo: searchTextField.trailingAnchor),
             lineView.leadingAnchor.constraint(equalTo: searchTextField.leadingAnchor),
-            lineView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 1.0),
+            lineView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor),
             lineView.heightAnchor.constraint(equalToConstant: 2.0),
             
             suggestionView.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: 16),

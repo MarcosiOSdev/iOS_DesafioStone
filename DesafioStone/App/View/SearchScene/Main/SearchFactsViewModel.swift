@@ -62,7 +62,10 @@ class SearchFactsViewModel: BindingViewModelType {
         self.searchTextObservable.asObservable()
             .map { $0 }
             .subscribe({ event in
-                self.searched.insert(event.element!)
+                if let element = event.element {
+                    self.searched.insert(element)
+                    print(element)
+                }
             }).disposed(by: disposedBag)
     }
 }

@@ -28,9 +28,7 @@ class SuggestionView: UIView {
         collectionView.register(SuggestionFactsCollectionViewCell.self,
                                 forCellWithReuseIdentifier: SuggestionFactsCollectionViewCell.reuseCellID)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.allowsSelection = true
         collectionView.backgroundColor = .clear
-        collectionView.isUserInteractionEnabled = true
         return collectionView
     }()
     
@@ -49,7 +47,6 @@ class SuggestionView: UIView {
             suggestionFactsCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             suggestionFactsCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             suggestionFactsCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            ])
-        layoutIfNeeded()
+            ])        
     }
 }
