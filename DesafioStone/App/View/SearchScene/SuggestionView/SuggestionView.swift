@@ -18,7 +18,6 @@ class SuggestionView: UIView {
         return label
     }()
     
-    
     var suggestionFactsCollectionView: UICollectionView = {
         let flow = UICollectionViewFlowLayout()
         flow.scrollDirection = .vertical
@@ -31,7 +30,10 @@ class SuggestionView: UIView {
         collectionView.backgroundColor = .clear
         return collectionView
     }()
-    
+}
+
+//MARK: - UI Lifecycle -
+extension SuggestionView {
     override func layoutSubviews() {
         self.isUserInteractionEnabled = true
         addSubview(self.suggestionFactsCollectionView)
@@ -39,7 +41,7 @@ class SuggestionView: UIView {
         
         NSLayoutConstraint.activate([
             
-            headerLabel.topAnchor.constraint(equalTo: topAnchor),
+            headerLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             headerLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             
@@ -47,6 +49,6 @@ class SuggestionView: UIView {
             suggestionFactsCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             suggestionFactsCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             suggestionFactsCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            ])        
+            ])
     }
 }

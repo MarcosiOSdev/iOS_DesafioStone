@@ -24,23 +24,47 @@ class FactCollectionViewCell: BaseFactCell {
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var loadingActivityIndicator: UIActivityIndicatorView!
     
+    var isLoading: Bool = true {
+        didSet {
+            isLoading ? showLoading() : hideLoading()
+        }
+    }
     var factModel: FactModel!
     var bag = DisposeBag()
-    private var _loadInProgress = BehaviorSubject<Bool>(value: false)
+    
+    
+    func configure(with factModel: FactModel,
+                   sharedAction: CocoaAction) {
+        
+        self.factModel = factModel
+        self.shareButton.rx.action = sharedAction
+        self.valueLabel.text = factModel.title
+        self.tagLabel.text = factModel.tag
+                
+        self.valueLabel.adjustsFontForContentSizeCategory = true
+        self.factModel.title.count > 80 ? setupNormalTitle() : setupLargeTitle()
+    }
+   
+}
 
+//MARK: - UI Lifecycle -
+extension FactCollectionViewCell {
     override func prepareForReuse() {
-        factModel = nil
-        shareButton.rx.action = nil
+        self.factModel = nil
+        self.shareButton.rx.action = nil
         super.prepareForReuse()
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupCell()
-        loadingActivityIndicator.isHidden = true
+        self.setupCell()
+        self.loadingActivityIndicator.isHidden = true
     }
-    
-    func showLoading() {
+}
+
+//MARK: - AUX Functions -
+extension FactCollectionViewCell {
+    private func showLoading() {
         self.shareButton.alpha = 1
         UIView.animate(withDuration: 0.3) {
             self.shareButton.alpha = 0
@@ -54,7 +78,7 @@ class FactCollectionViewCell: BaseFactCell {
         }
     }
     
-    func hideLoading() {        
+    private func hideLoading() {
         UIView.animate(withDuration: 0.3) {
             self.loadingActivityIndicator.alpha = 0
         }
@@ -65,22 +89,9 @@ class FactCollectionViewCell: BaseFactCell {
             self.loadingActivityIndicator.isHidden = true
         })
     }
-    
-    func configure(with factModel: FactModel,
-                   sharedAction: CocoaAction) {
-        
-        self.factModel = factModel
-        shareButton.rx.action = sharedAction
-        self.valueLabel.text = factModel.title
-        self.tagLabel.text = factModel.tag
-                
-        self.valueLabel.adjustsFontForContentSizeCategory = true
-        factModel.title.count > 80 ? setupNormalTitle() : setupLargeTitle()
-    }
-   
 }
 
-//MARK: - Setups
+//MARK: - Setups -
 extension FactCollectionViewCell {
 
        private func setupLargeTitle() {

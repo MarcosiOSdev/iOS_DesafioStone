@@ -16,7 +16,6 @@ class SuggestionFactsCollectionViewCell: UICollectionViewCell {
     var suggestionFact: String? {
         didSet {
             self.factLabel.text = suggestionFact
-            
         }
     }
     
@@ -31,16 +30,22 @@ class SuggestionFactsCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        self.contentView.addSubview(factLabel)
-        self.contentView.backgroundColor = UIColor(hexString: "#22A2FF")
-        
+        self.setupUI()
         self.setupConstraint()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }    
+    }
     
+    private func setupUI() {
+        self.contentView.addSubview(factLabel)
+        self.contentView.backgroundColor = UIColor(hexString: "#22A2FF")
+    }
+}
+
+//MARK: - Constraint -
+extension SuggestionFactsCollectionViewCell {
     private func setupConstraint() {
         NSLayoutConstraint.activate([
             factLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
@@ -49,5 +54,4 @@ class SuggestionFactsCollectionViewCell: UICollectionViewCell {
             factLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             ])
     }
-    
 }

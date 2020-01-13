@@ -55,7 +55,7 @@ class SearchFactsViewModel: BindingViewModelType {
         
         input = UIInput(searchText: searchTextObservable)
         
-        binding()
+        self.binding()
     }
     
     func binding() {

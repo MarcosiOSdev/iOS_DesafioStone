@@ -12,7 +12,6 @@ import RxCocoa
 import RxDataSources
 import Action
 
-//typealias FactSection = AnimatableSectionModel<String, FactModel>
 enum FactsTableViewCellType {
     case normal(factModel: FactModel)
     case error(message: String)
@@ -103,7 +102,7 @@ class FactsViewModel: BindingViewModelType {
     }
 }
 
-//MARK: Functions for Service
+//MARK: - Functions for Service -
 extension FactsViewModel {
     private func featch(category: CategoryModel?) {
         

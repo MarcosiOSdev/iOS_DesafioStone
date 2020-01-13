@@ -53,7 +53,7 @@ class FactsViewController: UIViewController, BindableType {
     }
 }
 
-//MARK: - Binding UI - ViewModel
+//MARK: - Binding UI ViewModel - 
 extension FactsViewController {
     func bindViewModel() {
         self.bindToCollection()
@@ -82,7 +82,7 @@ extension FactsViewController {
             .asObservable()
             .subscribe { event in
                 guard let isLoading = event.element, let cell = self.cellSelected else { return }
-                isLoading ? cell.showLoading() : cell.hideLoading()
+                cell.isLoading = isLoading
             }.disposed(by: self.disposedBag)
     }
     
@@ -110,7 +110,7 @@ extension FactsViewController {
     }
 }
 
-//MARK: - Setups View
+//MARK: - Setups View -
 extension FactsViewController {
     
     private func configureNavigationBar() {
