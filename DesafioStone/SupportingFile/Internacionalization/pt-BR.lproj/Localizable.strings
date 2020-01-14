@@ -9,3 +9,6 @@
 "TITLE_SEARCH_FACTS" = "Busca por Fatos";
 "UNCATEGORIZED_FACT_TAG" = "Descategorizado";
 "ERROR_DEFAULT" = "Ocorreu um erro :/";
+
+"SUGGESTION_TITLE_IN_SEARCH_SCENE" = "Sugestões de pesquisa:";
+"SEARCH_PLACEHOLDER_IN_SEARCH_SCENE" = "Pesquise";

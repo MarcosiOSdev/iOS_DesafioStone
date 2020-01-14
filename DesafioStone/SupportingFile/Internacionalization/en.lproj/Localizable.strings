@@ -9,3 +9,6 @@
 "TITLE_SEARCH_FACTS" = "Search Facts";
 "UNCATEGORIZED_FACT_TAG" = "Uncategorized";
 "ERROR_DEFAULT" = "An error has occurred :/";
+
+"SUGGESTION_TITLE_IN_SEARCH_SCENE" = "Suggestions:";
+"SEARCH_PLACEHOLDER_IN_SEARCH_SCENE" = "Search";

@@ -27,6 +27,8 @@ class SearchFactsViewModel: BindingViewModelType {
         var lastSearch: Driver<[String]>
         var suggestionSearch: Driver<[String]>
         var title: Driver<String>
+        var suggestionTitle: Driver<String>
+        var placeholderSearch: Driver<String>
     }
     
     
@@ -44,14 +46,25 @@ class SearchFactsViewModel: BindingViewModelType {
         
         let suggestionSearch = Driver<[String]>.of(suggestionList)
         
-        let title = Observable<String>
-            .of(StringText.sharing.text(by: .titleSearchFacts))
-            .asDriver(onErrorJustReturn: "")
+        let title =
+            Observable<String>
+                .of(StringText.sharing.text(by: .titleSearchFacts))
+                .asDriver(onErrorJustReturn: "")
         
+        let suggestionTitle =
+            Observable<String>
+                .of(StringText.sharing.text(by: .suggestionTitleSearchScene))
+                .asDriver(onErrorJustReturn: "")
+        
+        let placeholderSearch =
+            Driver<String>
+                .of(StringText.sharing.text(by: .searchPlaceholderSearchScene))
         
         output = UIOutput(lastSearch: lastSearch.asDriver(onErrorJustReturn: []),
                           suggestionSearch: suggestionSearch,
-                          title: title)
+                          title: title,
+                          suggestionTitle: suggestionTitle,
+                          placeholderSearch: placeholderSearch)
         
         input = UIInput(searchText: searchTextObservable)
         

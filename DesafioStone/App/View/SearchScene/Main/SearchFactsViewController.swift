@@ -37,9 +37,9 @@ class SearchFactsViewController: UIViewController, BindableType {
     var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.alwaysBounceVertical = true
+        scrollView.alwaysBounceVertical = false
         scrollView.showsVerticalScrollIndicator = true
-        scrollView.isDirectionalLockEnabled = true        
+        scrollView.isDirectionalLockEnabled = true
         return scrollView
     }()
     
@@ -49,7 +49,7 @@ class SearchFactsViewController: UIViewController, BindableType {
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.axis = .vertical
-        stackView.backgroundColor = .blue
+        stackView.spacing = 0
         return stackView
     }()
         
@@ -79,9 +79,6 @@ extension SearchFactsViewController {
     
     private func setupScrollView() {
         self.view.addSubview(self.scrollView)
-        
-//        self.scrollView.contentSize.width = self.view.frame.width
-        
         let topAnchor: NSLayoutYAxisAnchor
         if #available(iOS 11.0, *) {
             topAnchor = view.safeAreaLayoutGuide.topAnchor
@@ -90,26 +87,26 @@ extension SearchFactsViewController {
         }
         NSLayoutConstraint.activate([
             self.scrollView.topAnchor.constraint(equalTo: topAnchor),
-            self.scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-//            self.scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            self.scrollView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            self.scrollView.heightAnchor.constraint(equalTo: self.view.heightAnchor)
-            //self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+            self.scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8),
+            self.scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -8),
+            self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            self.scrollView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -16),
         ])
     }
     
     private func setupStackView() {
         self.scrollView.addSubview(self.stackView)
         NSLayoutConstraint.activate([
-            self.stackView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 8),
-            self.stackView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 8),
-            self.stackView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -8),
-            self.stackView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor),
+            self.stackView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 16),
+            self.stackView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
+            self.stackView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
+            self.stackView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor)
         ])
         
         self.addArrangedSearchTextField()
         self.addArrangedLineView()
         self.addArrangedSuggestionView()
+        
     }
     
     private func addArrangedSearchTextField() {
@@ -117,17 +114,13 @@ extension SearchFactsViewController {
         NSLayoutConstraint.activate([
             self.searchTextField.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor),
             self.searchTextField.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor),
-            self.searchTextField.heightAnchor.constraint(equalToConstant: 50),
+            self.searchTextField.heightAnchor.constraint(equalToConstant: 45)
         ])
     }
     
     private func addArrangedLineView() {
         self.stackView.addArrangedSubview(self.lineView)
-        NSLayoutConstraint.activate([
-            self.lineView.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor),
-            self.lineView.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor),
-            self.lineView.heightAnchor.constraint(equalToConstant: 2.0),
-        ])
+        self.lineView.heightAnchor.constraint(equalToConstant: 1.0).isActive = true
     }
     
     private func addArrangedSuggestionView() {
@@ -168,6 +161,16 @@ extension SearchFactsViewController {
             .bind(to: viewModel.input.searchText)
             .disposed(by: disposeBag)
         
-        self.suggestionView.headerLabel.text = "Suggestions -- Colocar no String --"
+        self.viewModel.output
+            .suggestionTitle
+            .drive(self.suggestionView.headerLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        self.viewModel.output
+            .placeholderSearch
+            .asObservable()
+            .subscribe(onNext: { value in
+                self.searchTextField.placeholder = value
+            }).disposed(by: self.disposeBag)
     }
 }

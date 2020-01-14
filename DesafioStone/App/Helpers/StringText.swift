@@ -18,6 +18,8 @@ class StringText {
         case titleSearchFacts = "TITLE_SEARCH_FACTS"
         case tagUncategorized = "UNCATEGORIZED_FACT_TAG"
         case defaultError = "ERROR_DEFAULT"
+        case suggestionTitleSearchScene = "SUGGESTION_TITLE_IN_SEARCH_SCENE"
+        case searchPlaceholderSearchScene = "SEARCH_PLACEHOLDER_IN_SEARCH_SCENE"
     }
     
     func text(by localizationString: LocalizationString ) -> String{
