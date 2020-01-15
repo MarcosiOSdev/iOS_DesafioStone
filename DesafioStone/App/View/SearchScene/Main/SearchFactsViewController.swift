@@ -30,8 +30,13 @@ class SearchFactsViewController: UIViewController, BindableType {
     var suggestionView: SuggestionView = {
         let sv = SuggestionView()
         sv.translatesAutoresizingMaskIntoConstraints = false
-        sv.backgroundColor = .clear
         return sv
+    }()
+    
+    var pastSearchesView: PastSearchesView = {
+        let view = PastSearchesView()
+        view.translatesAutoresizingMaskIntoConstraints = true
+        return view
     }()
     
     var scrollView: UIScrollView = {
@@ -106,6 +111,7 @@ extension SearchFactsViewController {
         self.addArrangedSearchTextField()
         self.addArrangedLineView()
         self.addArrangedSuggestionView()
+        self.addPastSearchesView()
         
     }
     
@@ -128,6 +134,10 @@ extension SearchFactsViewController {
         self.suggestionView.heightAnchor.constraint(equalToConstant: 200).isActive = true
     }
     
+    private func addPastSearchesView() {
+        self.stackView.addArrangedSubview(self.pastSearchesView)
+        self.pastSearchesView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+    }
 }
 
 //MARK: - Binding Views -
@@ -138,7 +148,15 @@ extension SearchFactsViewController {
             .asObservable()
             .subscribe(onNext: { _ in
                 debugPrint("Clicou aqui \(self.searchTextField.text)")
+//                self.viewModel.input.searchText.
             }).disposed(by: self.disposeBag)
+        
+//        self.searchTextField.rx
+//            .controlEvent(.editingDidEndOnExit)
+//            .map { String($0) }
+//            .bind(to: self.viewModel.input.searchText)
+//            .disposed(by: self.disposeBag)
+        
         
         self.viewModel.output
             .suggestionSearch
@@ -172,5 +190,15 @@ extension SearchFactsViewController {
             .subscribe(onNext: { value in
                 self.searchTextField.placeholder = value
             }).disposed(by: self.disposeBag)
+        
+        self.viewModel.output
+            .lastSearch
+            .drive(self.pastSearchesView.pastSearchesTableView.rx.items)
+                { tableView, index, element in
+                    let indexPath = IndexPath(row: index, section: 0)
+                    let cell = tableView.dequeueReusableCell(withIdentifier: PastSearchesView.cellID , for: indexPath)
+                    return cell
+                }
+            .disposed(by: self.disposeBag)
     }
 }

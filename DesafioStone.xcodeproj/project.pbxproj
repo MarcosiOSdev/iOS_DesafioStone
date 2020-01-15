@@ -69,6 +69,7 @@
 		D87B2D3323B15DF200685E81 /* SuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87B2D3223B15DF200685E81 /* SuggestionView.swift */; };
 		D884C25323A40B6000CEE022 /* Scene+CustomTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D884C25223A40B6000CEE022 /* Scene+CustomTest.swift */; };
 		D88DA5BF239171BA00458240 /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88DA5BE239171BA00458240 /* RxTest.framework */; };
+		D8D388B023CFCC18005E156A /* PastSearchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D388AF23CFCC18005E156A /* PastSearchesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +172,7 @@
 		D87B2D3223B15DF200685E81 /* SuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionView.swift; sourceTree = "<group>"; };
 		D884C25223A40B6000CEE022 /* Scene+CustomTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Scene+CustomTest.swift"; sourceTree = "<group>"; };
 		D88DA5BE239171BA00458240 /* RxTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8D388AF23CFCC18005E156A /* PastSearchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastSearchesView.swift; sourceTree = "<group>"; };
 		D8DA49F8236B633F0061650C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FD8C7AFABD5A144FD5A5EFF2 /* Pods-DesafioStoneUITests.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioStoneUITests.staging.xcconfig"; path = "Target Support Files/Pods-DesafioStoneUITests/Pods-DesafioStoneUITests.staging.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -470,7 +472,7 @@
 			isa = PBXGroup;
 			children = (
 				D8F1D7B723C7E3CF00430B7B /* Main */,
-				D8F1D7B623C7E3A800430B7B /* LastSuggestionView */,
+				D8F1D7B623C7E3A800430B7B /* PastSearchesView */,
 				D87B2D3123B15DD900685E81 /* SuggestionView */,
 			);
 			path = SearchScene;
@@ -545,11 +547,12 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
-		D8F1D7B623C7E3A800430B7B /* LastSuggestionView */ = {
+		D8F1D7B623C7E3A800430B7B /* PastSearchesView */ = {
 			isa = PBXGroup;
 			children = (
+				D8D388AF23CFCC18005E156A /* PastSearchesView.swift */,
 			);
-			path = LastSuggestionView;
+			path = PastSearchesView;
 			sourceTree = "<group>";
 		};
 		D8F1D7B723C7E3CF00430B7B /* Main */ = {
@@ -827,6 +830,7 @@
 				28913C8523973DB5005473F2 /* OpenSansFont.swift in Sources */,
 				D81EE68323904DA90000A214 /* ErrorFactCollectionViewCell.swift in Sources */,
 				2899C52022E9536200D6191B /* UINavigationController+Rx.swift in Sources */,
+				D8D388B023CFCC18005E156A /* PastSearchesView.swift in Sources */,
 				D81EE68823904E0D0000A214 /* EmptyFactCollectionViewCell.swift in Sources */,
 				D823676123B0EB7400A31F5C /* SearchFactsViewModel.swift in Sources */,
 				289CEB6422EA796C00112AE0 /* FactCollectionViewCell.swift in Sources */,
