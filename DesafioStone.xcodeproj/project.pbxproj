@@ -64,11 +64,13 @@
 		D823676123B0EB7400A31F5C /* SearchFactsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D823676023B0EB7400A31F5C /* SearchFactsViewModel.swift */; };
 		D823676423B0F17C00A31F5C /* SearchFactsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D823676323B0F17C00A31F5C /* SearchFactsViewModelTests.swift */; };
 		D8372A8C23B0F84400D1275A /* SearchFactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8372A8B23B0F84400D1275A /* SearchFactsViewController.swift */; };
+		D83C2B4323D7B361000EF513 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C2B4223D7B361000EF513 /* BaseAPI.swift */; };
 		D87B2D2E23B1517600685E81 /* SuggestionFactsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87B2D2D23B1517600685E81 /* SuggestionFactsCollectionViewCell.swift */; };
 		D87B2D3023B15AFB00685E81 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87B2D2F23B15AFB00685E81 /* UIColor+Hex.swift */; };
 		D87B2D3323B15DF200685E81 /* SuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87B2D3223B15DF200685E81 /* SuggestionView.swift */; };
 		D884C25323A40B6000CEE022 /* Scene+CustomTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D884C25223A40B6000CEE022 /* Scene+CustomTest.swift */; };
 		D88DA5BF239171BA00458240 /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88DA5BE239171BA00458240 /* RxTest.framework */; };
+		D8D1155E23D3F4AD009EC3B6 /* PastSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D1155D23D3F4AD009EC3B6 /* PastSearchTableViewCell.swift */; };
 		D8D388B023CFCC18005E156A /* PastSearchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D388AF23CFCC18005E156A /* PastSearchesView.swift */; };
 /* End PBXBuildFile section */
 
@@ -167,11 +169,13 @@
 		D823676023B0EB7400A31F5C /* SearchFactsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFactsViewModel.swift; sourceTree = "<group>"; };
 		D823676323B0F17C00A31F5C /* SearchFactsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFactsViewModelTests.swift; sourceTree = "<group>"; };
 		D8372A8B23B0F84400D1275A /* SearchFactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFactsViewController.swift; sourceTree = "<group>"; };
+		D83C2B4223D7B361000EF513 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
 		D87B2D2D23B1517600685E81 /* SuggestionFactsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionFactsCollectionViewCell.swift; sourceTree = "<group>"; };
 		D87B2D2F23B15AFB00685E81 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		D87B2D3223B15DF200685E81 /* SuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionView.swift; sourceTree = "<group>"; };
 		D884C25223A40B6000CEE022 /* Scene+CustomTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Scene+CustomTest.swift"; sourceTree = "<group>"; };
 		D88DA5BE239171BA00458240 /* RxTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8D1155D23D3F4AD009EC3B6 /* PastSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastSearchTableViewCell.swift; sourceTree = "<group>"; };
 		D8D388AF23CFCC18005E156A /* PastSearchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastSearchesView.swift; sourceTree = "<group>"; };
 		D8DA49F8236B633F0061650C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FD8C7AFABD5A144FD5A5EFF2 /* Pods-DesafioStoneUITests.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioStoneUITests.staging.xcconfig"; path = "Target Support Files/Pods-DesafioStoneUITests/Pods-DesafioStoneUITests.staging.xcconfig"; sourceTree = "<group>"; };
@@ -257,12 +261,12 @@
 			path = "open-sans";
 			sourceTree = "<group>";
 		};
-		28913C8F23974B0E005473F2 /* Cell */ = {
+		28913C8F23974B0E005473F2 /* BaseCell */ = {
 			isa = PBXGroup;
 			children = (
 				28913C9023974B20005473F2 /* BaseFactCell.swift */,
 			);
-			path = Cell;
+			path = BaseCell;
 			sourceTree = "<group>";
 		};
 		2899C49522E928D100D6191B = {
@@ -360,12 +364,8 @@
 		2899C4D222E92B2D00D6191B /* FactScene */ = {
 			isa = PBXGroup;
 			children = (
-				D81BBA0723A01BA5001D45A6 /* FactsViewController */,
-				28913C8F23974B0E005473F2 /* Cell */,
-				D81EE68523904DF90000A214 /* EmptyFactCell */,
-				D81EE68023904D510000A214 /* ErrorFactCell */,
-				289CEB6122EA795000112AE0 /* FactCell */,
-				2899C4FF22E93B9900D6191B /* FactsViewModel.swift */,
+				D8D1155723D3F248009EC3B6 /* ViewModel */,
+				D8D1155623D3F21D009EC3B6 /* View */,
 			);
 			path = FactScene;
 			sourceTree = "<group>";
@@ -428,6 +428,7 @@
 			children = (
 				2899C52722E95DA000D6191B /* ChuckNorrisAPI.swift */,
 				28A63D4722EBA1C0002A9186 /* ChuckNorrisAPIType.swift */,
+				D83C2B4223D7B361000EF513 /* BaseAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -471,20 +472,19 @@
 		D81BBA0523A01B60001D45A6 /* SearchScene */ = {
 			isa = PBXGroup;
 			children = (
-				D8F1D7B723C7E3CF00430B7B /* Main */,
-				D8F1D7B623C7E3A800430B7B /* PastSearchesView */,
-				D87B2D3123B15DD900685E81 /* SuggestionView */,
+				D8D1155A23D3F419009EC3B6 /* ViewModel */,
+				D8D1155923D3F414009EC3B6 /* View */,
 			);
 			path = SearchScene;
 			sourceTree = "<group>";
 		};
-		D81BBA0723A01BA5001D45A6 /* FactsViewController */ = {
+		D81BBA0723A01BA5001D45A6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				2899C51922E94D4B00D6191B /* FactsViewController.swift */,
 				2899C51A22E94D4B00D6191B /* FactsViewController.xib */,
 			);
-			path = FactsViewController;
+			path = Main;
 			sourceTree = "<group>";
 		};
 		D81BBA0823A01BD1001D45A6 /* Launch */ = {
@@ -547,9 +547,72 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		D8D1155623D3F21D009EC3B6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D81BBA0723A01BA5001D45A6 /* Main */,
+				28913C8F23974B0E005473F2 /* BaseCell */,
+				289CEB6122EA795000112AE0 /* FactCell */,
+				D81EE68523904DF90000A214 /* EmptyFactCell */,
+				D81EE68023904D510000A214 /* ErrorFactCell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D8D1155723D3F248009EC3B6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D8D1155823D3F252009EC3B6 /* Main */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D8D1155823D3F252009EC3B6 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				2899C4FF22E93B9900D6191B /* FactsViewModel.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		D8D1155923D3F414009EC3B6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D8F1D7B723C7E3CF00430B7B /* Main */,
+				D8F1D7B623C7E3A800430B7B /* PastSearchesView */,
+				D87B2D3123B15DD900685E81 /* SuggestionView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D8D1155A23D3F419009EC3B6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D8D1155B23D3F422009EC3B6 /* Main */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D8D1155B23D3F422009EC3B6 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				D823676023B0EB7400A31F5C /* SearchFactsViewModel.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		D8D1155C23D3F474009EC3B6 /* PastSearchCell */ = {
+			isa = PBXGroup;
+			children = (
+				D8D1155D23D3F4AD009EC3B6 /* PastSearchTableViewCell.swift */,
+			);
+			path = PastSearchCell;
+			sourceTree = "<group>";
+		};
 		D8F1D7B623C7E3A800430B7B /* PastSearchesView */ = {
 			isa = PBXGroup;
 			children = (
+				D8D1155C23D3F474009EC3B6 /* PastSearchCell */,
 				D8D388AF23CFCC18005E156A /* PastSearchesView.swift */,
 			);
 			path = PastSearchesView;
@@ -558,7 +621,6 @@
 		D8F1D7B723C7E3CF00430B7B /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				D823676023B0EB7400A31F5C /* SearchFactsViewModel.swift */,
 				D8372A8B23B0F84400D1275A /* SearchFactsViewController.swift */,
 			);
 			path = Main;
@@ -839,6 +901,7 @@
 				28A63D4822EBA1C0002A9186 /* ChuckNorrisAPIType.swift in Sources */,
 				D8372A8C23B0F84400D1275A /* SearchFactsViewController.swift in Sources */,
 				2899C4FE22E938B700D6191B /* CoordinatorType.swift in Sources */,
+				D83C2B4323D7B361000EF513 /* BaseAPI.swift in Sources */,
 				2899C50322E93F2700D6191B /* UIViewController+Custom.swift in Sources */,
 				28A63D4422EB0AD1002A9186 /* CategoryModel.swift in Sources */,
 				2899C52822E95DA000D6191B /* ChuckNorrisAPI.swift in Sources */,
@@ -851,6 +914,7 @@
 				287F370223922E9E00D8FC20 /* BindingViewModelType.swift in Sources */,
 				2899C50022E93B9900D6191B /* FactsViewModel.swift in Sources */,
 				2899C4D722E92BEA00D6191B /* SceneTransitionType.swift in Sources */,
+				D8D1155E23D3F4AD009EC3B6 /* PastSearchTableViewCell.swift in Sources */,
 				28913C9123974B20005473F2 /* BaseFactCell.swift in Sources */,
 				2899C51B22E94D4B00D6191B /* FactsViewController.swift in Sources */,
 			);

@@ -45,7 +45,7 @@ class FactsViewModel: BindingViewModelType {
     private var searchViewButtonTapped: PublishSubject<Void> = .init()
     private var reloadEvent: PublishSubject<Void> = .init()
     private var sharedFact: PublishSubject<FactModel> = PublishSubject<FactModel>()
-    
+    private var searchCategory: PublishSubject<CategoryModel> = .init()
     
     init(chuckNorrisAPI: ChuckNorrisAPIType,
          coordinator: CoordinatorType) {
@@ -66,7 +66,7 @@ class FactsViewModel: BindingViewModelType {
                           finishedShareFact: self._isLoadingShare.asDriver(onErrorJustReturn: false))
         
         self.searchViewButtonTapped.subscribe(onNext: { _ in
-            coordinator.transition(to: .searchCategory, type: .push)
+            self.openSearch()
         }).disposed(by: disposedBag)
         
         reloadEvent
@@ -85,6 +85,10 @@ class FactsViewModel: BindingViewModelType {
             })
             .disposed(by: disposedBag)
 
+        searchCategory.subscribe(onNext: { category in
+            print(category.value)
+            self.featch(category: category)
+        }).disposed(by: self.disposedBag)
         
         self.featch(category: nil)
     }
@@ -99,6 +103,10 @@ class FactsViewModel: BindingViewModelType {
                                             return Observable.empty()
             }), type: .modal)
         }
+    }
+    
+    private func openSearch() {
+        coordinator.transition(to: .searchCategory(completion: searchCategory.asObserver()), type: .push)
     }
 }
 

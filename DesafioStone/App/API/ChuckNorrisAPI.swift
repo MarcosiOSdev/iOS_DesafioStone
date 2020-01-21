@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 
-class ChuckNorrisAPI: ChuckNorrisAPIType {
+class ChuckNorrisAPI: BaseAPI, ChuckNorrisAPIType {
     
     var urlSession = URLSession.shared
     
@@ -27,7 +27,6 @@ class ChuckNorrisAPI: ChuckNorrisAPIType {
     }
     
     func facts(category: CategoryModel?) -> Observable<FactResponse> {
-        
         var query: [String: Any]? = nil
         if let category = category {
             query = ["query": category.value]
@@ -38,23 +37,7 @@ class ChuckNorrisAPI: ChuckNorrisAPIType {
             return .empty()
         }
         
-//        return self.urlSession.rx.response(request: urlRequest)
-//            .map { response, data in
-//            if 200 ..< 300 ~= response.statusCode {
-//                return FactResponse(data: data)
-//            } else if 400 ..< 500 ~= response.statusCode {
-//                throw ChuckNorrisAPIError.notFound
-//            } else {
-//                throw ChuckNorrisAPIError.serverFailure
-//            }
-//        }
-        
-        return self.urlSession.rx
-            .data(request: urlRequest)
-            .map { data in
-                let factResponse = FactResponse(data: data)
-                return factResponse
-        }
+        return self.send(urlRequest: urlRequest)
     }
     
     private func request(endpoint: String,

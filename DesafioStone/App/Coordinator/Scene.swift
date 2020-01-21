@@ -14,7 +14,7 @@ import Action
 enum Scene {
     case facts
     case sharedLink(title: String, link: URL, completion: CocoaAction?)
-    case searchCategory
+    case searchCategory(completion: AnyObserver<CategoryModel>)
     
     /// JUST USING IN TEST
     case none
@@ -43,8 +43,9 @@ extension Scene {
                 completion?.execute()                
             }
             return viewController
-        case .searchCategory:
-            let viewModel = SearchFactsViewModel()
+        case .searchCategory(let completion):
+            let viewModel = SearchFactsViewModel(coordinator: coordinator)
+            viewModel.completion = completion
             var viewController = SearchFactsViewController()
             viewController.bindViewModel(to: viewModel)
             return viewController

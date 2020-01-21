@@ -14,17 +14,20 @@ import RxCocoa
 class SearchFactsViewModel: BindingViewModelType {
     
     var disposedBag = DisposeBag()
+    var coordinator: CoordinatorType
     var input: SearchFactsViewModel.UIInput
     var output: SearchFactsViewModel.UIOutput
+    
+    var completion: AnyObserver<CategoryModel>?
     
     private let suggestionList = ["GAMES", "SPORT", "DEV", "SCIENCE", "TECHNOLOGY", "MUSIC", "TRAVEL", "CARRER"]
     
     struct UIInput {
-        var searchText: PublishRelay<String>
+        var searchText: AnyObserver<String>
     }
     
     struct UIOutput {
-        var lastSearch: Driver<[String]>
+        var lastSearch: Signal<[String]>
         var suggestionSearch: Driver<[String]>
         var title: Driver<String>
         var suggestionTitle: Driver<String>
@@ -32,18 +35,18 @@ class SearchFactsViewModel: BindingViewModelType {
     }
     
     
-    private let searchTextObservable: PublishRelay<String> = .init()
-    private let lastSearch: BehaviorSubject = BehaviorSubject<[String]>(value: [])
+    private let searchTextObservable: PublishSubject<String> = .init()
+    private let lastSearch = BehaviorRelay<[String]>(value: [])
     
     private var searched: Set<String> = [] {
         didSet {
             let list = self.searched.map{$0}
-            self.lastSearch.onNext(list)
+            self.lastSearch.accept(list)
         }
     }
     
-    init() {
-        
+    init(coordinator: CoordinatorType) {
+        self.coordinator = coordinator
         let suggestionSearch = Driver<[String]>.of(suggestionList)
         
         let title =
@@ -59,14 +62,15 @@ class SearchFactsViewModel: BindingViewModelType {
         let placeholderSearch =
             Driver<String>
                 .of(StringText.sharing.text(by: .searchPlaceholderSearchScene))
+                .asDriver(onErrorJustReturn: "")
         
-        output = UIOutput(lastSearch: lastSearch.asDriver(onErrorJustReturn: []),
+        output = UIOutput(lastSearch: lastSearch.asSignal(onErrorJustReturn: []),
                           suggestionSearch: suggestionSearch,
                           title: title,
                           suggestionTitle: suggestionTitle,
                           placeholderSearch: placeholderSearch)
         
-        input = UIInput(searchText: searchTextObservable)
+        input = UIInput(searchText: searchTextObservable.asObserver())
         
         self.binding()
     }
@@ -75,10 +79,31 @@ class SearchFactsViewModel: BindingViewModelType {
         self.searchTextObservable.asObservable()
             .map { $0 }
             .subscribe({ event in
-                if let element = event.element {
-                    self.searched.insert(element)
-                    print(element)
+                guard let element = event.element else { return }
+                
+                var category: CategoryModel? = nil
+                if !self.suggestionList.contains(element) {
+                    category = self.saveLastSearch(element)
+                
+                } else {
+                    let categoryString = self.suggestionList.filter{$0 == element}.first
+                    if categoryString != nil {
+                        category = CategoryModel(uid: 0, value: categoryString!)
+                    }
                 }
+                self.infoSearchToBackScene(category! )
+                
             }).disposed(by: disposedBag)
+    }
+    
+    private func infoSearchToBackScene(_ element: CategoryModel) {
+        self.completion?.onNext(element)
+        self.coordinator.pop()
+    }
+    
+    private func saveLastSearch(_ element: String) -> CategoryModel {
+        print(element)
+        self.searched.insert(element)
+        return CategoryModel(uid: 10, value: element)
     }
 }

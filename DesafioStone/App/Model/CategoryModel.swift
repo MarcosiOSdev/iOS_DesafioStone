@@ -13,14 +13,15 @@ class CategoryModel {
     var uid: Int = 0
     var value: String = ""
     
+    init(uid: Int, value: String) {
+        self.uid = uid
+        self.value = value
+    }
 }
 
 extension CategoryModel {
-    static var isEmpty: CategoryModel {
-        let cat = CategoryModel()
-        cat.uid = 0
-        cat.value = ""
-        return cat
+    static var isEmpty: CategoryModel {        
+        return CategoryModel(uid: 0, value: "")
     }
 }
 

@@ -14,10 +14,9 @@ class SearchFactsViewController: UIViewController, BindableType {
     
     //MARK: - UIViews -
     var searchTextField: UITextField = {
-        var tv = UITextField()
-        tv.placeholder = "Searching ..."
-        tv.translatesAutoresizingMaskIntoConstraints = false
-        return tv
+        let view = UITextField()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     var lineView: UIView = {
@@ -28,9 +27,9 @@ class SearchFactsViewController: UIViewController, BindableType {
     }()
     
     var suggestionView: SuggestionView = {
-        let sv = SuggestionView()
-        sv.translatesAutoresizingMaskIntoConstraints = false
-        return sv
+        let view = SuggestionView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     var pastSearchesView: PastSearchesView = {
@@ -136,28 +135,47 @@ extension SearchFactsViewController {
     
     private func addPastSearchesView() {
         self.stackView.addArrangedSubview(self.pastSearchesView)
-        self.pastSearchesView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        self.pastSearchesView.heightAnchor.constraint(equalToConstant: 300).isActive = true
     }
 }
 
 //MARK: - Binding Views -
 extension SearchFactsViewController {
     func bindViewModel() {
-        self.searchTextField.rx
+        
+        //Inputs
+        let inputSearchText = self.searchTextField.rx
             .controlEvent(.editingDidEndOnExit)
             .asObservable()
-            .subscribe(onNext: { _ in
-                debugPrint("Clicou aqui \(self.searchTextField.text)")
-//                self.viewModel.input.searchText.
-            }).disposed(by: self.disposeBag)
+            .map { self.searchTextField.text ?? "" }
         
-//        self.searchTextField.rx
-//            .controlEvent(.editingDidEndOnExit)
-//            .map { String($0) }
-//            .bind(to: self.viewModel.input.searchText)
-//            .disposed(by: self.disposeBag)
+        let suggestionSearch = self.suggestionView.suggestionFactsCollectionView
+            .rx
+            .modelSelected(String.self)
+            .map { $0 }
         
+        let pastSearch = self.pastSearchesView.pastSearchesTableView
+            .rx
+            .modelSelected(String.self)
+            .map{$0}
         
+        let search =
+            Observable.from([
+                inputSearchText,
+                suggestionSearch,
+                pastSearch])
+                .merge()
+            
+        search
+            .asObservable()
+            .bind(to: self.viewModel.input.searchText)
+            .disposed(by: self.disposeBag)
+        
+        search.subscribe { _ in
+            self.searchTextField.text = ""
+        }.disposed(by: self.disposeBag)
+        
+        //Outputs
         self.viewModel.output
             .suggestionSearch
             .asObservable()
@@ -172,12 +190,20 @@ extension SearchFactsViewController {
                 }
             .disposed(by: disposeBag)
         
-        self.suggestionView.suggestionFactsCollectionView
-            .rx
-            .modelSelected(String.self)
-            .map { $0 }
-            .bind(to: viewModel.input.searchText)
-            .disposed(by: disposeBag)
+        self.viewModel.output
+            .lastSearch
+            .asObservable()
+            .filter { $0.count > 0}
+            .bind(to: self.pastSearchesView.pastSearchesTableView.rx.items)
+                { tableView, index, element in
+                    let indexPath = IndexPath(row: index, section: 0)
+                    let cell = tableView
+                        .dequeueReusableCell(withIdentifier: PastSearchTableViewCell.reuseCell,
+                                             for: indexPath) as! PastSearchTableViewCell
+                    cell.model = element
+                    return cell
+            }
+            .disposed(by: self.disposeBag)
         
         self.viewModel.output
             .suggestionTitle
@@ -191,14 +217,5 @@ extension SearchFactsViewController {
                 self.searchTextField.placeholder = value
             }).disposed(by: self.disposeBag)
         
-        self.viewModel.output
-            .lastSearch
-            .drive(self.pastSearchesView.pastSearchesTableView.rx.items)
-                { tableView, index, element in
-                    let indexPath = IndexPath(row: index, section: 0)
-                    let cell = tableView.dequeueReusableCell(withIdentifier: PastSearchesView.cellID , for: indexPath)
-                    return cell
-                }
-            .disposed(by: self.disposeBag)
     }
 }

@@ -8,10 +8,7 @@
 
 import UIKit
 
-class PastSearchesView: UIView {
-    
-    static let cellID = "cellID"
-    
+class PastSearchesView: UIView {    
     var headerLabel: UILabel = {
         let view = UILabel()
         view.text = "Past Searches: "
@@ -22,7 +19,8 @@ class PastSearchesView: UIView {
     
     var pastSearchesTableView: UITableView = {
         let view = UITableView()
-        view.register(UITableViewCell.self, forCellReuseIdentifier: PastSearchesView.cellID)
+        view.register(PastSearchTableViewCell.self, forCellReuseIdentifier: PastSearchTableViewCell.reuseCell)
+        view.separatorStyle = .none
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -53,9 +51,10 @@ extension PastSearchesView {
     private func setupPastSearchesTableView() {
         self.addSubview(self.pastSearchesTableView)
         NSLayoutConstraint.activate([
-            self.pastSearchesTableView.topAnchor.constraint(equalTo: self.headerLabel.topAnchor, constant: 8), //Section
+            self.pastSearchesTableView.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor, constant: 4),
             self.pastSearchesTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.pastSearchesTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            self.pastSearchesTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
     }
 }
