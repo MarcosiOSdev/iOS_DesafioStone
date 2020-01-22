@@ -12,7 +12,7 @@ import RxSwift
 /// Telas do app
 enum Scene {
     case facts
-    case sharedLink(title: String, link: URL, completion: CocoaAction?)
+    case sharedLink(title: String, link: URL, completion: AnyObserver<String>?)
     case searchCategory(completion: AnyObserver<CategoryModel>)
     
     /// JUST USING IN TEST
@@ -39,7 +39,7 @@ extension Scene {
             let objectsToShare: [Any] = [link, title]
             let viewController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             viewController.completionWithItemsHandler = { activityType, bollean, anyes, error in
-                completion?.execute()                
+                completion?.onNext("")
             }
             return viewController
         case .searchCategory(let completion):

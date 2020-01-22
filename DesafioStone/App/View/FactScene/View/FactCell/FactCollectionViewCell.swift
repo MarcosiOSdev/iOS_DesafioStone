@@ -33,10 +33,14 @@ class FactCollectionViewCell: BaseFactCell {
     
     
     func configure(with factModel: FactModel,
-                   sharedAction: CocoaAction) {
+                   sharedAction: AnyObserver<(model: FactModel, cell: FactCollectionViewCell)>) {
         
         self.factModel = factModel
-        self.shareButton.rx.action = sharedAction
+        self.shareButton.rx
+            .tap
+            .map { (model: self.factModel, cell: self) }
+            .bind(to: sharedAction)
+            .disposed(by: self.bag)
         self.valueLabel.text = factModel.title
         self.tagLabel.text = factModel.tag
                 
@@ -50,7 +54,6 @@ class FactCollectionViewCell: BaseFactCell {
 extension FactCollectionViewCell {
     override func prepareForReuse() {
         self.factModel = nil
-        self.shareButton.rx.action = nil
         super.prepareForReuse()
     }
     

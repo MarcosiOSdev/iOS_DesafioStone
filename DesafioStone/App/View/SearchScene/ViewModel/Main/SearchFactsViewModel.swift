@@ -38,12 +38,7 @@ class SearchFactsViewModel: BindingViewModelType {
     private let searchTextObservable: PublishSubject<String> = .init()
     private let lastSearch = BehaviorRelay<[String]>(value: [])
     
-    private var searched: Set<String> = [] {
-        didSet {
-            let list = self.searched.map{$0}
-            self.lastSearch.accept(list)
-        }
-    }
+    private static var searched = [String]()
     
     init(coordinator: CoordinatorType) {
         self.coordinator = coordinator
@@ -73,6 +68,19 @@ class SearchFactsViewModel: BindingViewModelType {
         input = UIInput(searchText: searchTextObservable.asObserver())
         
         self.binding()
+        
+        
+        /// Search order
+        let totalIndices = SearchFactsViewModel.searched.count - 1
+        guard totalIndices >= 0 else { return }
+        
+        var reversedCategory = [String]()
+
+        for arrayIndex in 0...totalIndices {
+            reversedCategory.append(SearchFactsViewModel.searched[totalIndices - arrayIndex])
+        }
+        let returnArray =  Array(reversedCategory.prefix(5))
+        self.lastSearch.accept(returnArray)
     }
     
     func binding() {
@@ -102,8 +110,10 @@ class SearchFactsViewModel: BindingViewModelType {
     }
     
     private func saveLastSearch(_ element: String) -> CategoryModel {
-        print(element)
-        self.searched.insert(element)
+        //TODO .. Salvar em CoreData
+        SearchFactsViewModel.searched.append(element)
+        let list = SearchFactsViewModel.searched.map{$0}
+        self.lastSearch.accept(list)
         return CategoryModel(uid: 10, value: element)
     }
 }

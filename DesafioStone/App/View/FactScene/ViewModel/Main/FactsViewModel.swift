@@ -34,17 +34,24 @@ class FactsViewModel: BindingViewModelType {
         var title: Driver<String>
         var finishedShareFact: Driver<Bool>
     }
-    
+    //MARK: - Property Inject
     private let chuckNorrisAPI: ChuckNorrisAPIType
     private let coordinator: CoordinatorType
     var disposedBag = DisposeBag()
     
+    
+    //MARK: - Output Property Private
     private var facts = BehaviorRelay<[FactsTableViewCellType]> (value: [])
     private var _isLoadingShare = BehaviorSubject<Bool>(value: false)
+    
+    //MARK: - Input Property Private
     private var searchViewButtonTapped: PublishSubject<Void> = .init()
     private var reloadEvent: PublishSubject<Void> = .init()
     private var sharedFact: PublishSubject<FactModel> = PublishSubject<FactModel>()
+    
+    //MARK: - Input Property like Completion
     private var searchCategory: PublishSubject<CategoryModel> = .init()
+    private var sharedFactsActionSheet: PublishSubject<String> = .init()
     
     init(chuckNorrisAPI: ChuckNorrisAPIType,
          coordinator: CoordinatorType) {
@@ -89,25 +96,35 @@ class FactsViewModel: BindingViewModelType {
             self.featch(category: category)
         }).disposed(by: self.disposedBag)
         
+        self.sharedFactsActionSheet.subscribe(onNext: { _ in
+            self._isLoadingShare.onNext(false)
+        }).disposed(by: self.disposedBag)
+        
         self.featch(category: nil)
     }
     
+    
+}
+
+//MARK: - Aux Functions -
+extension FactsViewModel {
+    
     private func openSharedActionSheet(_ fact: FactModel) {
         if let url = URL(string: fact.url) {
-            coordinator
-                .transition(to: .sharedLink(title: fact.title,
-                                        link: url,
-                                        completion: CocoaAction {
-                                            self._isLoadingShare.onNext(false)
-                                            return Observable.empty()
-            }), type: .modal)
+            self.coordinator
+                    .transition(to: .sharedLink(title: fact.title,
+                                                link: url,
+                                                completion: sharedFactsActionSheet.asObserver()),
+                                                type: .modal)
         }
     }
     
     private func openSearch() {
-        coordinator.transition(to: .searchCategory(completion: searchCategory.asObserver()), type: .push)
+        coordinator.transition(to: .searchCategory(completion: searchCategory.asObserver()),
+                               type: .push)
     }
 }
+
 
 //MARK: - Functions for Service -
 extension FactsViewModel {
