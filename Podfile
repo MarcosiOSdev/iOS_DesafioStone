@@ -13,7 +13,7 @@ target 'DesafioStone' do
     #Request HTTP pod 'RxAlamofire', '4.5.0'
 
     # Community projects
-    pod 'Action', '~> 3.4'
+    #pod 'Action', '~> 3.4'
     pod 'NSObject+Rx', '~> 4.1'    
 
   target 'DesafioStoneTests' do

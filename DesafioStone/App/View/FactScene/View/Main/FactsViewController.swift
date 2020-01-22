@@ -10,7 +10,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
-import Action
 
 
 class FactsViewController: UIViewController, BindableType {

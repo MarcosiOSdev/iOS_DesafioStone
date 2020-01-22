@@ -1,7 +1,4 @@
 PODS:
-  - Action (3.11.0):
-    - RxCocoa (~> 4.0)
-    - RxSwift (~> 4.0)
   - Differentiator (3.1.0)
   - "NSObject+Rx (4.4.1)":
     - RxSwift (~> 4.3)
@@ -18,7 +15,6 @@ PODS:
     - RxSwift (>= 4.4.2, ~> 4.4)
 
 DEPENDENCIES:
-  - Action (~> 3.4)
   - "NSObject+Rx (~> 4.1)"
   - RxBlocking (~> 4.0)
   - RxCocoa (~> 4.0)
@@ -28,7 +24,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - Action
     - Differentiator
     - "NSObject+Rx"
     - RxBlocking
@@ -38,7 +33,6 @@ SPEC REPOS:
     - RxTest
 
 SPEC CHECKSUMS:
-  Action: 689181e4c3f6566844178d8a7da6fef39a9597fc
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   "NSObject+Rx": 9884a92f19b610795c431e10b4e601913b59c9e9
   RxBlocking: 79413e4d916f44bb3e113c5b2cc059e36fe58910
@@ -47,6 +41,6 @@ SPEC CHECKSUMS:
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   RxTest: 3ccb66bfbace0bf7df1c43a7c75d046f8ce60372
 
-PODFILE CHECKSUM: 52028be52532209f33348b82e36feb8ca03c0c74
+PODFILE CHECKSUM: 9b5eb38441719a6e7a3102721b3a118ef2335ba2
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.0.beta.2

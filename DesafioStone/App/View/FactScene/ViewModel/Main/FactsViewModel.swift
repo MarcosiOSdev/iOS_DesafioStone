@@ -10,7 +10,6 @@ import Foundation
 import RxSwift
 import RxCocoa
 import RxDataSources
-import Action
 
 enum FactsTableViewCellType {
     case normal(factModel: FactModel)
