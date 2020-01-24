@@ -43,7 +43,7 @@ extension Scene {
             }
             return viewController
         case .searchCategory(let completion):
-            let viewModel = SearchFactsViewModel(coordinator: coordinator)
+            let viewModel = SearchFactsViewModel(coordinator: coordinator, lastSearchCoreData: LastSearchCoreData())
             viewModel.completion = completion
             var viewController = SearchFactsViewController()
             viewController.bindViewModel(to: viewModel)

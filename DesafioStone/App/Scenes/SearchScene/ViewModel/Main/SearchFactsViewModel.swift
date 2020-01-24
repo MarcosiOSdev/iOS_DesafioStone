@@ -9,17 +9,19 @@
 import Foundation
 import RxSwift
 import RxCocoa
-
+import CoreData
 
 class SearchFactsViewModel: BindingViewModelType {
     
+    //MARK: - Inject Properties
     var disposedBag = DisposeBag()
     var coordinator: CoordinatorType
+    var lastSearchCoreData: LastSearchCoreDataType
+    
     var input: SearchFactsViewModel.UIInput
     var output: SearchFactsViewModel.UIOutput
     
     var completion: AnyObserver<CategoryModel>?
-    
     private let suggestionList = ["GAMES", "SPORT", "DEV", "SCIENCE", "TECHNOLOGY", "MUSIC", "TRAVEL", "CARRER"]
     
     struct UIInput {
@@ -34,14 +36,20 @@ class SearchFactsViewModel: BindingViewModelType {
         var placeholderSearch: Driver<String>
     }
     
-    
+    //MARK: Inputs property
     private let searchTextObservable: PublishSubject<String> = .init()
+    
+    //MARK: Output property
     private let lastSearch = BehaviorRelay<[String]>(value: [])
     
     private static var searched = [String]()
     
-    init(coordinator: CoordinatorType) {
+    init(coordinator: CoordinatorType,
+         lastSearchCoreData: LastSearchCoreDataType) {
+        
         self.coordinator = coordinator
+        self.lastSearchCoreData = lastSearchCoreData
+        
         let suggestionSearch = Driver<[String]>.of(suggestionList)
         
         let title =
@@ -68,22 +76,10 @@ class SearchFactsViewModel: BindingViewModelType {
         input = UIInput(searchText: searchTextObservable.asObserver())
         
         self.binding()
-        
-        
-        /// Search order
-        let totalIndices = SearchFactsViewModel.searched.count - 1
-        guard totalIndices >= 0 else { return }
-        
-        var reversedCategory = [String]()
-
-        for arrayIndex in 0...totalIndices {
-            reversedCategory.append(SearchFactsViewModel.searched[totalIndices - arrayIndex])
-        }
-        let returnArray =  Array(reversedCategory.prefix(5))
-        self.lastSearch.accept(returnArray)
+        self.loadingLastSearch()
     }
     
-    func binding() {
+    private func binding() {
         self.searchTextObservable.asObservable()
             .map { $0 }
             .subscribe({ event in
@@ -103,17 +99,29 @@ class SearchFactsViewModel: BindingViewModelType {
                 
             }).disposed(by: disposedBag)
     }
+}
+
+//MARK: - CoreData Functions -
+extension SearchFactsViewModel {
+    private func saveLastSearch(_ element: String) -> CategoryModel {
+        let categoryModel = CategoryModel(uid: UUID().hashValue, value: element)
+        self.lastSearchCoreData.save(category: categoryModel)
+        return categoryModel
+    }
     
+    private func loadingLastSearch() {
+        self.lastSearchCoreData.fetch()
+            .subscribe(onNext: { [weak self] categories in
+                let lastSearches = categories.map {$0.value}
+                self?.lastSearch.accept(lastSearches)
+        }).disposed(by: self.disposedBag)
+    }
+}
+
+//MARK: - Coordinators Functions -
+extension SearchFactsViewModel {
     private func infoSearchToBackScene(_ element: CategoryModel) {
         self.completion?.onNext(element)
         self.coordinator.pop()
-    }
-    
-    private func saveLastSearch(_ element: String) -> CategoryModel {
-        //TODO .. Salvar em CoreData
-        SearchFactsViewModel.searched.append(element)
-        let list = SearchFactsViewModel.searched.map{$0}
-        self.lastSearch.accept(list)
-        return CategoryModel(uid: 10, value: element)
     }
 }
