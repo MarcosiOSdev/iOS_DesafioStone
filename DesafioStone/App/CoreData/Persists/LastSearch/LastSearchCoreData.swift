@@ -10,11 +10,23 @@ import Foundation
 import RxSwift
 import CoreData
 
-class LastSearchCoreData: LastSearchCoreDataType {
+class LastSearchCoreData {
     var coreDataStack = CoreDataStack()
     var managedContext: NSManagedObjectContext {
        self.coreDataStack.managedContext
     }
+}
+
+//MARK: - CoreDataType Functions -
+extension LastSearchCoreData: LastSearchCoreDataType {
+    
+    func update(category: CategoryModel) {
+        let lastSearches = self.lastSearch(with: category.value)
+        if let model = lastSearches.first {
+            model.createDate = Date()
+            self.coreDataStack.saveContext()
+        }
+    }    
     
     func save(category: CategoryModel) {
         let last = LastSearchCDModel(context: self.managedContext)
@@ -29,21 +41,51 @@ class LastSearchCoreData: LastSearchCoreDataType {
         return Observable<[CategoryModel]>.create { [weak self] observer in
              
             let fetchRequest: NSFetchRequest = LastSearchCDModel.fetchRequest()
-            fetchRequest.fetchLimit = 5
             let highestSortDescriptor = NSSortDescriptor(key: "createDate", ascending: false)
+            
+            fetchRequest.fetchLimit = 5
             fetchRequest.sortDescriptors = [highestSortDescriptor]
             
-            do {
-                let categoriesCD = try self?.coreDataStack.managedContext.fetch(fetchRequest)
-                if let categoriesModel = self?.mapper(to: categoriesCD ?? []) {
-                    observer.onNext(categoriesModel)
+            DispatchQueue.main.async {
+                do {
+                    let categoriesCD = try self?.coreDataStack.managedContext.fetch(fetchRequest)
+                    if let categoriesModel = self?.mapper(to: categoriesCD ?? []) {
+                        observer.onNext(categoriesModel)
+                    }
+                } catch {
+                    observer.onNext([])
                 }
-            } catch {
-                observer.onNext([])
             }
-            
             return Disposables.create()
         }
+    }
+    
+    func containCategory(_ category: String) -> Bool {
+        let fetchCoreData = self.lastSearch(with: category)
+        return fetchCoreData.count > 0
+    }
+}
+
+
+//MARK: - Aux Functions -
+extension LastSearchCoreData {
+    
+    private func lastSearch(with category: String) -> [LastSearchCDModel] {
+        let fetchRequest: NSFetchRequest = LastSearchCDModel.fetchRequest()
+        let predicate = self.predicate(with: category)
+        
+        fetchRequest.predicate = predicate
+        fetchRequest.fetchLimit = 1
+        do {
+            let fetchCoreData = try self.managedContext.fetch(fetchRequest)
+            return fetchCoreData
+        } catch {
+            return []
+        }
+    }
+    
+    private func predicate(with category: String) -> NSPredicate {
+        return NSPredicate(format: "category == %@", category)
     }
     
     private func mapper(to lastSearchCDModels: [LastSearchCDModel] ) -> [CategoryModel] {
@@ -55,8 +97,7 @@ class LastSearchCoreData: LastSearchCoreDataType {
                                               value: categoryCD.category ?? "")
             
             tempList.append(categoryModel)
-        }        
+        }
         return tempList
     }
-    
 }

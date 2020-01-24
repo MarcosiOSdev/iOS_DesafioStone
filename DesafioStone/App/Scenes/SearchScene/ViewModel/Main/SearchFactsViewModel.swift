@@ -105,7 +105,12 @@ class SearchFactsViewModel: BindingViewModelType {
 extension SearchFactsViewModel {
     private func saveLastSearch(_ element: String) -> CategoryModel {
         let categoryModel = CategoryModel(uid: UUID().hashValue, value: element)
-        self.lastSearchCoreData.save(category: categoryModel)
+        let exist = self.lastSearchCoreData.containCategory(element)
+        if !exist {
+            self.lastSearchCoreData.save(category: categoryModel)
+        } else {
+            self.lastSearchCoreData.update(category: categoryModel)
+        }        
         return categoryModel
     }
     

@@ -11,5 +11,7 @@ import RxSwift
 
 protocol LastSearchCoreDataType: AnyObject {
     func save(category: CategoryModel)
+    func update(category: CategoryModel)
     func fetch() -> Observable<[CategoryModel]>
+    func containCategory(_ category: String) -> Bool
 }
