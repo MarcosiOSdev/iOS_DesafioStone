@@ -5,10 +5,22 @@
   Created by Marcos Felipe Souza on 28/07/19.
   Copyright © 2019 Marcos Felipe Souza. All rights reserved.
 */
+
+
+/* NAVIGATION TITLES */
 "TITLE_FACT_SCENE" = "Chuck Norris Facts";
 "TITLE_SEARCH_FACTS" = "Search Facts";
+
+/* SCENE FACT CELL TAG */
 "UNCATEGORIZED_FACT_TAG" = "Uncategorized";
+
+/* SCENE ERROR CELL TAG */
 "ERROR_DEFAULT" = "An error has occurred :/";
 
+/* SCENE SEARCH SCENE */
 "SUGGESTION_TITLE_IN_SEARCH_SCENE" = "Suggestions:";
 "SEARCH_PLACEHOLDER_IN_SEARCH_SCENE" = "Search";
+
+/* SCENE EMPTY FACT CELL */
+"VALUE_EMPTY_EMPTY_CELL_FACT" = "Result is empty";
+"TAP_TO_RETURN_EMPTY_CELL_FACT" = "Tap here to reload";

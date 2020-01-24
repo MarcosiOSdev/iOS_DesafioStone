@@ -5,10 +5,21 @@
   Created by Marcos Felipe Souza on 28/07/19.
   Copyright © 2019 Marcos Felipe Souza. All rights reserved.
 */
+
+/* NAVIGATION TITLES */
 "TITLE_FACT_SCENE" = "Fatos do Chuck Norris";
 "TITLE_SEARCH_FACTS" = "Busca por Fatos";
+
+/* SCENE FACT CELL TAG */
 "UNCATEGORIZED_FACT_TAG" = "Descategorizado";
+
+/* SCENE ERROR CELL TAG */
 "ERROR_DEFAULT" = "Ocorreu um erro :/";
 
+/* SCENE SEARCH SCENE */
 "SUGGESTION_TITLE_IN_SEARCH_SCENE" = "Sugestões de pesquisa:";
 "SEARCH_PLACEHOLDER_IN_SEARCH_SCENE" = "Pesquise";
+
+/* SCENE EMPTY FACT CELL */
+"VALUE_EMPTY_EMPTY_CELL_FACT" = "Não teve sucesso com o resultado";
+"TAP_TO_RETURN_EMPTY_CELL_FACT" = "Toque para reload dados";
