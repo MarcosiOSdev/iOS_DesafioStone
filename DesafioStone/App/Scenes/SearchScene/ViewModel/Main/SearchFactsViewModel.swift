@@ -81,6 +81,7 @@ class SearchFactsViewModel: BindingViewModelType {
     
     private func binding() {
         self.searchTextObservable.asObservable()
+            .observeOn(MainScheduler.instance)
             .map { $0 }
             .subscribe({ event in
                 guard let element = event.element else { return }
@@ -95,7 +96,7 @@ class SearchFactsViewModel: BindingViewModelType {
                         category = CategoryModel(uid: 0, value: categoryString!)
                     }
                 }
-                self.infoSearchToBackScene(category! )
+                self.infoSearchToBackScene(category!)
                 
             }).disposed(by: disposedBag)
     }

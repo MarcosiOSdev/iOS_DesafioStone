@@ -30,4 +30,9 @@ class BaseFactCell: UICollectionViewCell {
         self.contentView.layer.borderColor = UIColor.gray.cgColor
         self.contentView.layer.masksToBounds = true
     }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupCell()
+    }
 }

@@ -13,6 +13,7 @@ PODS:
   - RxSwift (4.5.0)
   - RxTest (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
+  - Shimmer (1.0.2)
 
 DEPENDENCIES:
   - "NSObject+Rx (~> 4.1)"
@@ -21,6 +22,7 @@ DEPENDENCIES:
   - RxDataSources (~> 3.0)
   - RxSwift (~> 4.0)
   - RxTest (~> 4.0)
+  - Shimmer
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -31,6 +33,8 @@ SPEC REPOS:
     - RxDataSources
     - RxSwift
     - RxTest
+  trunk:
+    - Shimmer
 
 SPEC CHECKSUMS:
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
@@ -40,7 +44,8 @@ SPEC CHECKSUMS:
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   RxTest: 3ccb66bfbace0bf7df1c43a7c75d046f8ce60372
+  Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
 
-PODFILE CHECKSUM: 9b5eb38441719a6e7a3102721b3a118ef2335ba2
+PODFILE CHECKSUM: 3bcdff89638590f349079d10b766be25a65b25df
 
 COCOAPODS: 1.9.0.beta.2

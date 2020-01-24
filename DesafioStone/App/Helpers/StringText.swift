@@ -20,6 +20,8 @@ class StringText {
         case defaultError = "ERROR_DEFAULT"
         case suggestionTitleSearchScene = "SUGGESTION_TITLE_IN_SEARCH_SCENE"
         case searchPlaceholderSearchScene = "SEARCH_PLACEHOLDER_IN_SEARCH_SCENE"
+        case tapToReturnEmptyCellFact = "TAP_TO_RETURN_EMPTY_CELL_FACT"
+        case valueIsEmptyEmptyCellFact = "VALUE_EMPTY_EMPTY_CELL_FACT"
     }
     
     func text(by localizationString: LocalizationString ) -> String{

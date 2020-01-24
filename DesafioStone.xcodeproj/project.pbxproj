@@ -74,6 +74,8 @@
 		D8C5E84923D8C6FC00F837E4 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C5E84823D8C6FC00F837E4 /* CoreDataStack.swift */; };
 		D8C5E84B23D8C98F00F837E4 /* LastSearchCoreDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C5E84A23D8C98F00F837E4 /* LastSearchCoreDataType.swift */; };
 		D8C5E85023D8CA5D00F837E4 /* LastSearchCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C5E84F23D8CA5D00F837E4 /* LastSearchCoreData.swift */; };
+		D8D05D7223DA9EE300B605CD /* LoadingFactCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D05D7023DA9EE300B605CD /* LoadingFactCollectionViewCell.swift */; };
+		D8D05D7323DA9EE300B605CD /* LoadingFactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8D05D7123DA9EE300B605CD /* LoadingFactCollectionViewCell.xib */; };
 		D8D1155E23D3F4AD009EC3B6 /* PastSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D1155D23D3F4AD009EC3B6 /* PastSearchTableViewCell.swift */; };
 		D8D388B023CFCC18005E156A /* PastSearchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D388AF23CFCC18005E156A /* PastSearchesView.swift */; };
 /* End PBXBuildFile section */
@@ -183,6 +185,8 @@
 		D8C5E84823D8C6FC00F837E4 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		D8C5E84A23D8C98F00F837E4 /* LastSearchCoreDataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastSearchCoreDataType.swift; sourceTree = "<group>"; };
 		D8C5E84F23D8CA5D00F837E4 /* LastSearchCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastSearchCoreData.swift; sourceTree = "<group>"; };
+		D8D05D7023DA9EE300B605CD /* LoadingFactCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingFactCollectionViewCell.swift; sourceTree = "<group>"; };
+		D8D05D7123DA9EE300B605CD /* LoadingFactCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingFactCollectionViewCell.xib; sourceTree = "<group>"; };
 		D8D1155D23D3F4AD009EC3B6 /* PastSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastSearchTableViewCell.swift; sourceTree = "<group>"; };
 		D8D388AF23CFCC18005E156A /* PastSearchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastSearchesView.swift; sourceTree = "<group>"; };
 		D8DA49F8236B633F0061650C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -591,6 +595,15 @@
 			path = LastSearch;
 			sourceTree = "<group>";
 		};
+		D8D05D6F23DA9E9C00B605CD /* LoadingCell */ = {
+			isa = PBXGroup;
+			children = (
+				D8D05D7023DA9EE300B605CD /* LoadingFactCollectionViewCell.swift */,
+				D8D05D7123DA9EE300B605CD /* LoadingFactCollectionViewCell.xib */,
+			);
+			path = LoadingCell;
+			sourceTree = "<group>";
+		};
 		D8D1155623D3F21D009EC3B6 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -598,6 +611,7 @@
 				28913C8F23974B0E005473F2 /* BaseCell */,
 				289CEB6122EA795000112AE0 /* FactCell */,
 				D81EE68523904DF90000A214 /* EmptyFactCell */,
+				D8D05D6F23DA9E9C00B605CD /* LoadingCell */,
 				D81EE68023904D510000A214 /* ErrorFactCell */,
 			);
 			path = View;
@@ -793,6 +807,7 @@
 				28913C7E23973AC0005473F2 /* OpenSans-LightItalic.ttf in Resources */,
 				28913C8223973AC0005473F2 /* OpenSans-Regular.ttf in Resources */,
 				2899C4A922E928D600D6191B /* Assets.xcassets in Resources */,
+				D8D05D7323DA9EE300B605CD /* LoadingFactCollectionViewCell.xib in Resources */,
 				287124B122EE85E700125BBD /* Localizable.strings in Resources */,
 				2899C4F722E936B200D6191B /* Staging.xcconfig in Resources */,
 				28913C8323973AC0005473F2 /* OpenSans-BoldItalic.ttf in Resources */,
@@ -939,6 +954,7 @@
 				2899C52022E9536200D6191B /* UINavigationController+Rx.swift in Sources */,
 				D8D388B023CFCC18005E156A /* PastSearchesView.swift in Sources */,
 				D8C5E85023D8CA5D00F837E4 /* LastSearchCoreData.swift in Sources */,
+				D8D05D7223DA9EE300B605CD /* LoadingFactCollectionViewCell.swift in Sources */,
 				D81EE68823904E0D0000A214 /* EmptyFactCollectionViewCell.swift in Sources */,
 				D823676123B0EB7400A31F5C /* SearchFactsViewModel.swift in Sources */,
 				289CEB6422EA796C00112AE0 /* FactCollectionViewCell.swift in Sources */,

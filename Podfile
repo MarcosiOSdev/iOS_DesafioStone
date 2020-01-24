@@ -11,6 +11,9 @@ target 'DesafioStone' do
     pod 'RxDataSources', '~> 3.0'
 
     #Request HTTP pod 'RxAlamofire', '4.5.0'
+    #Images
+    pod 'Shimmer'
+
 
     # Community projects
     #pod 'Action', '~> 3.4'

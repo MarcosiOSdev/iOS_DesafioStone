@@ -25,6 +25,10 @@ class FactsViewController: UIViewController, BindableType {
             self.factsCollectionView.register(EmptyFactCollectionViewCell.nib,
                                               forCellWithReuseIdentifier: EmptyFactCollectionViewCell.reuseCell)
             
+            self.factsCollectionView.register(LoadingFactCollectionViewCell.nib,
+                                              forCellWithReuseIdentifier: LoadingFactCollectionViewCell.reuseCell)
+            
+            
             if let layout = self.factsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 let width = UIScreen.main.bounds.width - 32
                 layout.estimatedItemSize = CGSize(width: width, height: CGFloat(10))
@@ -139,8 +143,15 @@ extension FactsViewController {
             cell.errorMessageLabel.text = message
             return cell
             
-        case .empty:
+        case .empty(let model):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyFactCollectionViewCell.reuseCell, for: indexPath) as? EmptyFactCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            cell.model = model
+            return cell
+        
+        case .loading :
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoadingFactCollectionViewCell.reuseCell, for: indexPath) as? LoadingFactCollectionViewCell else {
                 return UICollectionViewCell()
             }
             return cell

@@ -22,5 +22,5 @@
 "SEARCH_PLACEHOLDER_IN_SEARCH_SCENE" = "Search";
 
 /* SCENE EMPTY FACT CELL */
-"VALUE_EMPTY_EMPTY_CELL_FACT" = "Result is empty";
+"VALUE_EMPTY_EMPTY_CELL_FACT" = "Result %@ is empty";
 "TAP_TO_RETURN_EMPTY_CELL_FACT" = "Tap here to reload";

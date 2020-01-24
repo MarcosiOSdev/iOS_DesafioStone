@@ -11,10 +11,17 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
+
+struct EmptyFactViewData {
+    var infoMessage: String = ""
+    var descriptionImage: String = ""
+}
+
 enum FactsTableViewCellType {
     case normal(factModel: FactModel)
     case error(message: String)
-    case empty
+    case empty(viewData: EmptyFactViewData)
+    case loading
 }
 
 //MARK: List of Variables
@@ -53,6 +60,9 @@ class FactsViewModel: BindingViewModelType {
     private var searchCategory: PublishSubject<CategoryModel> = .init()
     private var sharedFactsActionSheet: PublishSubject<String> = .init()
     
+    //MARK: - Save Property
+    private var lastSearchCategory: CategoryModel?
+    
     init(chuckNorrisAPI: ChuckNorrisAPIType,
          coordinator: CoordinatorType) {
         self.chuckNorrisAPI = chuckNorrisAPI
@@ -67,7 +77,7 @@ class FactsViewModel: BindingViewModelType {
             .of(StringText.sharing.text(by: .titleFactScene))
             .asDriver(onErrorJustReturn: "")
         
-        output = UIOutput(facts: facts.asSignal(onErrorJustReturn: [.empty]),
+        output = UIOutput(facts: facts.asSignal(onErrorJustReturn: [.empty(viewData: EmptyFactViewData())]),
                           title: title,
                           finishedShareFact: self._isLoadingShare.asDriver(onErrorJustReturn: false))
         
@@ -78,7 +88,8 @@ class FactsViewModel: BindingViewModelType {
         reloadEvent
             .asObservable()
             .subscribe(onNext: { _ in
-                self.featch(category: nil)
+                let category = self.lastSearchCategory
+                self.featch(category: category)
             }).disposed(by: disposedBag)
         
         sharedFact           
@@ -92,7 +103,7 @@ class FactsViewModel: BindingViewModelType {
             .disposed(by: disposedBag)
 
         searchCategory.subscribe(onNext: { category in
-            print(category.value)
+            self.lastSearchCategory = category
             self.featch(category: category)
         }).disposed(by: self.disposedBag)
         
@@ -108,6 +119,15 @@ class FactsViewModel: BindingViewModelType {
 
 //MARK: - Aux Functions -
 extension FactsViewModel {
+    
+    private func buildEmptyCell(with category: String) -> EmptyFactViewData {
+        let descriptionImage = StringText.sharing.text(by: .tapToReturnEmptyCellFact)
+        var infoMessage = StringText.sharing.text(by: .valueIsEmptyEmptyCellFact)
+        infoMessage = String(format: infoMessage, category)
+        
+        return EmptyFactViewData(infoMessage: infoMessage,
+                                 descriptionImage: descriptionImage)
+    }
     
     private func openSharedActionSheet(_ fact: FactModel) {
         if let url = URL(string: fact.url) {
@@ -129,28 +149,29 @@ extension FactsViewModel {
 //MARK: - Functions for Service -
 extension FactsViewModel {
     private func featch(category: CategoryModel?) {
-        
-        let observable = chuckNorrisAPI.facts(category: category)
-            .retry(3)
-        
-        observable.subscribe(onNext: { factResponse in
-            guard factResponse.result.count > 0 else {
-                self.facts.accept([.empty])
-                return
-            }
-            
-            let factsCell = factResponse.result.map { result -> FactsTableViewCellType in
-                let factModel = FactModel()
-                factModel.setModel(by: result)
-                self.tagUncategorized(in: factModel)
-                return FactsTableViewCellType.normal(factModel: factModel)
-            }
-            self.facts.accept(factsCell)            
-        }, onError: { error in
-            let genericError = StringText.sharing.text(by: .defaultError)
-            self.facts.accept([.error(message: genericError)])
-        })
-        .disposed(by: disposedBag)
+        self.facts.accept([.loading])
+//        let observable = chuckNorrisAPI.facts(category: category)
+//            .retry(3)
+//
+//        observable.subscribe(onNext: { factResponse in
+//            guard factResponse.result.count > 0 else {
+//                let viewData = self.buildEmptyCell(with: category?.value ?? "")
+//                self.facts.accept([.empty(viewData: viewData)])
+//                return
+//            }
+//
+//            let factsCell = factResponse.result.map { result -> FactsTableViewCellType in
+//                let factModel = FactModel()
+//                factModel.setModel(by: result)
+//                self.tagUncategorized(in: factModel)
+//                return FactsTableViewCellType.normal(factModel: factModel)
+//            }
+//            self.facts.accept(factsCell)
+//        }, onError: { error in
+//            let genericError = StringText.sharing.text(by: .defaultError)
+//            self.facts.accept([.error(message: genericError)])
+//        })
+//        .disposed(by: disposedBag)
     }
     
     func tagUncategorized(in factModel: FactModel) {
