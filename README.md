@@ -23,10 +23,24 @@ Se esse error acima ocorrer, rode isso abaixo 😪 :
 
     pod install --repo-update
 
+## Continuos Integration:
+
+
+
+Contém um pipeline em Fastlane, o Fastlane para esse desafio foi utilizado na versão  2.140.0 ( fastlane -v )
+Para utiliza-lo é necessário instala-lo, mas para instalar tem que ter o xcode-select instalado : 
+
+    xcode-select --install
+    brew install fastlane
+        
+    
+
+
+
 ## Architecture:
 
 O projeto está usando MVVM como arquitetura ao inves de MVC. 
-Para persistencia temporaria está sendo usado Realm ( offline works ).
+Para persistencia temporaria está sendo usado CoreData ( offline works ).
 Para o gerenciamento de fluxos ( Flow Manager ) foi criado um Scener e Coordinator.
 Para o gerenciamento de dependencia do projeto foi utilizado o Cocoapods.
 Na  parte de #organização , abortará mais detalhes cada um deles.
@@ -51,6 +65,7 @@ Model pode ser considerado um entity, pois há mais uma model para cada area.
 
 ### ViewModel
 Contém toda a PresenterLogic, a view model que coleta os dados e informa o que a view deve-se fazer.
+Contém toda a BusinessLogic (PS: não criou outra camada pois a regra e o app são simples).
 
 ### Scene
 Scene é um composto de MVVM de uma certa Entidade. 
@@ -61,14 +76,11 @@ Scene monta essa apresentação para que o Coordinator possa gerenciar o fluxo d
 ### Coordinator 
 Gerencia o Flow , quando cria uma navigation e a necessidade de adicionar uma nova Scene.
 
-### Service 
-Contém a BusinessLogic, toda entrada de dados tem a sua forma de tratar. 
-A camada Service serve para isso, ela ramifica se a chamada deve-se ir na API e salvar na base offline ( realm ) ou se deve fazer algum tratamento dos dados , como mencionado, trata da Business Logic.
 
 ### API
 Area responsavel para fazer a requisição a API ( ChuckNoriss ).
 
-### Realm
+### CoreData
 Base de dados offline, para realizar cache de dados e objetos, evitando a busca e o consumo insano de internet do usuario.
 
 

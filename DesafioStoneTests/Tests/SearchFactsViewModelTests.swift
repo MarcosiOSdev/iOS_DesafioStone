@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import RxTest
 import RxBlocking
-import Action
+
 @testable import DesafioStone
 
 class SearchFactsViewModelTests: XCTestCase {
@@ -22,7 +22,9 @@ class SearchFactsViewModelTests: XCTestCase {
     var disposedBag = DisposeBag()
     
     override func setUp() {
-        viewModel = SearchFactsViewModel()
+        
+        viewModel = SearchFactsViewModel(coordinator: CoordinatorStub(),
+                                         lastSearchCoreData: LastSearchCoreData())
         scheduler = TestScheduler(initialClock: 0)
     }
     
@@ -42,7 +44,11 @@ class SearchFactsViewModelTests: XCTestCase {
     
     func test_tap_suggestion_value() {
         let suggestionValueFake = scheduler.createObserver([String].self)
-        viewModel.output.lastSearch.drive(suggestionValueFake).disposed(by: disposedBag)
+        viewModel.output
+            .lastSearch
+            .asObservable()
+            .bind(to: suggestionValueFake)
+            .disposed(by: disposedBag)
         
         scheduler.createColdObservable([
             .next(10, "GAMES"),

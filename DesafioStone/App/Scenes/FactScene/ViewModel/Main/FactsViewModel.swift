@@ -58,7 +58,7 @@ class FactsViewModel: BindingViewModelType {
     
     //MARK: - Input Property like Completion
     private var searchCategory: PublishSubject<CategoryModel> = .init()
-    private var sharedFactsActionSheet: PublishSubject<String> = .init()
+    private var sharedFactsActionSheet: PublishSubject<Void> = .init()
     
     //MARK: - Save Property
     private var lastSearchCategory: CategoryModel?
@@ -149,29 +149,29 @@ extension FactsViewModel {
 //MARK: - Functions for Service -
 extension FactsViewModel {
     private func featch(category: CategoryModel?) {
-        self.facts.accept([.loading])
-//        let observable = chuckNorrisAPI.facts(category: category)
-//            .retry(3)
-//
-//        observable.subscribe(onNext: { factResponse in
-//            guard factResponse.result.count > 0 else {
-//                let viewData = self.buildEmptyCell(with: category?.value ?? "")
-//                self.facts.accept([.empty(viewData: viewData)])
-//                return
-//            }
-//
-//            let factsCell = factResponse.result.map { result -> FactsTableViewCellType in
-//                let factModel = FactModel()
-//                factModel.setModel(by: result)
-//                self.tagUncategorized(in: factModel)
-//                return FactsTableViewCellType.normal(factModel: factModel)
-//            }
-//            self.facts.accept(factsCell)
-//        }, onError: { error in
-//            let genericError = StringText.sharing.text(by: .defaultError)
-//            self.facts.accept([.error(message: genericError)])
-//        })
-//        .disposed(by: disposedBag)
+        self.facts.accept([.loading, .loading, .loading])
+        let observable = chuckNorrisAPI.facts(category: category)
+            .retry(3)
+
+        observable.subscribe(onNext: { factResponse in
+            guard factResponse.result.count > 0 else {
+                let viewData = self.buildEmptyCell(with: category?.value ?? "")
+                self.facts.accept([.empty(viewData: viewData)])
+                return
+            }
+
+            let factsCell = factResponse.result.map { result -> FactsTableViewCellType in
+                let factModel = FactModel()
+                factModel.setModel(by: result)
+                self.tagUncategorized(in: factModel)
+                return FactsTableViewCellType.normal(factModel: factModel)
+            }
+            self.facts.accept(factsCell)
+        }, onError: { error in
+            let genericError = StringText.sharing.text(by: .defaultError)
+            self.facts.accept([.error(message: genericError)])
+        })
+        .disposed(by: disposedBag)
     }
     
     func tagUncategorized(in factModel: FactModel) {

@@ -16,7 +16,7 @@ extension Scene: RawRepresentable {
         switch rawValue {
         case 1: self = .facts
         case 2: self = .sharedLink(title: "", link: URL(string: "")!, completion: nil)
-        case 3: self = .searchCategory
+        case 3: self = .searchCategory(completion: nil)
         default: self = .none
         }
     }

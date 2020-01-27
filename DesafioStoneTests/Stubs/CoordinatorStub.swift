@@ -22,8 +22,9 @@ class CoordinatorStub: CoordinatorType {
         currentSceneObservable.onNext(scene.rawValue)
         switch scene {
         case .sharedLink(_, _, let completion):
-            completionOk.asObservable().subscribe(onNext: { _ in
-                completion?.execute()
+            completionOk.asObservable()
+                .subscribe({ _ in
+                completion?.onNext(Void())
             }).disposed(by: disposedBag)
         default:
             break;

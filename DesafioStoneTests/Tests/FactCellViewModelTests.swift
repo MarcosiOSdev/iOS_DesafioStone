@@ -11,7 +11,6 @@ import RxSwift
 import RxCocoa
 import RxTest
 import RxBlocking
-import Action
 @testable import DesafioStone
 
 class FactCellViewModelTests: XCTestCase {
@@ -32,12 +31,6 @@ class FactCellViewModelTests: XCTestCase {
     override func tearDown() {
         self.viewModel = nil
         self.scheduler = nil
-    }
-
-    func actionMock() -> CocoaAction {
-        return CocoaAction {
-            return Observable.empty()
-        }
     }
     
     func test_init_viewModel_with_3_facts() {
@@ -61,7 +54,7 @@ class FactCellViewModelTests: XCTestCase {
         self.viewModel = FactsViewModel(chuckNorrisAPI: ChuckNorrisAPIEmptyStub(), coordinator: CoordinatorStub())
         do {
             let result: FactsTableViewCellType = try viewModel.output.facts.toBlocking(timeout: 1.0).first()!.first!
-            XCTAssertEqual(result, FactsTableViewCellType.empty)
+            XCTAssertEqual(result, FactsTableViewCellType.empty(viewData: EmptyFactViewData(infoMessage: "", descriptionImage: "")))
         } catch {
             XCTFail("Erro in test_with_empty_result with: \(error.localizedDescription)")
         }
@@ -134,14 +127,14 @@ class FactCellViewModelTests: XCTestCase {
             .disposed(by: disposedBag)
         
         scheduler.start()
-        XCTAssertEqual(nextScene.events, [.next(10, Scene.searchCategory.rawValue)])
+        XCTAssertEqual(nextScene.events, [.next(10, 3)]) //SearchCategory tem rawValue 3
     }
     
     func test_reload_with_empty() {
         let factsReloadFake = scheduler.createObserver([FactsTableViewCellType].self)
         viewModel.output
             .facts
-            .asDriver(onErrorJustReturn: [.empty])
+            .asDriver(onErrorJustReturn: [.empty(viewData: EmptyFactViewData())])
             .drive(factsReloadFake)
             .disposed(by: disposedBag)
         

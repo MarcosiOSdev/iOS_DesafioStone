@@ -21,16 +21,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="474" height="127"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="127" id="Znx-xn-ecu"/>
+                            <constraint firstAttribute="height" constant="127" id="bcC-Um-3E2"/>
+                            <constraint firstAttribute="width" priority="250" constant="304" id="uOx-c1-nF8"/>
                         </constraints>
                     </view>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="AcM-O4-TT2" secondAttribute="bottom" id="5Li-Xp-LTw"/>
-                <constraint firstAttribute="trailing" secondItem="AcM-O4-TT2" secondAttribute="trailing" id="MWk-29-Crj"/>
-                <constraint firstItem="AcM-O4-TT2" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="PS0-AU-2I2"/>
-                <constraint firstItem="AcM-O4-TT2" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="l8y-oz-s4j"/>
+                <constraint firstItem="AcM-O4-TT2" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="AX3-oF-ARM"/>
+                <constraint firstAttribute="trailing" secondItem="AcM-O4-TT2" secondAttribute="trailing" id="JSp-xU-n1Q"/>
+                <constraint firstAttribute="bottom" secondItem="AcM-O4-TT2" secondAttribute="bottom" id="XpT-5G-hc6"/>
+                <constraint firstItem="AcM-O4-TT2" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="gxM-Nw-zx7"/>
+                <constraint firstItem="AcM-O4-TT2" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="y3W-A3-lhJ"/>
+                <constraint firstItem="AcM-O4-TT2" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="zYh-dl-xXZ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="474" height="127"/>

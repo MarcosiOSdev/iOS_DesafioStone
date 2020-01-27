@@ -20,7 +20,6 @@ class LoadingFactCollectionViewCell: BaseFactCell {
     @IBOutlet weak var customContenView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
-//        self.loading()
     }
     
     override func layoutSubviews() {
@@ -29,17 +28,14 @@ class LoadingFactCollectionViewCell: BaseFactCell {
     }
     
     private func loading() {
-        
         let shimmer = FBShimmeringView(frame: self.customContenView.frame)
-        shimmer.contentView = customContenView
-        
+        shimmer.contentView = self.customContenView
+        self.addSubview(shimmer)
         shimmer.isShimmering = true
         shimmer.layer.cornerRadius = self.frame.height / 12
         shimmer.layer.borderWidth = 0.3
         shimmer.layer.borderColor = UIColor.gray.cgColor
         shimmer.layer.masksToBounds = true
-        
-        self.addSubview(shimmer)
     }
 
 }
