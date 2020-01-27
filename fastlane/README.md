@@ -26,6 +26,16 @@ Description of what the lane does
 fastlane ios install_cocoapods
 ```
 
+### ios install_slather
+```
+fastlane ios install_slather
+```
+
+### ios install_scan
+```
+fastlane ios install_scan
+```
+
 
 ----
 

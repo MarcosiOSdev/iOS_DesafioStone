@@ -14,6 +14,15 @@ class FactModel {
     var tag: String = ""
     var url: String = ""
     
+    init(id: String, title: String, tag: String, url: String) {
+        self.id = id
+        self.title = title
+        self.tag = tag
+        self.url = url
+    }
+    
+    init() {}
+    
     func setModel(by fact: FactResponse.Fact) {
         self.id = fact.id
         self.url = fact.url
@@ -25,12 +34,7 @@ class FactModel {
     }
     
     static var empty: FactModel {
-        let factModel = FactModel()
-        factModel.id = "0"
-        factModel.title = "Empty"
-        factModel.tag = "Doesnt have"
-        factModel.url = "http..."
-        return factModel
+        return FactModel(id: "0", title: "Empty", tag: "Doesnt have", url: "http...")
     }
     
 }

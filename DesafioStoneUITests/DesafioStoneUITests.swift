@@ -27,7 +27,7 @@ class DesafioStoneUITests: XCTestCase {
     }
 
     func testExample() {
-        
+        snapshot("0Launch")
     }
 
 }

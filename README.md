@@ -22,6 +22,25 @@ Attention : Cocoapods contém alguns bugs no build de um projeto com o
 Se esse error acima ocorrer, rode isso abaixo 😪 :
 
     pod install --repo-update
+    
+    
+//Install the Fastlane:
+
+    xcode-select --install
+    brew install fastlane
+
+//Install the Bundle: 
+    
+    sudo gem install bundler
+    
+//Install the Slather 
+
+    bundle
+
+
+
+
+slather setup path/to/project.xcodeproj
 
 ## Continuos Integration:
 
@@ -30,12 +49,12 @@ Se esse error acima ocorrer, rode isso abaixo 😪 :
 Contém um pipeline em Fastlane, o Fastlane para esse desafio foi utilizado na versão  2.140.0 ( fastlane -v )
 Para utiliza-lo é necessário instala-lo, mas para instalar tem que ter o xcode-select instalado : 
 
-    xcode-select --install
-    brew install fastlane
-        
     
+        
+Run o pipeline :
 
-
+    fastlane install
+        
 
 ## Architecture:
 

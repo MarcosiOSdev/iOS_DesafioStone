@@ -15,7 +15,8 @@ class AppCoordinator: CoordinatorType {
     fileprivate weak var window: UIWindow?
     fileprivate var currentViewController: UIViewController!
     fileprivate var currentNavigation: UINavigationController!
-    fileprivate var scene: Scene!
+    fileprivate var listScene: [Scene] = []
+    
     init(window: UIWindow) {
         self.window = window
     }
@@ -38,7 +39,8 @@ class AppCoordinator: CoordinatorType {
     
     @discardableResult
     func transition(to scene: Scene, type: SceneTransitionType) -> Completable {
-        self.scene = scene
+        self.listScene.append(scene)
+        
         let subject = PublishSubject<Void>()
         let viewController = scene.dependencyInjection(coordinator: self)
         switch type {
@@ -80,7 +82,7 @@ class AppCoordinator: CoordinatorType {
     
     func pop(animated: Bool) -> Completable {
         let subject = PublishSubject<Void>()
-        
+        self.listScene.removeLast()
         if let presenter = currentViewController.presentingViewController {
             currentViewController.dismiss(animated: animated) {
                 self.currentViewController = AppCoordinator.actualViewController(for: presenter)
@@ -115,6 +117,9 @@ class AppCoordinator: CoordinatorType {
     }
     
     func currentScene() -> Scene {
-        return self.scene
+        guard let scene = self.listScene.last else {
+            return .none
+        }
+        return scene
     }
 }

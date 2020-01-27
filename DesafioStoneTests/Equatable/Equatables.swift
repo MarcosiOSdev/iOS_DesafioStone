@@ -36,3 +36,11 @@ extension Scene: Equatable {
         }
     }
 }
+
+extension CategoryModel: Equatable {
+    public static func == (lhs: CategoryModel, rhs: CategoryModel) -> Bool {
+        return lhs.uid == rhs.uid && lhs.value == rhs.value
+    }
+    
+    
+}

@@ -17,9 +17,23 @@ class CoordinatorStub: CoordinatorType {
     var completionOk = PublishRelay<Void>()
     var currentSceneObservable = PublishSubject<Int>()
     let disposedBag = DisposeBag()
+    var scenes: [Scene] = []
+    
+    init(currentScene: Scene) {
         
+        switch currentScene {
+        case .facts:
+            scenes = [.facts]
+        case .searchCategory(let completion):
+            scenes = [.facts, .searchCategory(completion: completion)]
+        default:
+            scenes = []
+        }
+    }
+    
     func transition(to scene: Scene, type: SceneTransitionType) -> Completable {
         currentSceneObservable.onNext(scene.rawValue)
+        scenes.append(scene)
         switch scene {
         case .sharedLink(_, _, let completion):
             completionOk.asObservable()
@@ -42,12 +56,17 @@ class CoordinatorStub: CoordinatorType {
 
 extension CoordinatorStub {
     func currentScene() -> Scene {
-        return .none
+        return scenes.last!
     }
     
     func pop(animated: Bool) -> Completable {
+        
         let finish = PublishSubject<Void>()
         finish.onCompleted()
+        
+        if !scenes.isEmpty {
+            self.scenes.removeLast()
+        }
         return finish.asObservable()
             .take(1)
             .ignoreElements()

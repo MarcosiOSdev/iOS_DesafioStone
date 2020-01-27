@@ -21,13 +21,38 @@ platform :ios do
   
   
   lane :install do
-    desc("Run Build and Tests")
-    scan()    
-    match(type: "ad-hoc", readonly: true)
+    
+    #cocoapods()
+    
+    desc("Rodando os testes unitários")
+    install_scan
+    #run_tests(scheme: "DesafioStone")
+
+    desc("Cobertura de Teste")
+    slather()
+
+
+    desc("Rodando os testes de tela")
+    capture_screenshots()
+
+
   end
 
   lane :install_cocoapods do 
+    desc("Instalando os Pods")
     cocoapods()
+  end 
+
+  lane :install_slather do 
+    desc("Cobertura de Teste")
+    slather()
+  end
+
+  lane :install_scan do 
+    scan(workspace: "DesafioStone.xcworkspace", 
+    device: "iPhone 6s", 
+    scheme: "DesafioStone", 
+    code_coverage: true)
   end 
 
 end

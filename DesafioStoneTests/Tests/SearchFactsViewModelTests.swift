@@ -20,15 +20,18 @@ class SearchFactsViewModelTests: XCTestCase {
     var viewModel: SearchFactsViewModel!
     var scheduler: TestScheduler!
     var disposedBag = DisposeBag()
+    var coordinatorStub: CoordinatorStub!
+    
     
     override func setUp() {
-        
-        viewModel = SearchFactsViewModel(coordinator: CoordinatorStub(),
+        coordinatorStub = CoordinatorStub(currentScene: .searchCategory(completion: nil))        
+        viewModel = SearchFactsViewModel(coordinator: coordinatorStub,
                                          lastSearchCoreData: LastSearchCoreData())
         scheduler = TestScheduler(initialClock: 0)
     }
     
     override func tearDown() {
+        coordinatorStub = nil
         viewModel = nil
     }
     
@@ -44,6 +47,8 @@ class SearchFactsViewModelTests: XCTestCase {
     
     func test_tap_suggestion_value() {
         let suggestionValueFake = scheduler.createObserver([String].self)
+        let completionFake = PublishSubject<CategoryModel>()
+        
         viewModel.output
             .lastSearch
             .asObservable()
@@ -51,19 +56,31 @@ class SearchFactsViewModelTests: XCTestCase {
             .disposed(by: disposedBag)
         
         scheduler.createColdObservable([
-            .next(10, "GAMES"),
-            .next(20, "SPORT")
+            .next(10, "GAMES")
             ])
             .bind(to: viewModel.input.searchText)
             .disposed(by: disposedBag)
+                
+        viewModel.completion = completionFake.asObserver()
         
+        let expect = expectation(description: #function)
+        var selected = ""
+        completionFake.asObservable().subscribe(onNext: { element in
+            expect.fulfill()
+            selected = element.value
+        }).disposed(by: self.disposedBag)
+                        
         scheduler.start()
         
-        XCTAssertEqual(suggestionValueFake.events, [
-            .next(0, []),
-            .next(10, ["GAMES"]),
-            .next(20, ["GAMES", "SPORT"])
-            ])
+        //Não armazena valor no lastSearch
+        XCTAssertEqual(suggestionValueFake.events, [ .next(0, []) ])
+        
+        waitForExpectations(timeout: 3.0) { error in
+            if error != nil {
+                XCTFail()
+            }
+            XCTAssertEqual("GAMES", selected)
+        }
     }
     
 }
