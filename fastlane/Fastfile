@@ -18,8 +18,6 @@ default_platform(:ios)
 platform :ios do
   desc "Description of what the lane does"
   
-  
-  
   lane :install do
     
     #cocoapods()
@@ -34,8 +32,6 @@ platform :ios do
 
     desc("Rodando os testes de tela")
     capture_screenshots()
-
-
   end
 
   lane :install_cocoapods do 
@@ -45,12 +41,17 @@ platform :ios do
 
   lane :install_slather do 
     desc("Cobertura de Teste")
-    slather()
+    slather(build_directory: "output_covarage",
+    input_format: "bah",
+    html: true,
+    show: true,
+    scheme: "DesafioStone",
+    proj: "DesafioStone.xcworkspace")
   end
 
   lane :install_scan do 
     scan(workspace: "DesafioStone.xcworkspace", 
-    device: "iPhone 6s", 
+    device: "iPhone 8", 
     scheme: "DesafioStone", 
     code_coverage: true)
   end 
