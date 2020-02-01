@@ -26,8 +26,35 @@ class DesafioStoneUITests: XCTestCase {
         app = nil
     }
 
-    func testExample() {
-        snapshot("0Launch")
+    func testNavigation() {
+        
+        snapshot("init_view")
+        XCTAssertTrue(true)
+//        let chuckNorrisFactsNavigationBar = app.navigationBars["Chuck Norris Facts"]
+//        chuckNorrisFactsNavigationBar.buttons["Search"].tap()
+//
+//        snapshot("search_view")
+//
+//        let elementsQuery = app.scrollViews.otherElements
+//        elementsQuery.collectionViews.staticTexts["GAMES"].tap()
+//
+//        snapshot("tap_in_suggestion_element")
+//
+//
+//        chuckNorrisFactsNavigationBar.buttons["Search"].tap()
+//        elementsQuery.textFields["Search"].tap()
+//        elementsQuery.textFields["Search"].typeText("Test")
+//        app.buttons["Return"].tap()
+//
+//        snapshot("search_test")
+//
+//        chuckNorrisFactsNavigationBar.buttons["Chuck Norris Facts"].tap()
+//        app.collectionViews.cells.otherElements.containing(.staticText, identifier:"Horses have long faces because they keep challenging Chuck Norris to \"whos got the biggest dick\" contests.").buttons["icon shared"].tap()
+//
+//
+//        snapshot("sharing_some_thing")
+//
+//        app.navigationBars["UIActivityContentView"].buttons["Close"].tap()
+//        snapshot("close_activity_content")
     }
-
 }

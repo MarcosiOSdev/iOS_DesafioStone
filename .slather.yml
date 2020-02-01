@@ -1,9 +1,0 @@
-# .slather.yml
-
-coverage_service: cobertura_xml
-xcodeproj: path/to/project.xcodeproj
-scheme: DesafioStone
-source_directory: path/to/sources/to/include
-output_directory: path/to/xml_report
-ignore:
-  - Pods/*

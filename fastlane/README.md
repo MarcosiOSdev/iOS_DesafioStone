@@ -16,24 +16,24 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
-### ios install
+### ios pipeline
 ```
-fastlane ios install
+fastlane ios pipeline
 ```
 Description of what the lane does
-### ios install_cocoapods
+### ios run_slather
 ```
-fastlane ios install_cocoapods
-```
-
-### ios install_slather
-```
-fastlane ios install_slather
+fastlane ios run_slather
 ```
 
-### ios install_scan
+### ios run_scan
 ```
-fastlane ios install_scan
+fastlane ios run_scan
+```
+
+### ios run_print
+```
+fastlane ios run_print
 ```
 
 

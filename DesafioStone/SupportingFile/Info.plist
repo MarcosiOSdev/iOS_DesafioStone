@@ -81,5 +81,8 @@
 			</dict>
 		</dict>
 	</dict>
+    <!-- Remove Dark Mode -->
+    <key>UIUserInterfaceStyle</key>
+    <string>Light</string>
 </dict>
 </plist>

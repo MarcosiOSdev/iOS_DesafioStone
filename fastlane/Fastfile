@@ -1,59 +1,62 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
 # For a list of all available actions, check out
-#
 #     https://docs.fastlane.tools/actions
 #
 # For a list of all available plugins, check out
-#
 #     https://docs.fastlane.tools/plugins/available-plugins
-#
 
 # Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
+update_fastlane
 
 default_platform(:ios)
 
 platform :ios do
   desc "Description of what the lane does"
   
-  lane :install do
-    
-    #cocoapods()
-    
+  lane :pipeline do
+            
     desc("Rodando os testes unitários")
-    install_scan
-    #run_tests(scheme: "DesafioStone")
+    run_scan    
 
     desc("Cobertura de Teste")
-    slather()
-
+    run_slather
 
     desc("Rodando os testes de tela")
-    capture_screenshots()
+    run_print
+ 
   end
 
-  lane :install_cocoapods do 
-    desc("Instalando os Pods")
-    cocoapods()
-  end 
-
-  lane :install_slather do 
+  lane :run_slather do 
     desc("Cobertura de Teste")
-    slather(build_directory: "output_covarage",
-    input_format: "bah",
-    html: true,
-    show: true,
-    scheme: "DesafioStone",
-    proj: "DesafioStone.xcworkspace")
+    slather(
+      html: true,
+      #show: true,
+      scheme: "DesafioStone",
+      workspace: "DesafioStone.xcworkspace",
+      proj: "DesafioStone.xcodeproj",
+      output_directory: "fastlane/test_output/slather",
+      ignore: [
+        "Pods/*",
+        "DesafioStone/SupportingFile/*",
+        "DesafioStone/App/API/*",
+        "DesafioStone/App/Coordinator/*",
+        "DesafioStone/App/CoreData/*",
+        "DesafioStone/App/Model/*",
+        "DesafioStone/App/Helpers/*",
+      ])
+
   end
 
-  lane :install_scan do 
+  lane :run_scan do 
     scan(workspace: "DesafioStone.xcworkspace", 
     device: "iPhone 8", 
     scheme: "DesafioStone", 
-    code_coverage: true)
+    clean: true,
+    code_coverage: true,
+    skip_testing: ["Pods/*"])
   end 
+
+  lane :run_print do 
+    capture_screenshots()
+  end
 
 end

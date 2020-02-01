@@ -35,25 +35,23 @@ Se esse error acima ocorrer, rode isso abaixo 😪 :
     
 //Install the Slather 
 
-    bundle
+    gem install slather --user-install
 
+    bundler
 
+    bundle info slather
 
 
 slather setup path/to/project.xcodeproj
 
 ## Continuos Integration:
 
-
-
 Contém um pipeline em Fastlane, o Fastlane para esse desafio foi utilizado na versão  2.140.0 ( fastlane -v )
 Para utiliza-lo é necessário instala-lo, mas para instalar tem que ter o xcode-select instalado : 
-
-    
         
 Run o pipeline :
 
-    fastlane install
+    fastlane pipeline
         
 
 ## Architecture:
