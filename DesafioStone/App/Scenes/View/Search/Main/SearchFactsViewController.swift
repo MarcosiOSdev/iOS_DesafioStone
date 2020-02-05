@@ -210,6 +210,10 @@ extension SearchFactsViewController {
             .drive(self.suggestionView.headerLabel.rx.text)
             .disposed(by: self.disposeBag)
         
+        self.viewModel.output.title
+            .drive(self.rx.title)
+            .disposed(by: self.disposeBag)
+        
         self.viewModel.output
             .placeholderSearch
             .asObservable()

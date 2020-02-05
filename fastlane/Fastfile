@@ -40,8 +40,11 @@ platform :ios do
         "DesafioStone/App/API/*",
         "DesafioStone/App/Coordinator/*",
         "DesafioStone/App/CoreData/*",
-        "DesafioStone/App/Model/*",
+        "DesafioStone/App/Model/*",        
         "DesafioStone/App/Helpers/*",
+        "DesafioStone/App/Scene/View/*",
+        "DesafioStone/App/Scene/Launch/*",
+        "DesafioStone/App/WatchOSConnectivity/*",
       ])
 
   end
@@ -56,7 +59,7 @@ platform :ios do
   end 
 
   lane :run_print do 
-    capture_screenshots()
+      ()
   end
 
 end

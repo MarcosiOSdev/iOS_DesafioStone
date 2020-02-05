@@ -79,6 +79,20 @@
 		D8D05D7323DA9EE300B605CD /* LoadingFactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8D05D7123DA9EE300B605CD /* LoadingFactCollectionViewCell.xib */; };
 		D8D1155E23D3F4AD009EC3B6 /* PastSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D1155D23D3F4AD009EC3B6 /* PastSearchTableViewCell.swift */; };
 		D8D388B023CFCC18005E156A /* PastSearchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D388AF23CFCC18005E156A /* PastSearchesView.swift */; };
+		D8D94A1223EA33E00055AD2A /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8D94A1023EA33E00055AD2A /* Interface.storyboard */; };
+		D8D94A1423EA33E60055AD2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8D94A1323EA33E60055AD2A /* Assets.xcassets */; };
+		D8D94A1B23EA33E60055AD2A /* br.com.mfelipesp.DesafioStoneWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D8D94A1A23EA33E60055AD2A /* br.com.mfelipesp.DesafioStoneWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D8D94A2223EA33E60055AD2A /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D94A2123EA33E60055AD2A /* ExtensionDelegate.swift */; };
+		D8D94A2423EA33E60055AD2A /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D94A2323EA33E60055AD2A /* NotificationController.swift */; };
+		D8D94A2623EA33E60055AD2A /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D94A2523EA33E60055AD2A /* ComplicationController.swift */; };
+		D8D94A2823EA33E80055AD2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8D94A2723EA33E80055AD2A /* Assets.xcassets */; };
+		D8D94A2D23EA33E80055AD2A /* br.com.mfelipesp.DesafioStoneWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D8D94A0E23EA33E00055AD2A /* br.com.mfelipesp.DesafioStoneWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D8D94A4423EA46100055AD2A /* MainInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D94A4323EA46100055AD2A /* MainInterfaceController.swift */; };
+		D8D94A4523EA46C90055AD2A /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A63D4322EB0AD1002A9186 /* CategoryModel.swift */; };
+		D8D94A4623EA46C90055AD2A /* FactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A63D4522EB9E88002A9186 /* FactModel.swift */; };
+		D8D94A4923EA4A7D0055AD2A /* FactRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D94A4823EA4A7D0055AD2A /* FactRowController.swift */; };
+		D8D94A4D23EA5DC30055AD2A /* WatchOSConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D94A4C23EA5DC30055AD2A /* WatchOSConnectivity.swift */; };
+		D8D94A5023EA63F60055AD2A /* SearchRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D94A4F23EA63F60055AD2A /* SearchRowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,7 +110,46 @@
 			remoteGlobalIDString = 2899C49D22E928D100D6191B;
 			remoteInfo = DesafioStone;
 		};
+		D8D94A1C23EA33E60055AD2A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2899C49622E928D100D6191B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D8D94A1923EA33E60055AD2A;
+			remoteInfo = "br.com.mfelipesp.DesafioStoneWatch Extension";
+		};
+		D8D94A2B23EA33E80055AD2A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2899C49622E928D100D6191B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D8D94A0D23EA33E00055AD2A;
+			remoteInfo = br.com.mfelipesp.DesafioStoneWatch;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D8D94A2E23EA33E80055AD2A /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				D8D94A2D23EA33E80055AD2A /* br.com.mfelipesp.DesafioStoneWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8D94A3223EA33E80055AD2A /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D8D94A1B23EA33E60055AD2A /* br.com.mfelipesp.DesafioStoneWatch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0548C102B9250839FE7DE9B5 /* Pods_DesafioStoneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesafioStoneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,6 +244,21 @@
 		D8D05D7123DA9EE300B605CD /* LoadingFactCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingFactCollectionViewCell.xib; sourceTree = "<group>"; };
 		D8D1155D23D3F4AD009EC3B6 /* PastSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastSearchTableViewCell.swift; sourceTree = "<group>"; };
 		D8D388AF23CFCC18005E156A /* PastSearchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastSearchesView.swift; sourceTree = "<group>"; };
+		D8D94A0E23EA33E00055AD2A /* br.com.mfelipesp.DesafioStoneWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = br.com.mfelipesp.DesafioStoneWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8D94A1123EA33E00055AD2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		D8D94A1323EA33E60055AD2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D8D94A1523EA33E60055AD2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8D94A1A23EA33E60055AD2A /* br.com.mfelipesp.DesafioStoneWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "br.com.mfelipesp.DesafioStoneWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8D94A2123EA33E60055AD2A /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		D8D94A2323EA33E60055AD2A /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		D8D94A2523EA33E60055AD2A /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		D8D94A2723EA33E80055AD2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D8D94A2923EA33E80055AD2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8D94A2A23EA33E80055AD2A /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		D8D94A4323EA46100055AD2A /* MainInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInterfaceController.swift; sourceTree = "<group>"; };
+		D8D94A4823EA4A7D0055AD2A /* FactRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactRowController.swift; sourceTree = "<group>"; };
+		D8D94A4C23EA5DC30055AD2A /* WatchOSConnectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchOSConnectivity.swift; sourceTree = "<group>"; };
+		D8D94A4F23EA63F60055AD2A /* SearchRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRowController.swift; sourceTree = "<group>"; };
 		D8DA49F8236B633F0061650C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FD8C7AFABD5A144FD5A5EFF2 /* Pods-DesafioStoneUITests.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioStoneUITests.staging.xcconfig"; path = "Target Support Files/Pods-DesafioStoneUITests/Pods-DesafioStoneUITests.staging.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -218,6 +286,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				68AAA0508483B85151454553 /* Pods_DesafioStoneUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B581279C0B9AE30FD8D34547 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8D94A1723EA33E60055AD2A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +372,8 @@
 				2899C4A022E928D100D6191B /* DesafioStone */,
 				2899C4B522E928D600D6191B /* DesafioStoneTests */,
 				2899C4C022E928D700D6191B /* DesafioStoneUITests */,
+				D8D94A0F23EA33E00055AD2A /* br.com.mfelipesp.DesafioStoneWatch */,
+				D8D94A1E23EA33E60055AD2A /* br.com.mfelipesp.DesafioStoneWatch Extension */,
 				2899C49F22E928D100D6191B /* Products */,
 				9E247355B904C706245516DE /* Pods */,
 				9A1536972E006B85432FB449 /* Frameworks */,
@@ -302,6 +386,8 @@
 				2899C49E22E928D100D6191B /* DesafioStone.app */,
 				2899C4B222E928D600D6191B /* DesafioStoneTests.xctest */,
 				2899C4BD22E928D700D6191B /* DesafioStoneUITests.xctest */,
+				D8D94A0E23EA33E00055AD2A /* br.com.mfelipesp.DesafioStoneWatch.app */,
+				D8D94A1A23EA33E60055AD2A /* br.com.mfelipesp.DesafioStoneWatch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -361,6 +447,7 @@
 				2899C4D922E92C5D00D6191B /* Model */,
 				2899C4D322E92B3E00D6191B /* Coordinator */,
 				D8C5E84623D8C6CA00F837E4 /* CoreData */,
+				D8D94A4B23EA5DA80055AD2A /* WatchOSConnectivity */,
 				2899C4D122E92B1700D6191B /* Scenes */,
 				2899C4A122E928D100D6191B /* AppDelegate.swift */,
 			);
@@ -370,21 +457,11 @@
 		2899C4D122E92B1700D6191B /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				D8D94A3923EA37680055AD2A /* View */,
+				D8D94A3823EA37600055AD2A /* ViewModel */,
 				D81BBA0823A01BD1001D45A6 /* Launch */,
-				D81BBA0523A01B60001D45A6 /* SearchScene */,
-				2899C4D222E92B2D00D6191B /* FactScene */,
-				287F370123922E9E00D8FC20 /* BindingViewModelType.swift */,
 			);
 			path = Scenes;
-			sourceTree = "<group>";
-		};
-		2899C4D222E92B2D00D6191B /* FactScene */ = {
-			isa = PBXGroup;
-			children = (
-				D8D1155723D3F248009EC3B6 /* ViewModel */,
-				D8D1155623D3F21D009EC3B6 /* View */,
-			);
-			path = FactScene;
 			sourceTree = "<group>";
 		};
 		2899C4D322E92B3E00D6191B /* Coordinator */ = {
@@ -484,15 +561,6 @@
 				FD8C7AFABD5A144FD5A5EFF2 /* Pods-DesafioStoneUITests.staging.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		D81BBA0523A01B60001D45A6 /* SearchScene */ = {
-			isa = PBXGroup;
-			children = (
-				D8D1155A23D3F419009EC3B6 /* ViewModel */,
-				D8D1155923D3F414009EC3B6 /* View */,
-			);
-			path = SearchScene;
 			sourceTree = "<group>";
 		};
 		D81BBA0723A01BA5001D45A6 /* Main */ = {
@@ -607,7 +675,76 @@
 			path = LoadingCell;
 			sourceTree = "<group>";
 		};
-		D8D1155623D3F21D009EC3B6 /* View */ = {
+		D8D1155C23D3F474009EC3B6 /* PastSearchCell */ = {
+			isa = PBXGroup;
+			children = (
+				D8D1155D23D3F4AD009EC3B6 /* PastSearchTableViewCell.swift */,
+			);
+			path = PastSearchCell;
+			sourceTree = "<group>";
+		};
+		D8D94A0F23EA33E00055AD2A /* br.com.mfelipesp.DesafioStoneWatch */ = {
+			isa = PBXGroup;
+			children = (
+				D8D94A1023EA33E00055AD2A /* Interface.storyboard */,
+				D8D94A1323EA33E60055AD2A /* Assets.xcassets */,
+				D8D94A1523EA33E60055AD2A /* Info.plist */,
+			);
+			path = br.com.mfelipesp.DesafioStoneWatch;
+			sourceTree = "<group>";
+		};
+		D8D94A1E23EA33E60055AD2A /* br.com.mfelipesp.DesafioStoneWatch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D8D94A3E23EA3D8E0055AD2A /* FactView */,
+				D8D94A2123EA33E60055AD2A /* ExtensionDelegate.swift */,
+				D8D94A2323EA33E60055AD2A /* NotificationController.swift */,
+				D8D94A2523EA33E60055AD2A /* ComplicationController.swift */,
+				D8D94A2723EA33E80055AD2A /* Assets.xcassets */,
+				D8D94A2923EA33E80055AD2A /* Info.plist */,
+				D8D94A2A23EA33E80055AD2A /* PushNotificationPayload.apns */,
+			);
+			path = "br.com.mfelipesp.DesafioStoneWatch Extension";
+			sourceTree = "<group>";
+		};
+		D8D94A3823EA37600055AD2A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				287F370123922E9E00D8FC20 /* BindingViewModelType.swift */,
+				D8D94A3D23EA37CD0055AD2A /* Fact */,
+				D8D94A3A23EA37810055AD2A /* Search */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D8D94A3923EA37680055AD2A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D8D94A3C23EA37B90055AD2A /* Fact */,
+				D8D94A3B23EA37A30055AD2A /* Search */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D8D94A3A23EA37810055AD2A /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				D823676023B0EB7400A31F5C /* SearchFactsViewModel.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		D8D94A3B23EA37A30055AD2A /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				D8F1D7B723C7E3CF00430B7B /* Main */,
+				D8F1D7B623C7E3A800430B7B /* PastSearchesView */,
+				D87B2D3123B15DD900685E81 /* SuggestionView */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		D8D94A3C23EA37B90055AD2A /* Fact */ = {
 			isa = PBXGroup;
 			children = (
 				D81BBA0723A01BA5001D45A6 /* Main */,
@@ -617,57 +754,57 @@
 				D8D05D6F23DA9E9C00B605CD /* LoadingCell */,
 				D81EE68023904D510000A214 /* ErrorFactCell */,
 			);
-			path = View;
+			path = Fact;
 			sourceTree = "<group>";
 		};
-		D8D1155723D3F248009EC3B6 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				D8D1155823D3F252009EC3B6 /* Main */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		D8D1155823D3F252009EC3B6 /* Main */ = {
+		D8D94A3D23EA37CD0055AD2A /* Fact */ = {
 			isa = PBXGroup;
 			children = (
 				2899C4FF22E93B9900D6191B /* FactsViewModel.swift */,
 			);
-			path = Main;
+			path = Fact;
 			sourceTree = "<group>";
 		};
-		D8D1155923D3F414009EC3B6 /* View */ = {
+		D8D94A3E23EA3D8E0055AD2A /* FactView */ = {
 			isa = PBXGroup;
 			children = (
-				D8F1D7B723C7E3CF00430B7B /* Main */,
-				D8F1D7B623C7E3A800430B7B /* PastSearchesView */,
-				D87B2D3123B15DD900685E81 /* SuggestionView */,
+				D8D94A4E23EA63CA0055AD2A /* SearchRow */,
+				D8D94A4723EA4A630055AD2A /* FactRow */,
+				D8D94A3F23EA3D9F0055AD2A /* Main */,
 			);
-			path = View;
+			path = FactView;
 			sourceTree = "<group>";
 		};
-		D8D1155A23D3F419009EC3B6 /* ViewModel */ = {
+		D8D94A3F23EA3D9F0055AD2A /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				D8D1155B23D3F422009EC3B6 /* Main */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		D8D1155B23D3F422009EC3B6 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				D823676023B0EB7400A31F5C /* SearchFactsViewModel.swift */,
+				D8D94A4323EA46100055AD2A /* MainInterfaceController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
 		};
-		D8D1155C23D3F474009EC3B6 /* PastSearchCell */ = {
+		D8D94A4723EA4A630055AD2A /* FactRow */ = {
 			isa = PBXGroup;
 			children = (
-				D8D1155D23D3F4AD009EC3B6 /* PastSearchTableViewCell.swift */,
+				D8D94A4823EA4A7D0055AD2A /* FactRowController.swift */,
 			);
-			path = PastSearchCell;
+			path = FactRow;
+			sourceTree = "<group>";
+		};
+		D8D94A4B23EA5DA80055AD2A /* WatchOSConnectivity */ = {
+			isa = PBXGroup;
+			children = (
+				D8D94A4C23EA5DC30055AD2A /* WatchOSConnectivity.swift */,
+			);
+			path = WatchOSConnectivity;
+			sourceTree = "<group>";
+		};
+		D8D94A4E23EA63CA0055AD2A /* SearchRow */ = {
+			isa = PBXGroup;
+			children = (
+				D8D94A4F23EA63F60055AD2A /* SearchRowController.swift */,
+			);
+			path = SearchRow;
 			sourceTree = "<group>";
 		};
 		D8F1D7B623C7E3A800430B7B /* PastSearchesView */ = {
@@ -699,10 +836,12 @@
 				2899C49B22E928D100D6191B /* Frameworks */,
 				2899C49C22E928D100D6191B /* Resources */,
 				E3A34388ED278429EBF61DAF /* [CP] Embed Pods Frameworks */,
+				D8D94A2E23EA33E80055AD2A /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D8D94A2C23EA33E80055AD2A /* PBXTargetDependency */,
 			);
 			name = DesafioStone;
 			productName = DesafioStone;
@@ -748,13 +887,48 @@
 			productReference = 2899C4BD22E928D700D6191B /* DesafioStoneUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		D8D94A0D23EA33E00055AD2A /* br.com.mfelipesp.DesafioStoneWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8D94A3723EA33E80055AD2A /* Build configuration list for PBXNativeTarget "br.com.mfelipesp.DesafioStoneWatch" */;
+			buildPhases = (
+				D8D94A0C23EA33E00055AD2A /* Resources */,
+				D8D94A3223EA33E80055AD2A /* Embed App Extensions */,
+				B581279C0B9AE30FD8D34547 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D8D94A1D23EA33E60055AD2A /* PBXTargetDependency */,
+			);
+			name = br.com.mfelipesp.DesafioStoneWatch;
+			productName = br.com.mfelipesp.DesafioStoneWatch;
+			productReference = D8D94A0E23EA33E00055AD2A /* br.com.mfelipesp.DesafioStoneWatch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		D8D94A1923EA33E60055AD2A /* br.com.mfelipesp.DesafioStoneWatch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8D94A3623EA33E80055AD2A /* Build configuration list for PBXNativeTarget "br.com.mfelipesp.DesafioStoneWatch Extension" */;
+			buildPhases = (
+				D8D94A1623EA33E60055AD2A /* Sources */,
+				D8D94A1723EA33E60055AD2A /* Frameworks */,
+				D8D94A1823EA33E60055AD2A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "br.com.mfelipesp.DesafioStoneWatch Extension";
+			productName = "br.com.mfelipesp.DesafioStoneWatch Extension";
+			productReference = D8D94A1A23EA33E60055AD2A /* br.com.mfelipesp.DesafioStoneWatch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		2899C49622E928D100D6191B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1020;
+				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Marcos Felipe Souza";
 				TargetAttributes = {
@@ -769,6 +943,12 @@
 					2899C4BC22E928D700D6191B = {
 						CreatedOnToolsVersion = 10.2.1;
 						TestTargetID = 2899C49D22E928D100D6191B;
+					};
+					D8D94A0D23EA33E00055AD2A = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					D8D94A1923EA33E60055AD2A = {
+						CreatedOnToolsVersion = 11.3.1;
 					};
 				};
 			};
@@ -789,6 +969,8 @@
 				2899C49D22E928D100D6191B /* DesafioStone */,
 				2899C4B122E928D600D6191B /* DesafioStoneTests */,
 				2899C4BC22E928D700D6191B /* DesafioStoneUITests */,
+				D8D94A0D23EA33E00055AD2A /* br.com.mfelipesp.DesafioStoneWatch */,
+				D8D94A1923EA33E60055AD2A /* br.com.mfelipesp.DesafioStoneWatch Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -835,6 +1017,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8D94A0C23EA33E00055AD2A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8D94A1423EA33E60055AD2A /* Assets.xcassets in Resources */,
+				D8D94A1223EA33E00055AD2A /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8D94A1823EA33E60055AD2A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8D94A2823EA33E80055AD2A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -978,6 +1177,7 @@
 				D8C5E84B23D8C98F00F837E4 /* LastSearchCoreDataType.swift in Sources */,
 				D87B2D3023B15AFB00685E81 /* UIColor+Hex.swift in Sources */,
 				289CEB6722EAAC6300112AE0 /* URLSession+Rx.swift in Sources */,
+				D8D94A4D23EA5DC30055AD2A /* WatchOSConnectivity.swift in Sources */,
 				287F370223922E9E00D8FC20 /* BindingViewModelType.swift in Sources */,
 				2899C50022E93B9900D6191B /* FactsViewModel.swift in Sources */,
 				2899C4D722E92BEA00D6191B /* SceneTransitionType.swift in Sources */,
@@ -1010,6 +1210,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D8D94A1623EA33E60055AD2A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8D94A2423EA33E60055AD2A /* NotificationController.swift in Sources */,
+				D8D94A2623EA33E60055AD2A /* ComplicationController.swift in Sources */,
+				D8D94A4423EA46100055AD2A /* MainInterfaceController.swift in Sources */,
+				D8D94A4623EA46C90055AD2A /* FactModel.swift in Sources */,
+				D8D94A4923EA4A7D0055AD2A /* FactRowController.swift in Sources */,
+				D8D94A4523EA46C90055AD2A /* CategoryModel.swift in Sources */,
+				D8D94A5023EA63F60055AD2A /* SearchRowController.swift in Sources */,
+				D8D94A2223EA33E60055AD2A /* ExtensionDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1022,6 +1237,16 @@
 			isa = PBXTargetDependency;
 			target = 2899C49D22E928D100D6191B /* DesafioStone */;
 			targetProxy = 2899C4BE22E928D700D6191B /* PBXContainerItemProxy */;
+		};
+		D8D94A1D23EA33E60055AD2A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D8D94A1923EA33E60055AD2A /* br.com.mfelipesp.DesafioStoneWatch Extension */;
+			targetProxy = D8D94A1C23EA33E60055AD2A /* PBXContainerItemProxy */;
+		};
+		D8D94A2C23EA33E80055AD2A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D8D94A0D23EA33E00055AD2A /* br.com.mfelipesp.DesafioStoneWatch */;
+			targetProxy = D8D94A2B23EA33E80055AD2A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1061,6 +1286,14 @@
 				2899C4F322E9328E00D6191B /* pt-BR */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D8D94A1023EA33E00055AD2A /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D8D94A1123EA33E00055AD2A /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1452,6 +1685,135 @@
 			};
 			name = Staging;
 		};
+		D8D94A2F23EA33E80055AD2A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V2686JM7D9;
+				IBSC_MODULE = br_com_mfelipesp_DesafioStoneWatch_Extension;
+				INFOPLIST_FILE = br.com.mfelipesp.DesafioStoneWatch/Info.plist;
+				IS_APP_VERSION = IS_APP_VERSION;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mfelipesp.DesafioStone.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Debug;
+		};
+		D8D94A3023EA33E80055AD2A /* Staging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V2686JM7D9;
+				IBSC_MODULE = br_com_mfelipesp_DesafioStoneWatch_Extension;
+				INFOPLIST_FILE = br.com.mfelipesp.DesafioStoneWatch/Info.plist;
+				IS_APP_VERSION = IS_APP_VERSION;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mfelipesp.DesafioStone.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Staging;
+		};
+		D8D94A3123EA33E80055AD2A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V2686JM7D9;
+				IBSC_MODULE = br_com_mfelipesp_DesafioStoneWatch_Extension;
+				INFOPLIST_FILE = br.com.mfelipesp.DesafioStoneWatch/Info.plist;
+				IS_APP_VERSION = IS_APP_VERSION;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mfelipesp.DesafioStone.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Release;
+		};
+		D8D94A3323EA33E80055AD2A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V2686JM7D9;
+				INFOPLIST_FILE = "br.com.mfelipesp.DesafioStoneWatch Extension/Info.plist";
+				IS_APP_VERSION = IS_APP_VERSION;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mfelipesp.DesafioStone.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Debug;
+		};
+		D8D94A3423EA33E80055AD2A /* Staging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V2686JM7D9;
+				INFOPLIST_FILE = "br.com.mfelipesp.DesafioStoneWatch Extension/Info.plist";
+				IS_APP_VERSION = IS_APP_VERSION;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mfelipesp.DesafioStone.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Staging;
+		};
+		D8D94A3523EA33E80055AD2A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V2686JM7D9;
+				INFOPLIST_FILE = "br.com.mfelipesp.DesafioStoneWatch Extension/Info.plist";
+				IS_APP_VERSION = IS_APP_VERSION;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mfelipesp.DesafioStone.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1491,6 +1853,26 @@
 				2899C4CD22E928D700D6191B /* Debug */,
 				2899C4E122E92D8D00D6191B /* Staging */,
 				2899C4CE22E928D700D6191B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8D94A3623EA33E80055AD2A /* Build configuration list for PBXNativeTarget "br.com.mfelipesp.DesafioStoneWatch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8D94A3323EA33E80055AD2A /* Debug */,
+				D8D94A3423EA33E80055AD2A /* Staging */,
+				D8D94A3523EA33E80055AD2A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8D94A3723EA33E80055AD2A /* Build configuration list for PBXNativeTarget "br.com.mfelipesp.DesafioStoneWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8D94A2F23EA33E80055AD2A /* Debug */,
+				D8D94A3023EA33E80055AD2A /* Staging */,
+				D8D94A3123EA33E80055AD2A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

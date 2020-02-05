@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="15705" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch44"/>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="15501"/>
+    </dependencies>
+    <scenes>
+        <!--Desafio Stone-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller title="Desafio Stone" animationDuration="3" hidesWhenLoading="NO" id="AgC-eL-Hgc" customClass="MainInterfaceController" customModule="br_com_mfelipesp_DesafioStoneWatch_Extension">
+                    <items>
+                        <table alignment="left" id="4m9-xS-vCc">
+                            <items>
+                                <tableRow identifier="SearchRow" id="ImK-9n-8AS" customClass="SearchRowController" customModule="br_com_mfelipesp_DesafioStoneWatch_Extension">
+                                    <group key="rootItem" width="1" height="35" alignment="left" spacing="2" id="D8N-xf-ccD">
+                                        <items>
+                                            <imageView width="25" height="25" alignment="left" verticalAlignment="center" image="magnifyingglass" catalog="system" id="vzN-Nj-4aM"/>
+                                            <label alignment="center" verticalAlignment="center" text="Pesquisar" id="dbp-Wn-LTg">
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.52695862676056338" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </label>
+                                        </items>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="0.536834286971831" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </group>
+                                </tableRow>
+                                <tableRow identifier="FactRow" id="gT2-82-ajE" customClass="FactRowController" customModule="br_com_mfelipesp_DesafioStoneWatch_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" spacing="6" id="lT0-nc-Nuj">
+                                        <items>
+                                            <separator height="1" heightAdjustment="-15" alignment="left" verticalAlignment="center" id="asy-uS-Wkw">
+                                                <color key="color" red="0.13385775690000001" green="0.63429743049999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </separator>
+                                            <group alignment="left" layout="vertical" spacing="0.0" id="QUx-c6-Flv">
+                                                <items>
+                                                    <group height="49" alignment="left" spacing="4" id="z7L-3O-Jci">
+                                                        <items>
+                                                            <imageView width="34" height="30" alignment="left" verticalAlignment="center" image="icn_chuck_norris" id="cYI-4L-30m"/>
+                                                            <label height="1" alignment="left" verticalAlignment="center" text="Categoria" textAlignment="left" id="Rjg-ea-0Zy">
+                                                                <color key="textColor" red="0.13385775690000001" green="0.63429743049999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                                            </label>
+                                                        </items>
+                                                    </group>
+                                                    <label alignment="left" textAlignment="left" numberOfLines="0" id="sFI-N2-MWr">
+                                                        <string key="text">klaskdlaskdlkasldklaskdlaksldkaslkdl;askdlaskasdkjaskdjkasjdkjaskjdkalsjdkjaskdjaskldjaklsjdkasjdkjasklddasdkajsdkljasdjaksljdkljsdklas</string>
+                                                        <color key="textColor" red="0.98030656579999997" green="0.98044699430000004" blue="0.98027580979999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                                    </label>
+                                                </items>
+                                            </group>
+                                        </items>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="0.53683428700000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="categoryLabel" destination="Rjg-ea-0Zy" id="O97-iK-J34"/>
+                                        <outlet property="descriptionLabel" destination="sFI-N2-MWr" id="mnk-pq-v0a"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="factTable" destination="4m9-xS-vCc" id="fTq-re-LfR"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="77" y="345"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" numberOfLines="0" id="IdU-wH-bcW"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
+                        <segue destination="4sK-HA-Art" kind="relationship" relationship="dynamicNotificationInterface" id="kXh-Jw-8B1"/>
+                        <segue destination="eXb-UN-Cd0" kind="relationship" relationship="dynamicInteractiveNotificationInterface" id="mpB-YA-K8N"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="97" y="643"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="ZPc-GJ-vnh">
+            <objects>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="br_com_mfelipesp_DesafioStoneWatch" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="468" y="643"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="Niz-AI-uX2">
+            <objects>
+                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="br_com_mfelipesp_DesafioStoneWatch" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="468" y="345"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icn_chuck_norris" width="100" height="100"/>
+        <image name="magnifyingglass" catalog="system" width="64" height="56"/>
+    </resources>
+    <color key="tintColor" red="0.13385775690000001" green="0.63429743049999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+</document>

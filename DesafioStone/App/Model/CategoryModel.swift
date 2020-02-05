@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RxDataSources
 
 class CategoryModel {
     var uid: Int = 0

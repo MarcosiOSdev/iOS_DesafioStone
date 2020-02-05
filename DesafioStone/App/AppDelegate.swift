@@ -12,9 +12,13 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var connectivityWatchOS: WatchOSConnectivity?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        self.connectivityWatchOS = WatchOSConnectivity.sharing
+        
         let appCoordinator = AppCoordinator(window: self.window!)
         appCoordinator.transition(to: Scene.facts, type: .root)
         
