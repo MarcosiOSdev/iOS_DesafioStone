@@ -34,5 +34,8 @@ class WatchOSConnectivity: NSObject, WCSessionDelegate {
         print("sessionDidBecomeInactive")
     }
     
+    func sendMessage(message: TypeMessageWatchOS) {
+        wcSession.sendMessage(message.message(), replyHandler: nil, errorHandler: message.error)
+    }
     
 }

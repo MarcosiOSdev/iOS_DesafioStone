@@ -112,9 +112,12 @@ class FactsViewModel: BindingViewModelType {
         }).disposed(by: self.disposedBag)
         
         self.featch(category: nil)
+        
+        self.facts.asObservable().subscribe(onNext: { facts in
+            let factsMessageWatchOS = FactsMessageWatchOS(facts: [FactModel.empty])
+            WatchOSConnectivity.sharing.sendMessage(message: factsMessageWatchOS)            
+        }).disposed(by: self.disposedBag)
     }
-    
-    
 }
 
 //MARK: - Aux Functions -

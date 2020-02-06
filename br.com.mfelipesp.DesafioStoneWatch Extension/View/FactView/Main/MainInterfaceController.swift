@@ -8,18 +8,20 @@
 
 import WatchKit
 import Foundation
-
+import WatchConnectivity
 
 class MainInterfaceController: WKInterfaceController {
 
     var facts = [FactModel]()
     var rowTypes = ["SearchRow"]
+    var wcSession : WCSession = WCSession.default
     
     @IBOutlet var factTable: WKInterfaceTable!
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-
+        
+        configWCSession()
         createStub()
         
         
@@ -73,6 +75,11 @@ class MainInterfaceController: WKInterfaceController {
         }
     }
     
+    private func configWCSession(){
+        self.wcSession.delegate = self
+        self.wcSession.activate()
+    }
+    
     func refreshTable(){
         
         factTable.setRowTypes(rowTypes)
@@ -97,4 +104,19 @@ class MainInterfaceController: WKInterfaceController {
          }
      }
     
+}
+
+extension MainInterfaceController: WCSessionDelegate {
+    // MARK: WCSession Methods
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        if let facts = message["facts"] as? [FactModel] {
+            print(facts)
+        }
+    }
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        
+        print("GOT IN THIS SESSION")
+        
+    }
 }

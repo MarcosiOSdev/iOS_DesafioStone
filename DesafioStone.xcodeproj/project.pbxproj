@@ -58,6 +58,8 @@
 		2CA5F4CE6D5A0CFD76E424E4 /* Pods_DesafioStone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C2157A60038E01ED127F2B3 /* Pods_DesafioStone.framework */; };
 		68AAA0508483B85151454553 /* Pods_DesafioStoneUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79CC21A1D9FE0613E4C984A7 /* Pods_DesafioStoneUITests.framework */; };
 		BA756740246C629722172C87 /* Pods_DesafioStoneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0548C102B9250839FE7DE9B5 /* Pods_DesafioStoneTests.framework */; };
+		D80A955C23ECD36C00729BB7 /* TypeMessageWatchOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D859803723ECCC0F0064EE06 /* TypeMessageWatchOS.swift */; };
+		D80A955D23ECD36E00729BB7 /* FactsMessageWatchOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D859803923ECCC810064EE06 /* FactsMessageWatchOS.swift */; };
 		D81EE68323904DA90000A214 /* ErrorFactCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81EE68123904DA90000A214 /* ErrorFactCollectionViewCell.swift */; };
 		D81EE68823904E0D0000A214 /* EmptyFactCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81EE68623904E0D0000A214 /* EmptyFactCollectionViewCell.swift */; };
 		D81EE68923904E0D0000A214 /* EmptyFactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D81EE68723904E0D0000A214 /* EmptyFactCollectionViewCell.xib */; };
@@ -66,6 +68,8 @@
 		D8372A8C23B0F84400D1275A /* SearchFactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8372A8B23B0F84400D1275A /* SearchFactsViewController.swift */; };
 		D83905BD23DE8B26002133A4 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83905BC23DE8B26002133A4 /* SnapshotHelper.swift */; };
 		D83C2B4323D7B361000EF513 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C2B4223D7B361000EF513 /* BaseAPI.swift */; };
+		D859803823ECCC0F0064EE06 /* TypeMessageWatchOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D859803723ECCC0F0064EE06 /* TypeMessageWatchOS.swift */; };
+		D859803A23ECCC810064EE06 /* FactsMessageWatchOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D859803923ECCC810064EE06 /* FactsMessageWatchOS.swift */; };
 		D87B2D2E23B1517600685E81 /* SuggestionFactsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87B2D2D23B1517600685E81 /* SuggestionFactsCollectionViewCell.swift */; };
 		D87B2D3023B15AFB00685E81 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87B2D2F23B15AFB00685E81 /* UIColor+Hex.swift */; };
 		D87B2D3323B15DF200685E81 /* SuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87B2D3223B15DF200685E81 /* SuggestionView.swift */; };
@@ -231,6 +235,8 @@
 		D8372A8B23B0F84400D1275A /* SearchFactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFactsViewController.swift; sourceTree = "<group>"; };
 		D83905BC23DE8B26002133A4 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		D83C2B4223D7B361000EF513 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
+		D859803723ECCC0F0064EE06 /* TypeMessageWatchOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeMessageWatchOS.swift; sourceTree = "<group>"; };
+		D859803923ECCC810064EE06 /* FactsMessageWatchOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactsMessageWatchOS.swift; sourceTree = "<group>"; };
 		D87B2D2D23B1517600685E81 /* SuggestionFactsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionFactsCollectionViewCell.swift; sourceTree = "<group>"; };
 		D87B2D2F23B15AFB00685E81 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		D87B2D3223B15DF200685E81 /* SuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionView.swift; sourceTree = "<group>"; };
@@ -563,6 +569,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D80A955823ECD0F100729BB7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D8D94A3E23EA3D8E0055AD2A /* FactView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D81BBA0723A01BA5001D45A6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -696,7 +710,7 @@
 		D8D94A1E23EA33E60055AD2A /* br.com.mfelipesp.DesafioStoneWatch Extension */ = {
 			isa = PBXGroup;
 			children = (
-				D8D94A3E23EA3D8E0055AD2A /* FactView */,
+				D80A955823ECD0F100729BB7 /* View */,
 				D8D94A2123EA33E60055AD2A /* ExtensionDelegate.swift */,
 				D8D94A2323EA33E60055AD2A /* NotificationController.swift */,
 				D8D94A2523EA33E60055AD2A /* ComplicationController.swift */,
@@ -795,6 +809,8 @@
 			isa = PBXGroup;
 			children = (
 				D8D94A4C23EA5DC30055AD2A /* WatchOSConnectivity.swift */,
+				D859803723ECCC0F0064EE06 /* TypeMessageWatchOS.swift */,
+				D859803923ECCC810064EE06 /* FactsMessageWatchOS.swift */,
 			);
 			path = WatchOSConnectivity;
 			sourceTree = "<group>";
@@ -1163,6 +1179,7 @@
 				D87B2D2E23B1517600685E81 /* SuggestionFactsCollectionViewCell.swift in Sources */,
 				2899C51E22E9514400D6191B /* BindableType.swift in Sources */,
 				28A63D4822EBA1C0002A9186 /* ChuckNorrisAPIType.swift in Sources */,
+				D859803A23ECCC810064EE06 /* FactsMessageWatchOS.swift in Sources */,
 				D8372A8C23B0F84400D1275A /* SearchFactsViewController.swift in Sources */,
 				2899C4FE22E938B700D6191B /* CoordinatorType.swift in Sources */,
 				D83C2B4323D7B361000EF513 /* BaseAPI.swift in Sources */,
@@ -1176,6 +1193,7 @@
 				2899C4D522E92B5D00D6191B /* Scene.swift in Sources */,
 				D8C5E84B23D8C98F00F837E4 /* LastSearchCoreDataType.swift in Sources */,
 				D87B2D3023B15AFB00685E81 /* UIColor+Hex.swift in Sources */,
+				D859803823ECCC0F0064EE06 /* TypeMessageWatchOS.swift in Sources */,
 				289CEB6722EAAC6300112AE0 /* URLSession+Rx.swift in Sources */,
 				D8D94A4D23EA5DC30055AD2A /* WatchOSConnectivity.swift in Sources */,
 				287F370223922E9E00D8FC20 /* BindingViewModelType.swift in Sources */,
@@ -1218,7 +1236,9 @@
 				D8D94A2623EA33E60055AD2A /* ComplicationController.swift in Sources */,
 				D8D94A4423EA46100055AD2A /* MainInterfaceController.swift in Sources */,
 				D8D94A4623EA46C90055AD2A /* FactModel.swift in Sources */,
+				D80A955C23ECD36C00729BB7 /* TypeMessageWatchOS.swift in Sources */,
 				D8D94A4923EA4A7D0055AD2A /* FactRowController.swift in Sources */,
+				D80A955D23ECD36E00729BB7 /* FactsMessageWatchOS.swift in Sources */,
 				D8D94A4523EA46C90055AD2A /* CategoryModel.swift in Sources */,
 				D8D94A5023EA63F60055AD2A /* SearchRowController.swift in Sources */,
 				D8D94A2223EA33E60055AD2A /* ExtensionDelegate.swift in Sources */,
