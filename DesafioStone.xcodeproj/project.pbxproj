@@ -320,6 +320,19 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		2829F34C23ECFB8700E807B6 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				D8D94A2723EA33E80055AD2A /* Assets.xcassets */,
+				D8D94A2A23EA33E80055AD2A /* PushNotificationPayload.apns */,
+				D8D94A2923EA33E80055AD2A /* Info.plist */,
+				D8D94A2123EA33E60055AD2A /* ExtensionDelegate.swift */,
+				D8D94A2323EA33E60055AD2A /* NotificationController.swift */,
+				D8D94A2523EA33E60055AD2A /* ComplicationController.swift */,
+			);
+			path = Supporting;
+			sourceTree = "<group>";
+		};
 		287F36F92392114400D8FC20 /* Stubs */ = {
 			isa = PBXGroup;
 			children = (
@@ -710,13 +723,8 @@
 		D8D94A1E23EA33E60055AD2A /* br.com.mfelipesp.DesafioStoneWatch Extension */ = {
 			isa = PBXGroup;
 			children = (
+				2829F34C23ECFB8700E807B6 /* Supporting */,
 				D80A955823ECD0F100729BB7 /* View */,
-				D8D94A2123EA33E60055AD2A /* ExtensionDelegate.swift */,
-				D8D94A2323EA33E60055AD2A /* NotificationController.swift */,
-				D8D94A2523EA33E60055AD2A /* ComplicationController.swift */,
-				D8D94A2723EA33E80055AD2A /* Assets.xcassets */,
-				D8D94A2923EA33E80055AD2A /* Info.plist */,
-				D8D94A2A23EA33E80055AD2A /* PushNotificationPayload.apns */,
 			);
 			path = "br.com.mfelipesp.DesafioStoneWatch Extension";
 			sourceTree = "<group>";
@@ -1771,7 +1779,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V2686JM7D9;
-				INFOPLIST_FILE = "br.com.mfelipesp.DesafioStoneWatch Extension/Info.plist";
+				INFOPLIST_FILE = "br.com.mfelipesp.DesafioStoneWatch Extension/Supporting/Info.plist";
 				IS_APP_VERSION = IS_APP_VERSION;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1794,7 +1802,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V2686JM7D9;
-				INFOPLIST_FILE = "br.com.mfelipesp.DesafioStoneWatch Extension/Info.plist";
+				INFOPLIST_FILE = "br.com.mfelipesp.DesafioStoneWatch Extension/Supporting/Info.plist";
 				IS_APP_VERSION = IS_APP_VERSION;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1817,7 +1825,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V2686JM7D9;
-				INFOPLIST_FILE = "br.com.mfelipesp.DesafioStoneWatch Extension/Info.plist";
+				INFOPLIST_FILE = "br.com.mfelipesp.DesafioStoneWatch Extension/Supporting/Info.plist";
 				IS_APP_VERSION = IS_APP_VERSION;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
