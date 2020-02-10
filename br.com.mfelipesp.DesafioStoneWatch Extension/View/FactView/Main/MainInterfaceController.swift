@@ -23,23 +23,6 @@ class MainInterfaceController: WKInterfaceController {
         
         configWCSession()
         createStub()
-        
-        
-        //factTable.setRowTypes(rowTypes)
-        //factTable.setNumberOfRows(1, withRowType: rowTypes[0])
-        //factTable.setNumberOfRows(facts.count, withRowType: rowTypes[1])
-        
-        
-        
-        
-//        if let row = factTable.rowController(at: 0) as? SearchRowController {
-//
-//        }
-//
-//        for index in 1..<factTable.numberOfRows {
-//          guard let row = factTable.rowController(at: index) as? FactRowController else { continue }
-//          row.factModel = facts[index]
-//        }
     }
     
     override func willActivate() {
@@ -53,7 +36,7 @@ class MainInterfaceController: WKInterfaceController {
             case "SearchRow":
                 let row = factTable.rowController(at:rowIndex) as! SearchRowController
                 print(row.description)
-//                presentController(withName: "Flight", context: flight)
+//                presentController(withName: "SearchInterface", context: self)
             case "FactRow":
                 let row = factTable.rowController(at:rowIndex) as! FactRowController
                 print(row.factModel?.title)
@@ -83,9 +66,6 @@ class MainInterfaceController: WKInterfaceController {
     func refreshTable(){
         
         factTable.setRowTypes(rowTypes)
-//        factTable.setNumberOfRows(1, withRowType: "SearchRow")
-//        factTable.setNumberOfRows(facts.count, withRowType: "FactRow")
-        
         let total =  facts.count + 1
         for rowIndex in 0 ..< total {
             switch rowTypes[rowIndex]{
@@ -111,12 +91,12 @@ extension MainInterfaceController: WCSessionDelegate {
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
         if let facts = message["facts"] as? [FactModel] {
             print(facts)
+            //Get some facts from search in iOS.
         }
     }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         
-        print("GOT IN THIS SESSION")
-        
+        //TODO: Got this session here or some error
     }
 }
