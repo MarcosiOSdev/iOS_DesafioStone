@@ -3,6 +3,11 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+variables:
+    scheme: 'DesafioStone'
+    sdk: 'iphoneos'
+    configuration: 'Debug'
+
 trigger:
 - master
 
@@ -10,10 +15,24 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- script: /usr/local/bin/pod install
+  displayName: 'pod install using a script'
+
+- task: CocoaPods@0
+  displayName: 'pod install using the CocoaPods task with defaults'
+
+- task: CocoaPods@0
+  inputs:
+    forceRepoUpdate: true
+    projectDirectory: '$(system.defaultWorkingDirectory)'
+  displayName: 'pod install using the CocoaPods task with a forced repo update and a custom project directory'
+
+-task: Xcode@5
+ inputs:
+   sdk: '$(SDK)'
+   scheme: '$(scheme)'
+   configuration: '$(configuration)'
+   xcodeVersion: '11.5' # Options: default, 10, 9, 8, specifyPath
+   exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
+   packageApp: false

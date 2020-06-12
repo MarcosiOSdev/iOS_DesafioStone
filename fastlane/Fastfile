@@ -14,6 +14,8 @@ platform :ios do
   
   lane :pipeline do
             
+    cocoapods()
+            
     desc("Rodando os testes unitários")
     run_scan    
 
@@ -48,7 +50,7 @@ platform :ios do
 
   lane :run_scan do 
     scan(workspace: "DesafioStone.xcworkspace", 
-    device: "iPhone 8", 
+    device: "iPhone 11",
     scheme: "DesafioStone", 
     clean: true,
     code_coverage: true,

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		280615582390C18D00B013F6 /* FactModelMockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280615572390C18D00B013F6 /* FactModelMockable.swift */; };
+		281F26D4249156CC003C5AA1 /* fastlane in Resources */ = {isa = PBXBuildFile; fileRef = 281F26D3249156CB003C5AA1 /* fastlane */; };
+		281F26D624915ABA003C5AA1 /* azure-pipelines.yml in Resources */ = {isa = PBXBuildFile; fileRef = 281F26D524915AB9003C5AA1 /* azure-pipelines.yml */; };
 		287124B122EE85E700125BBD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 287124B322EE85E700125BBD /* Localizable.strings */; };
 		287F36FB2392115600D8FC20 /* ChuckNorrisAPIStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287F36FA2392115600D8FC20 /* ChuckNorrisAPIStub.swift */; };
 		287F36FD2392128700D8FC20 /* CoordinatorStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287F36FC2392128700D8FC20 /* CoordinatorStub.swift */; };
@@ -101,6 +103,8 @@
 /* Begin PBXFileReference section */
 		0548C102B9250839FE7DE9B5 /* Pods_DesafioStoneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesafioStoneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		280615572390C18D00B013F6 /* FactModelMockable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactModelMockable.swift; sourceTree = "<group>"; };
+		281F26D3249156CB003C5AA1 /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
+		281F26D524915AB9003C5AA1 /* azure-pipelines.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = "azure-pipelines.yml"; sourceTree = "<group>"; };
 		287124B422EE85E900125BBD /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		287F36FA2392115600D8FC20 /* ChuckNorrisAPIStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisAPIStub.swift; sourceTree = "<group>"; };
 		287F36FC2392128700D8FC20 /* CoordinatorStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorStub.swift; sourceTree = "<group>"; };
@@ -286,6 +290,8 @@
 		2899C49522E928D100D6191B = {
 			isa = PBXGroup;
 			children = (
+				281F26D524915AB9003C5AA1 /* azure-pipelines.yml */,
+				281F26D3249156CB003C5AA1 /* fastlane */,
 				2899C52122E9556D00D6191B /* README.md */,
 				2899C4A022E928D100D6191B /* DesafioStone */,
 				2899C4B522E928D600D6191B /* DesafioStoneTests */,
@@ -804,6 +810,7 @@
 				2899C4AC22E928D600D6191B /* LaunchScreen.storyboard in Resources */,
 				D81EE68923904E0D0000A214 /* EmptyFactCollectionViewCell.xib in Resources */,
 				2899C4F522E9369700D6191B /* Debug.xcconfig in Resources */,
+				281F26D4249156CC003C5AA1 /* fastlane in Resources */,
 				28913C8623974430005473F2 /* ErrorFactCollectionViewCell.xib in Resources */,
 				28913C8123973AC0005473F2 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				28913C7C23973AC0005473F2 /* Apache License.txt in Resources */,
@@ -817,6 +824,7 @@
 				28913C7D23973AC0005473F2 /* OpenSans-ExtraBold.ttf in Resources */,
 				289CEB6522EA796C00112AE0 /* FactCollectionViewCell.xib in Resources */,
 				28913C7F23973AC0005473F2 /* OpenSans-Bold.ttf in Resources */,
+				281F26D624915ABA003C5AA1 /* azure-pipelines.yml in Resources */,
 				2899C4DD22E92D4F00D6191B /* Release.xcconfig in Resources */,
 				2899C4F022E9328C00D6191B /* InfoPlist.strings in Resources */,
 				28913C8023973AC0005473F2 /* OpenSans-SemiboldItalic.ttf in Resources */,

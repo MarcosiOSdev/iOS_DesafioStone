@@ -117,7 +117,9 @@ extension FactsViewController {
 extension FactsViewController {
     
     private func configureNavigationBar() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
+        let barItem = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
+        barItem.accessibilityIdentifier = "searchBarItem"
+        self.navigationItem.rightBarButtonItem = barItem
     }
     
     private func setupCell(in collectionView: UICollectionView,

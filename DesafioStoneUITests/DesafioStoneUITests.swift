@@ -30,10 +30,8 @@ class DesafioStoneUITests: XCTestCase {
         
         snapshot("init_view")
         XCTAssertTrue(true)
-//        let chuckNorrisFactsNavigationBar = app.navigationBars["Chuck Norris Facts"]
-//        chuckNorrisFactsNavigationBar.buttons["Search"].tap()
-//
-//        snapshot("search_view")
+        app.buttons["searchBarItem"].tap()
+        snapshot("search_view")
 //
 //        let elementsQuery = app.scrollViews.otherElements
 //        elementsQuery.collectionViews.staticTexts["GAMES"].tap()
