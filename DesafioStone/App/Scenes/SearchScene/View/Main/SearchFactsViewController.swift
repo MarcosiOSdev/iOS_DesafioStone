@@ -130,7 +130,7 @@ extension SearchFactsViewController {
     
     private func addArrangedSuggestionView() {
         self.stackView.addArrangedSubview(self.suggestionView)
-        self.suggestionView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        self.suggestionView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
     
     private func addPastSearchesView() {

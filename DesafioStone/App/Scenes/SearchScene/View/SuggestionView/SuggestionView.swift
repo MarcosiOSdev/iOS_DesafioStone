@@ -20,7 +20,7 @@ class SuggestionView: UIView {
     
     var suggestionFactsCollectionView: UICollectionView = {
         let flow = UICollectionViewFlowLayout()
-        flow.scrollDirection = .vertical
+        flow.scrollDirection = .horizontal
         flow.itemSize = UICollectionViewFlowLayoutAutomaticSize
         flow.estimatedItemSize = CGSize(width: 35.0, height: 100.0)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flow)
